@@ -1,0 +1,192 @@
+{
+  "acceptance": {
+    "accepted_status": "ACCEPTED_OPERATIONAL",
+    "contract_status": "FROZEN_NOT_SATISFIED",
+    "current_status": "INCOMPLETE_NOT_OPERATIONAL",
+    "missing_receipts": [
+      "cloud_firewall_export",
+      "database_role_tests",
+      "honest_public_status",
+      "host_firewall_export",
+      "migration_replay_sanitizer_packet",
+      "negative_network_probe",
+      "object_permission_tests",
+      "redacted_secret_scope_inventory",
+      "restore_and_post_restore_replay",
+      "reviewed_terraform_plan",
+      "state_machine_tests"
+    ],
+    "public_receipts_attached": 0,
+    "required_receipts": 11
+  },
+  "architecture": {
+    "broker_write_access": false,
+    "database": {
+      "engine": "PostgreSQL",
+      "queue_mechanism": "FOR UPDATE SKIP LOCKED",
+      "version": "18"
+    },
+    "execution_managed_by_foundry": false,
+    "execution_reachable_from_research": false,
+    "provider": "DigitalOcean",
+    "research_and_holdout_separate": true,
+    "research_services": [
+      "researchd",
+      "worker",
+      "validator",
+      "data_gateway",
+      "sanitizer",
+      "sentinel",
+      "status_adapter"
+    ]
+  },
+  "checks": {
+    "acceptance_receipts_fail_closed": true,
+    "broker_credentials_absent_by_contract": true,
+    "database_controls_declared": true,
+    "direct_mutation_grants_absent": true,
+    "execution_isolated_by_contract": true,
+    "files_present": true,
+    "honest_statuses": true,
+    "legacy_kill_migration_bounded": true,
+    "migration_roles_separated": true,
+    "private_host_egress_and_state_protected": true
+  },
+  "claim_boundary": "This receipt verifies committed local contracts. It is not a Terraform plan, cloud inventory, deployment, network probe, database integration test or restore receipt.",
+  "content_hash": "sha256:0552a3ec9c62826d6bfbdee8d38069971fede2c80e1bd7cec7363b8bc69682f6",
+  "contract_hashes": {
+    "acceptance_contract": "sha256:f98e1c568875887be9a59e4566e24f36c17b0e24d5ac81e279edbe0b21cbd90d",
+    "deployment_manifest": "sha256:9d91267fdcbfd8518fd5c7c1b5783dbe3f480c34e58e441947fdc4a5fd0e0681",
+    "lifecycle_contract": "sha256:126d72518b99847ac330a0bb65103b943dd595aa92f61914de25393115cf960f",
+    "migration_packet": "sha256:dfa7b99b59d38bfc126a5733f108e1decd991e5ce90eae96e445ba2d2b1b3110",
+    "runtime_contract": "sha256:8d23303a658009186e1a79ba5daa5ebbb8858097fa15691eb9007605c4a6d3b5"
+  },
+  "design_status": {
+    "acceptance": "INCOMPLETE_NOT_OPERATIONAL",
+    "deployment": "PLANNED_NOT_APPLIED",
+    "lifecycle": "DESIGN_FROZEN_NOT_DEPLOYED",
+    "runtime": "FROZEN_NOT_DEPLOYED"
+  },
+  "failures": [],
+  "files": [
+    {
+      "path": "config/foundry_acceptance_receipt_contract.json",
+      "sha256": "37076af080e60c70130e1085fa4b75d89ba1d24ace38b64064fe24cd858dee24"
+    },
+    {
+      "path": "config/foundry_deployment_manifest.json",
+      "sha256": "b46f47642057c94fca2ab94f99a99397e58a98c212dbd1bcaebceb8bf0489770"
+    },
+    {
+      "path": "config/foundry_legacy_migrations/eia_petroleum_inventory_v1.json",
+      "sha256": "f548ce4505cd61ba580a17282462cb48cbb194f0b1bc32bb216b9b17634678ee"
+    },
+    {
+      "path": "config/foundry_runtime_contract.json",
+      "sha256": "7a16d38167f70cc9d7dbd19aa8d0f663e8fb69623c67a49bd7d5b20efa43800c"
+    },
+    {
+      "path": "config/foundry_trial_state_machine.json",
+      "sha256": "1472eb2b0dffbd18c3a5fac9ad020962c06e87d415fd0826eafb1d356c632e08"
+    },
+    {
+      "path": "deploy/foundry/README.md",
+      "sha256": "fbb6510e7d3e07d9a2d8b9848aae651af27a18c9241c8cb84acff8b6a5bbbdb7"
+    },
+    {
+      "path": "deploy/foundry/host/holdout.nft",
+      "sha256": "4c70d39580280cd4363e593b5580e2a1eeb16e7c9245970b64c8c86c9755fc7e"
+    },
+    {
+      "path": "deploy/foundry/host/research.nft",
+      "sha256": "f51421b07da57109478402c51fc95ba34e024c049e9c5c6670af893264612152"
+    },
+    {
+      "path": "deploy/foundry/host/squid-foundry.conf",
+      "sha256": "65e4488143d5e26d37542b455467be16d9881481b85411a0148e7c9e7e3c1461"
+    },
+    {
+      "path": "deploy/foundry/host/squid-holdout.conf",
+      "sha256": "4e2990fb0f59ad7e0f6cf1613bac6d242b496d2ab149e776a44b7a1bd51fbea6"
+    },
+    {
+      "path": "deploy/foundry/requirements.in",
+      "sha256": "d375af9a0f805ccfd0fbf9a4943cfc6f44b4d7371e6a2376f6b8318d3c73e3d6"
+    },
+    {
+      "path": "deploy/foundry/requirements.lock",
+      "sha256": "4631499cdf46dbf1927aca66d3a9aed0a91cdd9f02599a5d1b71fcc7ce9ad750"
+    },
+    {
+      "path": "deploy/foundry/sql/001_core.sql",
+      "sha256": "1a68c5d21dcd07da04db1995d57f59da0744ce0824287cf7fd3526f521da736b"
+    },
+    {
+      "path": "deploy/foundry/sql/002_privileges.sql",
+      "sha256": "74bb15756d2564b0959d7f2a6b6f5898621773ab1b3e04b5bc9f84aa887e1476"
+    },
+    {
+      "path": "deploy/foundry/sql/003_legacy_migration.sql",
+      "sha256": "0053e8ad54d9aedd312a7134601cbdfe9ba46fc33fb72af9b3a9ce55307e485e"
+    },
+    {
+      "path": "deploy/foundry/terraform/.terraform.lock.hcl",
+      "sha256": "bf22bb5ae428aabe71c3ce2480e3f6efbc24308d68180837689783fd70678e95"
+    },
+    {
+      "path": "deploy/foundry/terraform/cloud-init/bastion.yaml",
+      "sha256": "db6e6ff9e29c1861106cd59c225c54cda7481974c87ebf566a2b7a93a41b627a"
+    },
+    {
+      "path": "deploy/foundry/terraform/cloud-init/holdout.yaml.tftpl",
+      "sha256": "739b60d062cdbe41930bbb16412cd88cefe0196a4a1bc6da87058d99cede6baa"
+    },
+    {
+      "path": "deploy/foundry/terraform/cloud-init/research.yaml.tftpl",
+      "sha256": "668f646551d602bb1243289aad7e168a62ae985ca9b188aded23d410fcc79b8d"
+    },
+    {
+      "path": "deploy/foundry/terraform/main.tf",
+      "sha256": "e6cdddad22e6e06f8dab74deec87dae556e14e3aa488928a2ebe6428a98a2692"
+    },
+    {
+      "path": "deploy/foundry/terraform/outputs.tf",
+      "sha256": "f982db87896da482af82c007e33440340182cf0d25a690117743d9a206e4664d"
+    },
+    {
+      "path": "deploy/foundry/terraform/terraform.tfvars.example",
+      "sha256": "f2b30f027400c86ea288777904d931f112938d55b74f8ff54ae7a33168695eab"
+    },
+    {
+      "path": "deploy/foundry/terraform/tests/isolation.tftest.hcl",
+      "sha256": "5999dd3681a07e2d903a781b0f7eaec25f63ff45173898ba0c99697eaef1a1f2"
+    },
+    {
+      "path": "deploy/foundry/terraform/variables.tf",
+      "sha256": "33770dc0ad162682131fbc6a6bd1548fb07c22a455bd91b3a6f2c076f13bb2cd"
+    },
+    {
+      "path": "deploy/foundry/terraform/versions.tf",
+      "sha256": "5b6466e4e9ddd56efbb2a2c95a2ef0ea99d610172fac58ebce3ca6aa90fa082b"
+    }
+  ],
+  "first_migration": {
+    "historical_identity_key": "8446702cb8dd1768",
+    "max_attempts": 1,
+    "network_policy": "NONE",
+    "new_identity_spend_allowed": false,
+    "preserved_state": "KILLED",
+    "public_trial_id": "ft_a9ae69f6bc4a5269",
+    "replay_status": "NOT_RUN_IN_FOUNDRY",
+    "status": "PREPARED_NOT_IMPORTED_OR_REPLAYED"
+  },
+  "lifecycle": {
+    "gate_failure_can_be_overridden": false,
+    "holdout_max_consumptions_per_identity": 1,
+    "states": 17,
+    "terminal_states_have_no_outbound_transitions": true,
+    "transitions": 31
+  },
+  "schema": "canli.foundry-local-contract-verification.v1",
+  "status": "PASS"
+}

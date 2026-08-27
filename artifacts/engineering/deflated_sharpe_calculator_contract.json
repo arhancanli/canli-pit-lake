@@ -1,0 +1,153 @@
+{
+  "schema": "canli.alphac-deflated-sharpe-calculator-contract.v1",
+  "status": "REFERENCE_IMPLEMENTATION_CONTRACT",
+  "version": "1.0.0",
+  "published_on": "2026-08-26",
+  "author": "Arhan Canli",
+  "claim_boundary": "This contract reproduces ALPHAC's PSR and DSR arithmetic for supplied inputs. It does not validate a strategy, prove profitability, estimate current portfolio performance, or replace the complete admission contract.",
+  "periodicity": {
+    "formula_unit": "per_period_sharpe",
+    "browser_input_unit": "annualized_sharpe",
+    "observed_conversion": "sr_per_period = sr_annualized / sqrt(periods_per_year)",
+    "dispersion_conversion": "variance_per_period = (sd_annualized / sqrt(periods_per_year))^2",
+    "kurtosis": "non_excess; Gaussian equals 3"
+  },
+  "formula": {
+    "psr": "Phi(((SR - SR*) * sqrt(T - 1)) / sqrt(1 - skew*SR + ((kurtosis - 1)/4)*SR^2))",
+    "expected_max_sharpe": "sqrt(V[SR]) * ((1-gamma)*PPF(1-1/N) + gamma*PPF(1-1/(N*e)))",
+    "dsr": "PSR(expected_max_sharpe)",
+    "constants": {
+      "euler_mascheroni": 0.5772156649,
+      "e": 2.718281828459045
+    }
+  },
+  "input_contract": {
+    "observed_sharpe_annualized": {
+      "minimum": -10,
+      "maximum": 10
+    },
+    "observations": {
+      "minimum": 2,
+      "maximum": 1000000,
+      "integer": true
+    },
+    "periods_per_year": {
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "skew": {
+      "minimum": -20,
+      "maximum": 20
+    },
+    "non_excess_kurtosis": {
+      "minimum": 1,
+      "maximum": 100
+    },
+    "effective_independent_trials": {
+      "minimum": 2,
+      "maximum": 10000000,
+      "integer": true
+    },
+    "cross_trial_sharpe_sd_annualized": {
+      "minimum": 0,
+      "maximum": 10
+    }
+  },
+  "selection_accounting": {
+    "trial_unit": "complete_union_hypothesis_identities",
+    "variance_unit": "sample variance of per-period Sharpe across selection identities",
+    "warning": "Reducing the trial count or dispersion after observing outcomes flatters DSR. The selection union must be defined independently of the selected result."
+  },
+  "current_policy": {
+    "admission_schema": "canli.alphac-sleeve-admission-contract.v7",
+    "per_sleeve_dsr": "mandatory_measurement_not_a_universal_gate",
+    "incremental_admission": "not_decided_by_dsr_alone",
+    "full_union_book_maturity_threshold": 0.95,
+    "threshold_context": "The 0.95 threshold applies to a full-union portfolio-maturity claim. It is not a per-sleeve gate and a calculator result is not an admission verdict."
+  },
+  "source_bindings": {
+    "implementation": {
+      "path": "src/alphaforge/validation/dsr.py",
+      "sha256": "sha256:ac2f18440e21b8241df4ac933748ab34125e42531aac2d1f5413aa4ad0deb1b2"
+    },
+    "admission_contract": {
+      "path": "config/sleeve_admission_contract.json",
+      "sha256": "sha256:6bc72c1f47675b4e14897e1ba3aad6e56aba9b5f013a7b9bae57f930e8d3b8b6"
+    }
+  },
+  "references": [
+    {
+      "title": "The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality",
+      "authors": "David H. Bailey and Marcos López de Prado",
+      "publication": "Journal of Portfolio Management 40(5), 94-107 (2014)",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551",
+      "doi": "10.2139/ssrn.2460551"
+    }
+  ],
+  "test_vectors": [
+    {
+      "id": "daily_long_sample_heavy_tail",
+      "inputs": {
+        "observed_sharpe_annualized": 1.5,
+        "observations": 730,
+        "periods_per_year": 365,
+        "skew": -0.5,
+        "non_excess_kurtosis": 5.0,
+        "effective_independent_trials": 229,
+        "cross_trial_sharpe_sd_annualized": 0.57
+      },
+      "outputs": {
+        "observed_sharpe_per_period": 0.07851358838853206,
+        "cross_trial_sharpe_variance_per_period": 0.0008901369863013697,
+        "expected_max_sharpe_per_period": 0.08382167718470863,
+        "expected_max_sharpe_annualized": 1.6014108940590446,
+        "psr_against_zero": 0.9809279924681973,
+        "deflated_sharpe_ratio": 0.44426268122044366,
+        "non_normality_variance_term": 1.04542117775591
+      }
+    },
+    {
+      "id": "trading_days_short_search",
+      "inputs": {
+        "observed_sharpe_annualized": 1.0,
+        "observations": 252,
+        "periods_per_year": 252,
+        "skew": 0.0,
+        "non_excess_kurtosis": 3.0,
+        "effective_independent_trials": 10,
+        "cross_trial_sharpe_sd_annualized": 0.5
+      },
+      "outputs": {
+        "observed_sharpe_per_period": 0.0629940788348712,
+        "cross_trial_sharpe_variance_per_period": 0.0009920634920634918,
+        "expected_max_sharpe_per_period": 0.049595184764089716,
+        "expected_max_sharpe_annualized": 0.7872991506724859,
+        "psr_against_zero": 0.84062387995459,
+        "deflated_sharpe_ratio": 0.5839730560867282,
+        "non_normality_variance_term": 1.001984126984127
+      }
+    },
+    {
+      "id": "large_search_negative_skew",
+      "inputs": {
+        "observed_sharpe_annualized": 2.2,
+        "observations": 1260,
+        "periods_per_year": 252,
+        "skew": -1.0,
+        "non_excess_kurtosis": 9.0,
+        "effective_independent_trials": 1000,
+        "cross_trial_sharpe_sd_annualized": 0.75
+      },
+      "outputs": {
+        "observed_sharpe_per_period": 0.13858697343671667,
+        "cross_trial_sharpe_variance_per_period": 0.0022321428571428566,
+        "expected_max_sharpe_per_period": 0.153790035936073,
+        "expected_max_sharpe_annualized": 2.4413411352392136,
+        "psr_against_zero": 0.9999970868543218,
+        "deflated_sharpe_ratio": 0.3095140591397488,
+        "non_normality_variance_term": 1.1769996718494151
+      }
+    }
+  ],
+  "content_hash": "sha256:241f33d627cecb876d5cd0cb0b9d48f18e20d55d921437ec2926d4603f92d349"
+}

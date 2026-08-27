@@ -1,0 +1,217 @@
+{
+  "schema": "canli.alphac-sleeve-admission-contract.v5-proposed",
+  "evidence_checks_per_candidate": 83,
+  "objective": {
+    "target_total_sleeves": 14,
+    "minimum_new_sleeves": 10,
+    "portfolio_sharpe_target": [
+      2.0,
+      2.5
+    ],
+    "portfolio_max_drawdown_target": 0.11,
+    "targets_are_admission_evidence": false,
+    "portfolio_max_drawdown_statistic": "expected_maximum_drawdown",
+    "portfolio_p95_max_drawdown_is_gated": false,
+    "portfolio_p95_max_drawdown_must_be_published": true,
+    "average_pairwise_correlation_objective": -0.03,
+    "average_pairwise_correlation_objective_note": "An objective, not a gate. -0.03 is the average pairwise correlation at which fourteen sleeves of measured quality reach 2.5. Thresholds are gates and live in 'thresholds'; anything that is not enforced must not sit there wearing a gate's costume."
+  },
+  "thresholds": {
+    "minimum_oos_observations": 252,
+    "minimum_stressed_oos_observations": 63,
+    "net_sharpe_min": 0.15,
+    "stressed_sharpe_min": 0.15,
+    "newey_west_t_min": 2.0,
+    "deflated_sharpe_min": 0.95,
+    "pbo_max": 0.2,
+    "absolute_beta_max": 0.1,
+    "average_pairwise_correlation_max": 0.0,
+    "ordinary_pairwise_correlation_max": 0.35,
+    "stressed_pairwise_correlation_max": 0.5,
+    "pairwise_correlation_upper_95_max": 0.35,
+    "stressed_pairwise_correlation_upper_95_max": 0.5,
+    "book_sharpe_delta_min_exclusive": 0.0,
+    "minimum_leave_one_period_out_book_sharpe_delta_exclusive": 0.0,
+    "book_max_drawdown_delta_max": 0.01,
+    "book_expected_shortfall_delta_max": 0.0,
+    "capacity_usd_min": 5000000,
+    "capacity_curve_min_points": 3,
+    "capacity_minimum_stressed_fill_ratio": 0.95,
+    "minimum_execution_scenarios_per_dimension": 3,
+    "book_sharpe_delta_lower_95_min_exclusive": 0.0,
+    "book_deflated_sharpe_min": 0.95,
+    "covariance_halflife_days_max": 21,
+    "realized_vol_halflife_days_max": 240,
+    "book_expected_max_drawdown_max": 0.11,
+    "realized_vol_leg_must_be_unlevered": true
+  },
+  "required_lineage": [
+    "preregistration_sha256",
+    "data_manifest_sha256",
+    "diversification_report_sha256",
+    "code_commit",
+    "family_trial_account",
+    "return_identity_id",
+    "point_in_time_data",
+    "survivorship_control",
+    "corporate_action_control",
+    "direction_locked",
+    "parameters_locked"
+  ],
+  "required_robustness": [
+    "walk_forward",
+    "purged",
+    "embargoed",
+    "untouched_holdout",
+    "parameter_perturbation",
+    "regime_stress",
+    "correlation_instability",
+    "leave_one_period_out",
+    "mean_zero_candidate_control",
+    "family_wise_trial_accounting",
+    "deterministic_rerun",
+    "correlation_confidence_intervals",
+    "crisis_conditional_dependence",
+    "tail_co_loss",
+    "execution_replay",
+    "capacity_stress",
+    "canonical_diversification_report",
+    "book_level_deflation",
+    "overlay_replay"
+  ],
+  "execution_dimensions": [
+    "commissions",
+    "bid_ask_spread",
+    "slippage",
+    "nonlinear_market_impact",
+    "latency",
+    "queue_position",
+    "partial_fills",
+    "rejected_orders",
+    "cancelled_orders",
+    "missing_opens",
+    "stale_quotes",
+    "holidays",
+    "corporate_actions",
+    "delistings",
+    "borrow_availability",
+    "borrow_fees",
+    "borrow_recalls",
+    "financing",
+    "futures_rolls_and_limits",
+    "option_surfaces_assignment_and_gaps",
+    "exchange_outages",
+    "venue_and_counterparty_risk",
+    "turnover",
+    "liquidity",
+    "crowding",
+    "operational_kill_switches"
+  ],
+  "execution_statuses": [
+    "TESTED_PASS",
+    "TESTED_FAIL",
+    "NOT_APPLICABLE"
+  ],
+  "capacity_curve_required_fields": [
+    "capital_usd",
+    "net_sharpe",
+    "fill_ratio",
+    "stressed_cost_bps"
+  ],
+  "lineage_types": {
+    "sha256_fields": [
+      "preregistration_sha256",
+      "data_manifest_sha256",
+      "diversification_report_sha256"
+    ],
+    "identifier_fields": [
+      "family_trial_account",
+      "return_identity_id"
+    ],
+    "boolean_fields": [
+      "point_in_time_data",
+      "survivorship_control",
+      "corporate_action_control",
+      "direction_locked",
+      "parameters_locked"
+    ],
+    "code_commit_field": "code_commit"
+  },
+  "execution_evidence_policy": {
+    "tested_statuses_require_sha256": true,
+    "tested_statuses_require_scenarios": true,
+    "tested_statuses_require_scenario_manifest": true,
+    "scenario_manifest_required_fields": [
+      "scenario_id",
+      "status",
+      "assumptions",
+      "assumptions_sha256",
+      "result",
+      "result_sha256"
+    ],
+    "scenario_statuses": [
+      "PASS",
+      "FAIL"
+    ],
+    "scenario_hashes_are_canonical_payload_hashes": true,
+    "dimension_hash_is_canonical_manifest_hash": true,
+    "not_applicable_requires_sha256": true
+  },
+  "diversification_evidence_policy": {
+    "implementation": "alphaforge.validation.diversification.diversification_report",
+    "return_type": "aligned OOS simple returns with no dropped rows",
+    "stress_mask": "predeclared upstream and supplied explicitly",
+    "candidate_weight": "predeclared upstream and supplied explicitly",
+    "confidence_method": "deterministic circular moving-block bootstrap",
+    "confidence_level_one_sided": 0.95,
+    "default_bootstrap_samples": 2000,
+    "default_block_size": 21,
+    "default_seed": 20260816
+  },
+  "pbo_policy": {
+    "measured_status": "MEASURED",
+    "single_identity_status": "NOT_DEFINED_SINGLE_IDENTITY",
+    "single_identity_value_must_be_null": true,
+    "never_report_not_defined_as_zero": true
+  },
+  "claim_boundary": "Passing this contract makes a result technically eligible for an explicit admission decision. It does not guarantee a sleeve, future performance, the target Sharpe, or the target drawdown. Point estimates cannot override confidence-bound, crisis-conditional, tail-loss, execution-evidence, or capacity-reconciliation failures. v5 additionally rejects any book whose permitted correlation ceiling is inconsistent with the stated portfolio objective, and gates the drawdown objective at expected maximum drawdown while requiring the 95th percentile to be published unsmoothed.",
+  "status": "PROPOSED_NOT_IN_FORCE",
+  "derived_from": "canli.alphac-sleeve-admission-contract.v4",
+  "rationale": "docs/design/FRONTIER_14_ADMISSION_V5.md",
+  "evidence": "artifacts/analysis/frontier_14/result.json",
+  "deflation_policy": {
+    "per_sleeve_selection_unit": "family_trial_account",
+    "per_sleeve_threshold_key": "deflated_sharpe_min",
+    "book_selection_unit": "complete_union_hypothesis_identities",
+    "book_threshold_key": "book_deflated_sharpe_min",
+    "reason": "DSR deflates for the trials the selection was drawn from. A pre-registered, direction-locked candidate in a new family was not selected from other families' trials. The published claim is the book's, so the book carries the full union.",
+    "book_deflation_is_strictly_additional": true
+  },
+  "overlay_policy": {
+    "mandatory_vol_target_overlay": true,
+    "implementation": "alphaforge.portfolio.overlay.vol_target",
+    "sigma_hat_rule": "max(ex_ante, realized)",
+    "annualized_vol_target": 0.1,
+    "covariance_halflife_days_max": 21,
+    "realized_vol_halflife_days_max": 240,
+    "halflife_pending_execution_costing": true,
+    "reason": "Permitted stressed pairwise correlation of 0.50 implies an expected maximum drawdown near 20% with no overlay and 16.4% with the overlay as shipped today. Correcting the realized-leg scale and shortening the covariance halflife to 21 holds it at 10.2%. The overlay, not a tighter correlation ceiling, is what holds the drawdown objective.",
+    "realized_vol_leg_must_be_unlevered": true,
+    "production_cov_halflife_today": 720,
+    "production_realized_vol_halflife_today": 240,
+    "known_defect": {
+      "site": "src/alphaforge/portfolio/strategy.py:609 (_realized_vol_ann)",
+      "description": "The realized leg is measured on the post-overlay account equity curve (strategy.py:377) while the ex-ante leg uses pre-overlay optimizer weights (strategy.py:539). The book runs de-levered, so the realized leg loses max() essentially always and the fast regime detector never fires.",
+      "measured_bind_fraction_as_shipped": 0.000193,
+      "measured_bind_fraction_if_fixed": 0.817626,
+      "expected_max_drawdown_cost_at_permitted_stressed_rho": 0.0217,
+      "status": "OPEN \u2014 live sizing path, fix not applied, requires an explicit decision"
+    },
+    "realized_vol_halflife_note": "240 is production's value and the value every sweep cell used. No shorter realized-leg halflife was tested, so none is required; this threshold bounds regression, not design.",
+    "covariance_halflife_note": "21 is the only tested covariance halflife that holds expected max drawdown at or under the objective at the permitted stressed correlation. Provisional pending execution costing."
+  },
+  "additional_required_portfolio_evidence": [
+    "book_sharpe_delta_lower_95",
+    "book_expected_max_drawdown"
+  ]
+}

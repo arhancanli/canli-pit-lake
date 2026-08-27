@@ -1,0 +1,55 @@
+{
+  "answers_completed": 0,
+  "author": "Arhan Canli",
+  "author_approvals": 0,
+  "claim_boundary": "These are blank hash-bound protocol review packets. They prove no author answers, approval, identity, next-stage authorization, external review, or publication.",
+  "content_hash": "sha256:df72b345f51736215be22a6a174fc2d9e2bf6cee20adf5017e4f47575f82ee2a",
+  "packets": 2,
+  "questions": 12,
+  "records": [
+    {
+      "answers_completed": 0,
+      "approved": false,
+      "family": "merger_arbitrage",
+      "markdown": "merger-announcement-identity-v2/REVIEW.md",
+      "markdown_sha256": "ccf1b9a9ebd21d553d46e82590fe322d6d7c1efb4639a5414eacd1d3db9668f9",
+      "packet": "merger-announcement-identity-v2/review_packet.json",
+      "packet_content_hash": "sha256:1b5e4a781dfd0fb9f188e541b38920cf6e93be07e9a5027cdae4172545e62dad",
+      "packet_sha256": "2bdb98f0769d8431291fbca4808e495e28f2d75e47740fff1e5188087c814bcb",
+      "questions": 6,
+      "review_key": "merger-announcement-identity-v2",
+      "status": "AWAITING_ARHAN_REVIEW_NO_APPROVAL_CLAIMED",
+      "technical_checks": 6,
+      "technical_checks_confirmed": 0
+    },
+    {
+      "answers_completed": 0,
+      "approved": false,
+      "family": "treasury_auction_concession",
+      "markdown": "treasury-auction-state-machine/REVIEW.md",
+      "markdown_sha256": "126af7f727ac37698f1006d019d56a354bb3827a2f0c3a4c4fdaa45c7c412b2f",
+      "packet": "treasury-auction-state-machine/review_packet.json",
+      "packet_content_hash": "sha256:c260e8f1d3c11d784ddb11ed12253e70e7b572114b3e3fd3204e54f6f813e7d4",
+      "packet_sha256": "de0632583b0cd00ab090523127a35d6429696a68a9372241db257229432bc1dc",
+      "questions": 6,
+      "review_key": "treasury-auction-state-machine",
+      "status": "AWAITING_ARHAN_REVIEW_NO_APPROVAL_CLAIMED",
+      "technical_checks": 6,
+      "technical_checks_confirmed": 0
+    }
+  ],
+  "schema": "canli.alphac-author-protocol-review-packet-manifest.v1",
+  "source_bindings": {
+    "builder": {
+      "path": "scripts/build_author_protocol_review_packets.py",
+      "sha256": "94607bd5bd4d7f7fb8bf523edb48c16ff35a6cc18cceef2acaa9a80f27836de9"
+    },
+    "registry": {
+      "path": "config/author_protocol_review_registry.json",
+      "sha256": "03634d2674280126136932acd0afe04e7a144d98366081b5e180a6763c1c8462"
+    }
+  },
+  "status": "PASS_BLANK_PROTOCOL_PACKETS_ZERO_AUTHOR_APPROVALS",
+  "technical_checks": 12,
+  "technical_checks_confirmed": 0
+}

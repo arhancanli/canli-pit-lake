@@ -1,0 +1,129 @@
+{
+  "activation_boundary": {
+    "approval_recorded": false,
+    "expected_approval_decision": "APPROVED_FOR_DISJOINT_CONFIRMATION_CORPUS_ACQUISITION",
+    "next_stage": "Acquire and freeze the 2006-2015 disjoint SEC confirmation corpus without prices or returns.",
+    "next_stage_authorized": false,
+    "return_data_opened": false,
+    "return_hypotheses_spent": 0
+  },
+  "ai_assistance": {
+    "author_reviewed_every_retained_claim": false,
+    "disclosure_approved_by_author": false,
+    "public_disclosure_text": null,
+    "scope": null,
+    "systems": [],
+    "used": null
+  },
+  "answers_completed": 0,
+  "approval": {
+    "approval_date": null,
+    "approved_evidence_content_hash": null,
+    "approved_evidence_sha256": null,
+    "approved_protocol_sha256": null,
+    "author_statement": null,
+    "blocking_issues": [],
+    "decision": null,
+    "explicit_authorization_reference": null,
+    "self_attested_by_author": false
+  },
+  "author": "Arhan Canli",
+  "author_approval_claimed": false,
+  "author_questions": [
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "IDENTITY_IN_OWN_WORDS",
+      "prompt": "Describe the exact point-in-time merger-announcement identity in your own words, including what makes an SEC source qualify."
+    },
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "EXPLORATION_INFLUENCE",
+      "prompt": "Explain how the failed 2016-2025 exploratory result influenced this redesign and why it cannot validate the new identity."
+    },
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "STRATA_AND_POWER",
+      "prompt": "Explain why DEFM14A and SC 14D9 remain separately gated and whether the declared denominators and exact-confidence thresholds are acceptable."
+    },
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "FAIL_CLOSED_CASES",
+      "prompt": "Explain how conflicts, complex consideration, missing cells, and later confirmation are handled without discretionary rescue or backdating."
+    },
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "INFORMATION_BOUNDARY",
+      "prompt": "List the information that remains unopened and explain which later action would spend the first return hypothesis."
+    },
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "CORRECTIONS_OR_APPROVAL",
+      "prompt": "Record every required correction, or explain why the exact bound protocol is acceptable for the next declared stage."
+    }
+  ],
+  "claim_boundary": "Automation populated source bindings, governed questions, and blank checks only. This packet proves no author answer, approval, identity, corpus authorization, return authorization, external review, or publication acceptance.",
+  "content_hash": "sha256:1b5e4a781dfd0fb9f188e541b38920cf6e93be07e9a5027cdae4172545e62dad",
+  "evidence_binding": {
+    "content_hash": "sha256:e2d294361c96994931849cef2e44faa464e3f2ab6a9ba1e05e9c4d6742f82b74",
+    "governance_decision": "AUTHOR_APPROVAL_REQUIRED",
+    "path": "artifacts/feasibility/merger_arbitrage/announcement_confirmatory_design.json",
+    "sha256": "4a53e4ad16367f7e0f66613275296613948521bbe7249705a86e32dcdb3c1a62",
+    "technical_decision": "PASS_PROSPECTIVE_NO_RETURN_CONFIRMATORY_DESIGN"
+  },
+  "external_review_claimed": false,
+  "family": "merger_arbitrage",
+  "identity_proof_claimed": false,
+  "protocol_binding": {
+    "path": "docs/design/FEASIBILITY_MERGER_ANNOUNCEMENT_IDENTITY_V2.md",
+    "sha256": "a49a4c019fabc4a5dad8f777c79988b6125832be65d4990083ed2da14484739b"
+  },
+  "review_key": "merger-announcement-identity-v2",
+  "schema": "canli.alphac-author-protocol-review-packet.v1",
+  "status": "AWAITING_ARHAN_REVIEW_NO_APPROVAL_CLAIMED",
+  "technical_checks": [
+    {
+      "author_confirmed": null,
+      "check": "ORIGINAL_FAILED_RESULT_REMAINS_FAILED",
+      "evidence": null
+    },
+    {
+      "author_confirmed": null,
+      "check": "EXPLORATION_AND_CONFIRMATION_PERIODS_ARE_DISJOINT",
+      "evidence": null
+    },
+    {
+      "author_confirmed": null,
+      "check": "BOTH_FILING_STRATA_MUST_PASS_INDEPENDENTLY",
+      "evidence": null
+    },
+    {
+      "author_confirmed": null,
+      "check": "SELECTION_IS_PRE_DOCUMENT_PRE_LABEL_PRE_RETURN",
+      "evidence": null
+    },
+    {
+      "author_confirmed": null,
+      "check": "RESOLVER_IS_DETERMINISTIC_AND_NEVER_BACKDATES",
+      "evidence": null
+    },
+    {
+      "author_confirmed": null,
+      "check": "CONFIRMATION_CORPUS_PRICES_AND_RETURNS_REMAIN_UNOPENED",
+      "evidence": null
+    }
+  ],
+  "technical_checks_confirmed": 0,
+  "title": "Merger announcement identity v2"
+}

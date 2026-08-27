@@ -253,7 +253,7 @@ would change before the timing did.
 | tests | **941 passed**, 12 network tests deselected by default |
 | types | `mypy --strict`, **0 issues** across 42 source files |
 | lint | `ruff`, **clean** |
-| parity with the engine | **122 files byte-identical** |
+| parity with the engine | **146 files byte-identical** |
 
 ---
 
@@ -267,7 +267,9 @@ fails if a single byte differs. It runs in CI on every push.
 
 The module set was not hand-picked either: it is the transitive import closure of
 `alphaforge.data`, and the test set is every test in the engine whose imports are fully satisfied
-by that closure. A copy nobody checks is a screenshot — this one is checked.
+by that closure. Only files the engine actually **publishes** are shipped — its `git ls-files`
+set, not its working tree — so nothing the engine deliberately gitignores can be republished here.
+A copy nobody checks is a screenshot; this one is checked.
 
 ```bash
 python tools/check_parity.py                        # against GitHub at the pinned commit

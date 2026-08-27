@@ -1,0 +1,15 @@
+{
+  "schema": "canli.alphac-admission-v7-power-audit-input-snapshot.v1",
+  "frozen_at": "2026-08-23T00:00:00+04:00",
+  "claim_boundary": "Immutable retrospective inputs used to audit v6 before v7 promotion. This snapshot is not forward evidence and is never rewritten from the active v7 contract.",
+  "observed": {
+    "average_pairwise_correlation": 0.024827414293607856,
+    "full_book_sharpe_research_simulation_not_forward_evidence": 1.784628099150113
+  },
+  "source_at_freeze": {
+    "path": "artifacts/analysis/current_book_diversification/result.json",
+    "study_schema": "canli.alphac-current-book-diversification-study.v1",
+    "capital_kind": "RESEARCH_SIMULATION_OVER_PAPER_SPECIFICATION",
+    "return_data_were_known_before_protocol": true
+  }
+}

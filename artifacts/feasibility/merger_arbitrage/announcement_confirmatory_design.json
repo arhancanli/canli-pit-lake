@@ -1,0 +1,191 @@
+{
+  "activation": {
+    "approval_recorded": false,
+    "corpus_acquisition_requires_author_approval": true,
+    "return_preregistration_is_separate": true,
+    "return_preregistration_requires_both_strata_to_pass": true
+  },
+  "authorship_disclosure": "AI-assisted technical draft prepared under the project owner's direction; Arhan Canli has not yet reviewed or approved the exact design.",
+  "candidate_status": "identity-redesign-required",
+  "claim_boundary": "Freezes a disjoint no-return confirmation design for a materially new announcement identity. It proves no corpus coverage, resolver accuracy, return, Sharpe, drawdown, correlation, capacity, or sleeve admission.",
+  "confidence_gates_per_stratum": {
+    "acceptance_timestamp_accuracy": {
+      "minimum_successes_at_target_denominator": 188,
+      "one_sided_exact_lower_95_threshold": 0.9,
+      "point_threshold": 0.9,
+      "target_denominator": 200
+    },
+    "announcement_coverage": {
+      "minimum_successes_at_target_denominator": 161,
+      "one_sided_exact_lower_95_threshold": 0.75,
+      "point_threshold": 0.8,
+      "target_denominator": 200
+    },
+    "outcome_marker_coverage": {
+      "minimum_successes_at_target_denominator": 142,
+      "one_sided_exact_lower_95_threshold": 0.65,
+      "point_threshold": 0.7,
+      "target_denominator": 200
+    },
+    "same_transaction_link_accuracy": {
+      "minimum_successes_at_target_denominator": 196,
+      "one_sided_exact_lower_95_threshold": 0.95,
+      "point_threshold": 0.95,
+      "target_denominator": 200
+    }
+  },
+  "confirmation_period": {
+    "end": "2015-12-31",
+    "start": "2006-01-01"
+  },
+  "content_hash": "sha256:e2d294361c96994931849cef2e44faa464e3f2ab6a9ba1e05e9c4d6742f82b74",
+  "corpus_acquired": false,
+  "corpus_frozen": false,
+  "decision": "AUTHOR_APPROVAL_REQUIRED",
+  "declared_on": "2026-08-26",
+  "execution_authorized": false,
+  "exploration_period": {
+    "end": "2025-12-31",
+    "start": "2016-01-01"
+  },
+  "exploratory_result_preserved_as_failed": true,
+  "family": "merger_arbitrage",
+  "governance_decision": "AUTHOR_APPROVAL_REQUIRED",
+  "independent_labels_completed": 0,
+  "lineage_gate": {
+    "required_fields": [
+      "cik",
+      "accession",
+      "form",
+      "acceptance_timestamp",
+      "primary_document",
+      "archive_url",
+      "document_sha256"
+    ],
+    "required_rate": 1.0
+  },
+  "periods_disjoint": true,
+  "project_owner": "Arhan Canli",
+  "protocol_frozen": true,
+  "resolver": {
+    "candidate_sources": [
+      "TARGET_8K_ITEM_1_01_7_01_OR_8_01_WITH_QUALIFYING_EXHIBIT",
+      "TARGET_PREM14A_OR_DEFA14A_WITH_PARTIES_AND_CASH_TERMS",
+      "BIDDER_SC_TO_T_LINKED_BY_SUBJECT_COMPANY_CIK"
+    ],
+    "conflict_policy": "UNRESOLVED_CONFLICT",
+    "later_confirmation_may_backdate": false,
+    "lookback_calendar_days": 365,
+    "qualifying_fields": [
+      "target_cik",
+      "one_named_counterparty",
+      "one_cash_consideration",
+      "binding_agreement_or_commenced_offer_language"
+    ],
+    "selection_rule": "EARLIEST_QUALIFYING_SEC_ACCEPTANCE_TIMESTAMP",
+    "states": [
+      "RESOLVED_CASH_MERGER",
+      "RESOLVED_CASH_TENDER",
+      "UNRESOLVED_NO_QUALIFYING_SOURCE",
+      "UNRESOLVED_CONFLICT",
+      "OUT_OF_SCOPE_NON_CASH_OR_COMPLEX_CONSIDERATION"
+    ]
+  },
+  "return_data_opened": false,
+  "return_hypotheses_spent": 0,
+  "review_boundary": {
+    "all_selected_anchors_labeled": true,
+    "independent_reviewer_required": true,
+    "no_automated_or_ai_labeling_assistance": true,
+    "prediction_blind_packet_required": true,
+    "prices_and_returns_forbidden": true,
+    "raw_confusion_counts_required": true
+  },
+  "schema": "canli.alphac-merger-announcement-confirmatory-design.v1",
+  "selection": {
+    "exploratory_accessions_excluded": 1965,
+    "insufficient_cell_policy": "DATA_GATED_NO_CROSS_CELL_SUBSTITUTION",
+    "namespace": "alphac-merger-announcement-confirmation-v2",
+    "rank_expression": "sha256(namespace + '|' + year + '|' + stratum + '|' + accession)",
+    "rows_per_stratum": 200,
+    "rows_per_year_stratum_cell": 20,
+    "selection_uses_document_text": false,
+    "selection_uses_human_labels": false,
+    "selection_uses_machine_prediction": false,
+    "selection_uses_prices_or_returns": false,
+    "selection_uses_realized_deal_outcome": false,
+    "target_rows": 400,
+    "years": [
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015
+    ]
+  },
+  "source_bindings": {
+    "compact_input_receipt": {
+      "content_hash": "sha256:11e1d46af1ed039a3c00d6d15e7479baf5d5bc4872103d4a0b4b876cae09a768",
+      "path": "config/merger_announcement_confirmatory_design_inputs.json",
+      "sha256": "2db3e951a2dabcf1323bcb84805c1df741168fd63ad6907ab1e1fc489e31dc52"
+    },
+    "exploratory_result": {
+      "path": "artifacts/feasibility/merger_arbitrage/result.json",
+      "sha256": "f28fbf54dfce33888c3d5e96e08d3c85549543105bd7fde68989f13bcc2827ea"
+    },
+    "exploratory_timeline": {
+      "path": "artifacts/feasibility/merger_arbitrage/target_anchor_timeline.parquet",
+      "sha256": "c39467ad09778b25a42550a0130eb42769a29aeb77547b9ce2c4db5e2940e6f7"
+    },
+    "protocol": {
+      "path": "docs/design/FEASIBILITY_MERGER_ANNOUNCEMENT_IDENTITY_V2.md",
+      "sha256": "a49a4c019fabc4a5dad8f777c79988b6125832be65d4990083ed2da14484739b"
+    }
+  },
+  "stage": "PROSPECTIVE_PRE_CORPUS_PRE_LABEL_PRE_RETURN_IDENTITY_REDESIGN",
+  "strata": {
+    "aggregate_cannot_rescue_failed_stratum": true,
+    "exploratory_measurements": {
+      "DEFM14A": {
+        "anchors": 1523,
+        "first_filing_date": "2016-01-08",
+        "last_filing_date": "2025-12-31",
+        "later_item201_or_102_8k_rate": 0.9238345370978333,
+        "prior_item101_8k_rate": 0.613263296126067
+      },
+      "SC 14D9": {
+        "anchors": 442,
+        "first_filing_date": "2016-01-05",
+        "last_filing_date": "2025-12-29",
+        "later_item201_or_102_8k_rate": 0.8959276018099548,
+        "prior_item101_8k_rate": 0.8665158371040724
+      }
+    },
+    "reported_and_gated_separately": true,
+    "values": [
+      "DEFM14A",
+      "SC 14D9"
+    ]
+  },
+  "technical_authorship_approved": false,
+  "technical_decision": "PASS_PROSPECTIVE_NO_RETURN_CONFIRMATORY_DESIGN",
+  "technical_gates": {
+    "author_technical_approval_recorded": false,
+    "both_strata_preserved": true,
+    "confidence_gates_are_predeclared": true,
+    "confirmation_corpus_unopened": true,
+    "confirmation_period_disjoint": true,
+    "exploratory_failure_preserved": true,
+    "market_and_return_columns_absent": true,
+    "resolver_is_deterministic_and_fail_closed": true,
+    "return_data_unopened": true,
+    "return_hypotheses_unspent": true,
+    "selection_is_pre_text_pre_label_pre_return": true,
+    "strata_gated_separately": true
+  }
+}

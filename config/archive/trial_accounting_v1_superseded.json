@@ -1,0 +1,79 @@
+{
+  "schema": "alphac.trial-accounting-policy.v1",
+  "hypothesis_identity_budget": 320,
+  "primary_ledger_record_audit_ceiling": 360,
+  "research_status": "ACTIVE",
+  "observed_hypothesis_identities": 228,
+  "window_only_keys": [
+    "start",
+    "end"
+  ],
+  "budget_last_reviewed": "2026-08-21",
+  "budget_review": {
+    "authorized_by": "owner, 2026-08-21",
+    "authorization": "Explicit owner decision to fund the fourteen-sleeve programme, taken with the evidence cost on the table rather than inferred afterwards.",
+    "hypothesis_identities_at_review": 162,
+    "prior_budget": 160,
+    "new_budget": 320,
+    "headroom": 158,
+    "rationale": "Ten new sleeves at the measured 6.5% hit rate (3 survivors from 46 tested candidates) implies about 154 trials. The budget is set at 320 identities, which funds that with a small margin and stops well short of an open-ended search. It is a CEILING, not a plan: the campaign closes at whatever count the evidence stops justifying.",
+    "cost_of_this_decision": {
+      "evidence": "artifacts/analysis/trial_budget_cost/result.json",
+      "annualized_deflated_benchmark_before": 1.2074,
+      "annualized_deflated_benchmark_after_154_trials": 1.3041,
+      "increase": 0.0967,
+      "applies_to": "every sleeve in the book, not only the new candidates. Deflation is a property of the search, and the search is the book's.",
+      "why_it_is_affordable": "The deflated benchmark grows with the LOGARITHM of the trial count, so 154 trials on top of 162 move it by roughly 0.10 annualized. Sample length is the far stronger lever, which is why v6 raising minimum_oos_observations from 252 to 756 matters more to admissibility than this budget does.",
+      "the_honest_caveat": "This assumes the measured 6.5% hit rate holds for families that have never been tested. It is an assumption, not a measurement, and the atlas families are deliberately unlike the ones that produced that rate. If the true rate is half of it, ten sleeves cost twice the trials and the budget will bind before the target is reached. Reaching the ceiling without ten admissions is a RESULT, not a failure of the budget, and the book stays smaller."
+    },
+    "what_did_not_change": "A target still never creates a sleeve. Fourteen is reached only if ten or more new identities independently clear every admission gate in config/sleeve_admission_contract.json; otherwise the book remains smaller. The budget buys permission to look, not permission to admit.",
+    "next_tripwire": "At 320 recorded hypothesis identities, registration pauses again and requires a fresh owner review. Any single family exceeding 40 identities also pauses for review, so the budget cannot be consumed by one line of enquiry that is not working.",
+    "status_token_note": "ACTIVE is the canonical token the trial tripwire recognises. The prospective nature of this budget is recorded here rather than encoded in the status, so no guard is left unable to read the state it governs."
+  },
+  "accounting_last_reconciled": "2026-08-22",
+  "ledger_scope_correction": {
+    "recorded_at": "2026-08-22",
+    "status": "CORRECTED",
+    "prior_reported_hypothesis_identities": 162,
+    "recovered_legacy_hypothesis_identities": 12,
+    "current_hypothesis_identities": 174,
+    "authorized_budget_unchanged": 320,
+    "budget_remaining": 146,
+    "new_experiments_run": 0,
+    "reason": "Canonical union discovery scanned only top-level var* profiles and omitted four durable experiment ledgers filed with legacy result artifacts. The ledgers are selection evidence and have been restored to N. Withdrawn archive_broken_prices ledgers remain excluded.",
+    "recovered_ledger_paths": [
+      "artifacts/exp1/20260625T075446Z/experiments.jsonl",
+      "artifacts/exp4/20260625T103226Z/experiments.jsonl",
+      "artifacts/exp4/smoke_20260625T102142Z/experiments.jsonl",
+      "artifacts/grand_backtest/20260616T143620Z/experiments.jsonl"
+    ]
+  },
+  "summary_trial_debt_correction": {
+    "recorded_at": "2026-08-22",
+    "status": "CORRECTED",
+    "prior_reported_hypothesis_identities": 174,
+    "recovered_historical_hypothesis_identities": 54,
+    "current_hypothesis_identities": 228,
+    "authorized_budget_unchanged": 320,
+    "budget_remaining": 92,
+    "new_experiments_run": 0,
+    "evidence": "artifacts/audit/trial_debt_reconciliation.json",
+    "reason": "Seven persisted historical studies reported named return configurations but bypassed the durable experiment ledger. The source-bound v2 reconciliation charges every measured parameter identity, including 32 AlphaMax robustness-grid configurations and AlphaTrend's post-hoc selector configurations; rounded summaries are never used to assert duplicate economic identity.",
+    "source_identity_counts": {
+      "alphamax_construction": 8,
+      "alphamax_weighting": 48,
+      "crypto_vrp_proxy": 1,
+      "alphamax_hyst_live": 6,
+      "alphamax_turnover": 8,
+      "alphatrend_arp": 3,
+      "alphatrend_breadth": 4
+    },
+    "already_reconciled_before_this_correction": 24,
+    "newly_reconciled_in_this_correction": 54
+  },
+  "definitions": {
+    "immutable_execution_record": "One append-only, config-hash-unique measurement row. Rolling-window remeasurements remain records.",
+    "hypothesis_identity": "A distinct economic or parameter identity after removing only start and end measurement-window keys.",
+    "window_only_remeasurement": "A later record whose config differs from an existing identity only in start or end. It remains public but does not inflate DSR selection N."
+  }
+}

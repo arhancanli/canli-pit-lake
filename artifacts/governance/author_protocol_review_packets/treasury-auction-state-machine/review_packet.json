@@ -1,0 +1,129 @@
+{
+  "activation_boundary": {
+    "approval_recorded": false,
+    "expected_approval_decision": "APPROVED_FOR_SEPARATE_RETURN_PREREGISTRATION",
+    "next_stage": "Write and seal a separate return preregistration before any market data is opened.",
+    "next_stage_authorized": false,
+    "return_data_opened": false,
+    "return_hypotheses_spent": 0
+  },
+  "ai_assistance": {
+    "author_reviewed_every_retained_claim": false,
+    "disclosure_approved_by_author": false,
+    "public_disclosure_text": null,
+    "scope": null,
+    "systems": [],
+    "used": null
+  },
+  "answers_completed": 0,
+  "approval": {
+    "approval_date": null,
+    "approved_evidence_content_hash": null,
+    "approved_evidence_sha256": null,
+    "approved_protocol_sha256": null,
+    "author_statement": null,
+    "blocking_issues": [],
+    "decision": null,
+    "explicit_authorization_reference": null,
+    "self_attested_by_author": false
+  },
+  "author": "Arhan Canli",
+  "author_approval_claimed": false,
+  "author_questions": [
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "STATE_MACHINE_IN_OWN_WORDS",
+      "prompt": "Describe the event clock and state machine in your own words, including tentative, confirmed, post-only, cancelled, and closed paths."
+    },
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "POSITION_IDENTITY",
+      "prompt": "Explain the pre-auction and post-auction position identity and which economic direction is deliberately unchanged."
+    },
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "REVISION_TREATMENT",
+      "prompt": "Explain why revised, late, post-event, and missing schedules receive their declared treatment without final-calendar hindsight."
+    },
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "OVERLAP_ACCOUNTING",
+      "prompt": "Explain how overlapping event windows must be netted for execution while preserving event-level attribution and costs."
+    },
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "INFORMATION_BOUNDARY",
+      "prompt": "List the information still prohibited at this stage and the fields that a later return preregistration must freeze."
+    },
+    {
+      "answer": null,
+      "answered_by": null,
+      "approved_by_author": false,
+      "id": "CORRECTIONS_OR_APPROVAL",
+      "prompt": "Record every required correction, or explain why the exact bound protocol is acceptable for the next declared stage."
+    }
+  ],
+  "claim_boundary": "Automation populated source bindings, governed questions, and blank checks only. This packet proves no author answer, approval, identity, corpus authorization, return authorization, external review, or publication acceptance.",
+  "content_hash": "sha256:c260e8f1d3c11d784ddb11ed12253e70e7b572114b3e3fd3204e54f6f813e7d4",
+  "evidence_binding": {
+    "content_hash": "sha256:46dfc56e7a2bd92cf55cacc1cb69ce4d09d8803a56376ab93faeb0d4b45ebef2",
+    "governance_decision": "AUTHOR_APPROVAL_REQUIRED",
+    "path": "artifacts/feasibility/treasury_auction_concession/schedule_state_machine_audit.json",
+    "sha256": "bcc88540e06b4de8db142c7a81f6fbf5c43c00fa8b0b575e218e3c7112cd8634",
+    "technical_decision": "PASS_NO_RETURN_STATE_MACHINE_AUDIT"
+  },
+  "external_review_claimed": false,
+  "family": "treasury_auction_concession",
+  "identity_proof_claimed": false,
+  "protocol_binding": {
+    "path": "docs/design/FEASIBILITY_TREASURY_AUCTION_STATE_MACHINE.md",
+    "sha256": "12b3fa9cfb774bd926945bf39111f9cd3ba50e0c87ba67220f9d8e1423b8563f"
+  },
+  "review_key": "treasury-auction-state-machine",
+  "schema": "canli.alphac-author-protocol-review-packet.v1",
+  "status": "AWAITING_ARHAN_REVIEW_NO_APPROVAL_CLAIMED",
+  "technical_checks": [
+    {
+      "author_confirmed": null,
+      "check": "ALL_156_EVENTS_HAVE_ONE_DETERMINISTIC_PATH",
+      "evidence": null
+    },
+    {
+      "author_confirmed": null,
+      "check": "REVISIONS_LATE_UPDATES_AND_MISSING_RECORDS_FAIL_CLOSED",
+      "evidence": null
+    },
+    {
+      "author_confirmed": null,
+      "check": "POSITION_SIGN_AND_EVENT_WINDOWS_ARE_NOT_RETUNED",
+      "evidence": null
+    },
+    {
+      "author_confirmed": null,
+      "check": "OVERLAPS_PRESERVE_EVENT_LEVEL_ATTRIBUTION",
+      "evidence": null
+    },
+    {
+      "author_confirmed": null,
+      "check": "MARKET_AND_RETURN_COLUMNS_ARE_ABSENT",
+      "evidence": null
+    },
+    {
+      "author_confirmed": null,
+      "check": "SEPARATE_RETURN_PREREGISTRATION_REMAINS_REQUIRED",
+      "evidence": null
+    }
+  ],
+  "technical_checks_confirmed": 0,
+  "title": "Treasury auction schedule state machine"
+}
