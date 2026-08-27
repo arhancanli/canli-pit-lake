@@ -1,0 +1,142 @@
+{
+  "schema": "canli.alphac-crypto-carry-portable-run.v1",
+  "status": "FROZEN_BEFORE_RETURN_COMPUTE",
+  "author": "Arhan Canli",
+  "family_trial_account": "crypto_carry",
+  "return_identity_id": "crypto_carry_portable_v1",
+  "config_hash": "50d9e8b059fee773",
+  "hypothesis_identity": "da5f5f47f99f9bd2",
+  "private_lake_root": "var/portable_crypto_carry_v1",
+  "output_path": "artifacts/prospective/crypto_carry_portable_v1",
+  "reservation_path": "artifacts/research/preregistrations/crypto_carry_portable_v1/return_identity_reservation.json",
+  "expected_walkforward_legs": 25,
+  "trial_config": {
+    "start": 1622505600000,
+    "end": 1780272000000,
+    "train_bars": 6048,
+    "test_bars": 1512,
+    "allocator": "rank",
+    "rebalance_bars": 168,
+    "no_trade_band": 0.001,
+    "instrument_ids": [
+      "BINANCE:PERP:1000PEPEUSDT",
+      "BINANCE:PERP:1000SHIBUSDT",
+      "BINANCE:PERP:AAVEUSDT",
+      "BINANCE:PERP:ADAUSDT",
+      "BINANCE:PERP:APEUSDT",
+      "BINANCE:PERP:APTUSDT",
+      "BINANCE:PERP:ARBUSDT",
+      "BINANCE:PERP:ATOMUSDT",
+      "BINANCE:PERP:AVAXUSDT",
+      "BINANCE:PERP:AXSUSDT",
+      "BINANCE:PERP:BCHUSDT",
+      "BINANCE:PERP:BLZUSDT",
+      "BINANCE:PERP:BNBUSDT",
+      "BINANCE:PERP:BTCUSDT",
+      "BINANCE:PERP:CHZUSDT",
+      "BINANCE:PERP:COMPUSDT",
+      "BINANCE:PERP:CRVUSDT",
+      "BINANCE:PERP:DOGEUSDT",
+      "BINANCE:PERP:DOTUSDT",
+      "BINANCE:PERP:EOSUSDT",
+      "BINANCE:PERP:ETCUSDT",
+      "BINANCE:PERP:ETHUSDT",
+      "BINANCE:PERP:FILUSDT",
+      "BINANCE:PERP:FTMUSDT",
+      "BINANCE:PERP:GALAUSDT",
+      "BINANCE:PERP:INJUSDT",
+      "BINANCE:PERP:LDOUSDT",
+      "BINANCE:PERP:LINAUSDT",
+      "BINANCE:PERP:LINKUSDT",
+      "BINANCE:PERP:LRCUSDT",
+      "BINANCE:PERP:LTCUSDT",
+      "BINANCE:PERP:LUNAUSDT",
+      "BINANCE:PERP:MANAUSDT",
+      "BINANCE:PERP:MATICUSDT",
+      "BINANCE:PERP:MKRUSDT",
+      "BINANCE:PERP:NEARUSDT",
+      "BINANCE:PERP:OCEANUSDT",
+      "BINANCE:PERP:OPUSDT",
+      "BINANCE:PERP:REEFUSDT",
+      "BINANCE:PERP:RNDRUSDT",
+      "BINANCE:PERP:RUNEUSDT",
+      "BINANCE:PERP:SANDUSDT",
+      "BINANCE:PERP:SEIUSDT",
+      "BINANCE:PERP:SOLUSDT",
+      "BINANCE:PERP:SUIUSDT",
+      "BINANCE:PERP:SUSHIUSDT",
+      "BINANCE:PERP:SXPUSDT",
+      "BINANCE:PERP:THETAUSDT",
+      "BINANCE:PERP:TIAUSDT",
+      "BINANCE:PERP:TOMOUSDT",
+      "BINANCE:PERP:TRXUSDT",
+      "BINANCE:PERP:UNIUSDT",
+      "BINANCE:PERP:VETUSDT",
+      "BINANCE:PERP:WAVESUSDT",
+      "BINANCE:PERP:WLDUSDT",
+      "BINANCE:PERP:XLMUSDT",
+      "BINANCE:PERP:XRPUSDT"
+    ],
+    "alpha_names": [
+      "carry_fund_21"
+    ]
+  },
+  "engine_config": {
+    "embargo_bars": 168,
+    "initial_cash": 100000.0,
+    "cov_window_bars": 720,
+    "cov_halflife_days": null,
+    "cov_min_periods": 240,
+    "ml": false,
+    "regime": false,
+    "verified_split_events": []
+  },
+  "bindings": {
+    "preregistration": {
+      "path": "docs/design/PREREG_CRYPTO_CARRY_PORTABLE_V1.md",
+      "sha256": "729963706715562640bcf2aecee2420433f888eb2f178300da2dded66c2b216e"
+    },
+    "portable_lake_readiness": {
+      "path": "artifacts/audit/crypto_carry_portable_lake_readiness.json",
+      "sha256": "e6c829153b60ac5fef16d35abe052e9efa720f96a61e4106ccb35c2c4f8ae441",
+      "content_hash": "sha256:d6ead5a3dd1b0db3f5db840ef3a4b00519d63b4af0ed354741cd33d0389f7d62"
+    },
+    "data_contract": {
+      "path": "config/crypto_carry_portable_v1_prerun.json",
+      "sha256": "5f3f9eca88d024b41cf4e93f5729ec7dd0d0f6fb01c7880aebeb79088081e495",
+      "content_hash": "sha256:e153521aa08d1ee1a27a64ff008e3ea25ba72858017133cb781178dcfb8b48e3"
+    },
+    "base_settings": {
+      "path": "configs/base.yaml",
+      "sha256": "6177d3f33089e7c0f6f8d99bc97e66d75f3d596e7593806b79c89cedebde15fa"
+    },
+    "runner": {
+      "path": "scripts/run_crypto_carry_portable_v1.py",
+      "sha256": "2cf54ab1cde34899523fc0fa3af461c96bc58219c2e0fe875cb88083591d674d"
+    },
+    "python_project": {
+      "path": "pyproject.toml",
+      "sha256": "ddaf8b60999275f6d3fb93b3073f256d75d1383bfc8bab14263dc58645841006"
+    },
+    "locked_environment": {
+      "path": "uv.lock",
+      "sha256": "5caca664242722a3a3112663d7a19b7b5000583e30ade3753e1b8ffdecfd6f06"
+    }
+  },
+  "execution_control": {
+    "default_mode": "ZERO_RETURN_PREFLIGHT_ONLY",
+    "return_execution_requires_explicit_flag": true,
+    "return_execution_requires_exact_authorization_token": true,
+    "authorization_token": "SPEND_EXACTLY_ONE_CRYPTO_CARRY_PORTABLE_V1_IDENTITY",
+    "reservation_must_validate_before_signal_compute": true,
+    "output_path_must_not_exist": true,
+    "alpha_forge_environment_overrides_forbidden": true
+  },
+  "research_accounting_at_freeze": {
+    "new_return_trials_executed": 0,
+    "return_metrics_computed": false,
+    "hypotheses_spent": 0,
+    "reservation_created": false
+  },
+  "content_hash": "sha256:4c51bc73f0332aeec402a008cc9bc8ea8cc81b74608634599d05a63d1ec327ff"
+}

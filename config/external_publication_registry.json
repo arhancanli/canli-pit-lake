@@ -1,0 +1,152 @@
+{
+  "schema": "canli.alphac-external-publication-registry.v2",
+  "owner_and_author": "Arhan Canli",
+  "status": "PREPARATION_ONLY_NO_EXTERNAL_SUBMISSIONS_CLAIMED",
+  "platform_policy": {
+    "finance_preprint": "ZENODO_PUBLICATION_PREPRINT_RECORD",
+    "ssrn_route": "EXCLUDED_PENDING_DIRECT_AUTHOR_ELIGIBILITY_CONFIRMATION_OR_POLICY_CHANGE",
+    "reproducibility_bundle_doi": "ZENODO",
+    "optional_methodology_preprint": ["ARXIV_Q_FIN_SUBJECT_TO_SCOPE_AND_ENDORSEMENT"],
+    "osf_preprints_route": "EXCLUDED_PENDING_PAPER_SPECIFIC_AUTHORSHIP_AND_PROVIDER_SCOPE_REVIEW",
+    "duplicate_doi_for_same_object_permitted": false,
+    "shotgun_duplicate_submission_permitted": false,
+    "peer_review_may_be_claimed_from_repository_posting": false
+  },
+  "shared_blocker_definitions": {
+    "REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE": "Exact result objects are released, but the redistribution-safe raw-input inventory and source-license review remain incomplete.",
+    "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED": "The result has not been reproduced from a fresh environment using only released instructions.",
+    "INDEPENDENT_HUMAN_REPLICATION_MISSING": "No named independent human or organization has reproduced the result.",
+    "OPEN_MATERIAL_REPLAY_CORRECTION": "The selected crypto-carry artifact materially diverges from the current-state replay. The surviving full path is now exhaustively compared, but the omitted historical code and derived-input snapshots make a unique additive causal split impossible. A prospective snapshot control cannot repair that omission; external submission remains prohibited pending a preregistered snapshot-bound current run, corrected bundle, and independent review."
+  },
+  "sleeves": [
+    {
+      "key": "alphaforge_crypto_carry", "bundle_slug": "crypto-carry",
+      "title": "Crypto Perpetual Carry: Trial Lineage, Capacity Failure, and Live Evidence Boundary",
+      "author": "Arhan Canli", "source_paper": "docs/research/CRYPTO_CARRY_LINEAGE.md",
+      "bundle_manifest": "publication/crypto-carry/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "LOCAL_SIMULATED_PAPER_NOT_ALPACA",
+      "submission_blockers": ["OPEN_MATERIAL_REPLAY_CORRECTION", "REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "LIVE_CRYPTO_POSITION_ATTRIBUTION_NOT_DEPLOYED_OR_EXTERNALLY_VERIFIED", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "alphamax_equity_momentum", "bundle_slug": "alphamax",
+      "title": "Equity Momentum Under Complete Trial Accounting: A Selected Survivor and Failed Deep-History Replication",
+      "author": "Arhan Canli", "source_paper": "docs/research/ALPHAMAX_EQUITY_MOMENTUM_LINEAGE.md",
+      "bundle_manifest": "publication/alphamax/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "ALPACA_PAPER_AND_RESEARCH_SIMULATION_SEPARATELY_LABELLED",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CORPORATE_ACTION_CORRECTION_LEDGER_NEEDS_COMPACT_APPENDIX", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "alphatrend_managed_futures", "bundle_slug": "alphatrend",
+      "title": "Managed-Futures Trend as an Unresolved Diversifier: Complete Trial Lineage and Forward Burden of Proof",
+      "author": "Arhan Canli", "source_paper": "docs/research/ALPHATREND_MANAGED_FUTURES_LINEAGE.md",
+      "bundle_manifest": "publication/alphatrend/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "ALPACA_PAPER_AND_RESEARCH_SIMULATION_SEPARATELY_LABELLED",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "FUTURES_PROXY_AND_ETF_IMPLEMENTATIONS_REQUIRE_SEPARATE_TABLES", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "alphavintage_macro_surprise", "bundle_slug": "alphavintage",
+      "title": "Point-in-Time Inflation Surprise and the Equity Size Spread: A Corrected Null, a Deployment-Governance Failure, and a Frozen Forward Experiment",
+      "author": "Arhan Canli", "source_paper": "docs/research/ALPHAVINTAGE_MACRO_SURPRISE_LINEAGE.md",
+      "bundle_manifest": "publication/alphavintage/v1.0.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "ALPACA_PAPER_AND_RESEARCH_SIMULATION_SEPARATELY_LABELLED",
+      "submission_blockers": ["DATA_LICENCE_REVIEW_REQUIRED", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "crypto_defensive", "bundle_slug": "crypto-defensive",
+      "title": "Crypto Defensive Factors: Two Positive Summaries Without Admission Evidence",
+      "author": "Arhan Canli", "source_paper": "docs/research/CRYPTO_DEFENSIVE_LINEAGE.md",
+      "bundle_manifest": "publication/crypto-defensive/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "crypto_momentum", "bundle_slug": "crypto-momentum",
+      "title": "Crypto Momentum: Complete Trial Lineage and Failed Sleeve-Admission Evidence",
+      "author": "Arhan Canli", "source_paper": "docs/research/CRYPTO_MOMENTUM_LINEAGE.md",
+      "bundle_manifest": "publication/crypto-momentum/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "crypto_multifactor_engine", "bundle_slug": "crypto-multifactor-engine",
+      "title": "Crypto Multi-Factor Engine: Seven Trials, Capacity Decay, and No-Deploy Verdict",
+      "author": "Arhan Canli", "source_paper": "docs/research/CRYPTO_MULTIFACTOR_ENGINE_LINEAGE.md",
+      "bundle_manifest": "publication/crypto-multifactor-engine/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "crypto_reversal", "bundle_slug": "crypto-reversal",
+      "title": "Crypto Short-Horizon Reversal: Two Decisive Negative Trials",
+      "author": "Arhan Canli", "source_paper": "docs/research/CRYPTO_REVERSAL_LINEAGE.md",
+      "bundle_manifest": "publication/crypto-reversal/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "crypto_vrp", "bundle_slug": "crypto-vrp",
+      "title": "Crypto Volatility Risk Premium: One Proxy Trial and a Published Null",
+      "author": "Arhan Canli", "source_paper": "docs/research/CRYPTO_VRP_LINEAGE.md",
+      "bundle_manifest": "publication/crypto-vrp/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "energy_inventory", "bundle_slug": "energy-inventory",
+      "title": "Petroleum Inventory Scarcity: One Negative Macro-Commodity Identity",
+      "author": "Arhan Canli", "source_paper": "docs/research/ENERGY_INVENTORY_LINEAGE.md",
+      "bundle_manifest": "publication/energy-inventory/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "equity_insider_activity", "bundle_slug": "equity-insider-activity",
+      "title": "Clustered Insider Purchases: Two Negative Event-Information Trials",
+      "author": "Arhan Canli", "source_paper": "docs/research/EQUITY_INSIDER_ACTIVITY_LINEAGE.md",
+      "bundle_manifest": "publication/equity-insider-activity/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "equity_low_beta", "bundle_slug": "equity-low-beta",
+      "title": "Equity Low Beta: Two Negative Identities and No Defensive Sleeve",
+      "author": "Arhan Canli", "source_paper": "docs/research/EQUITY_LOW_BETA_LINEAGE.md",
+      "bundle_manifest": "publication/equity-low-beta/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "equity_narrative_change", "bundle_slug": "equity-narrative-change",
+      "title": "Annual Risk-Factor Narrative Stability: A Preregistered Null",
+      "author": "Arhan Canli", "source_paper": "docs/research/EQUITY_NARRATIVE_CHANGE_LINEAGE.md",
+      "bundle_manifest": "publication/equity-narrative-change/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "equity_quality", "bundle_slug": "equity-quality",
+      "title": "Equity Fundamental Quality: Eleven Identities and No Validated Sleeve",
+      "author": "Arhan Canli", "source_paper": "docs/research/EQUITY_QUALITY_LINEAGE.md",
+      "bundle_manifest": "publication/equity-quality/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "equity_value_investment", "bundle_slug": "equity-value-investment",
+      "title": "Equity Value, Issuance, and Investment: Thirteen Identities and Unstable Evidence",
+      "author": "Arhan Canli", "source_paper": "docs/research/EQUITY_VALUE_INVESTMENT_LINEAGE.md",
+      "bundle_manifest": "publication/equity-value-investment/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    },
+    {
+      "key": "macro_economic_trend", "bundle_slug": "macro-economic-trend",
+      "title": "Point-in-Time Macroeconomic Trend: Seven Identities Without a Validated Sleeve",
+      "author": "Arhan Canli", "source_paper": "docs/research/MACRO_ECONOMIC_TREND_LINEAGE.md",
+      "bundle_manifest": "publication/macro-economic-trend/v0.1.0/bundle_manifest.json",
+      "state": "BUNDLE_INCOMPLETE", "capital_kind": "RESEARCH_SIMULATION_ONLY",
+      "submission_blockers": ["REDISTRIBUTION_SAFE_RAW_DATA_INVENTORY_INCOMPLETE", "CLEAN_ENVIRONMENT_REPLAY_NOT_COMPLETED", "INDEPENDENT_HUMAN_REPLICATION_MISSING"]
+    }
+  ],
+  "claim_boundary": "This registry is a preparation ledger. It claims no SSRN, Zenodo, arXiv or OSF submission, DOI, moderation outcome, peer review, citation or independent replication. SSRN is not a current target under the eligibility guidance observed on 2026-08-24."
+}

@@ -1,0 +1,40 @@
+# AlphaForge — Sharadar survivorship-free RESEARCH profile. Deep-merges over configs/base.yaml.
+# Identical to configs/equity.yaml (the US-equity sleeve) EXCEPT it points the lake + var at the
+# dedicated Sharadar research lake (data/lake_sharadar, var_sharadar) loaded by
+# scripts/sharadar_load.py: 8,436 survivorship-free tickers (incl. delisted), 1998+, with the
+# SF1 fundamentals (incl. op_cash_flow) the accruals/issuance/investment factors need.
+# Measurement-only: NOT the deployed path. Resolve with:  af --profile sharadar <command>
+
+paths:
+  lake_dir: data/lake_sharadar
+  var_dir: var_sharadar
+
+data:
+  asset_class: equity
+  timeframe: "1d"
+  exchange: polygon
+  backfill_start: "1997-01-01T00:00:00Z"
+
+universe:
+  size: 2000
+  entry_rank: 1800
+  exit_rank: 2300
+
+portfolio:
+  rank_top_k: 100
+  dollar_neutral: true
+
+signals:
+  horizon_bars: 63
+
+costs:
+  equity_commission_bps: 1.0
+  equity_half_spread_bps: 3.0
+  equity_borrow_bps_annual: 50.0
+  impact_coef: 1.0
+  latency_addon_bps: 2.0
+
+risk:
+  # Thin survivorship-free small-caps: a large flatten on a low-ADV name would crash the
+  # sqrt-impact model. Clamp de-risking at the 5%-ADV edge instead (closes over the next bars).
+  clamp_reduce_only_adv: true

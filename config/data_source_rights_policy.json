@@ -1,0 +1,131 @@
+{
+  "schema": "canli.alphac-data-source-rights-policy.v2",
+  "owner": "Arhan Canli",
+  "review_date": "2026-08-26",
+  "review_boundary": "Operational publication policy, not legal advice. Absence of a clear redistribution grant is treated as no permission to redistribute raw records.",
+  "sources": {
+    "ALPACA_PRIVATE_ACCOUNT": {
+      "access_kind": "authenticated private paper-broker account",
+      "official_terms": "https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf",
+      "raw_redistribution": "PROHIBITED_BY_PROJECT_POLICY",
+      "permitted_release": "sanitized aggregate reconciliation with account identifiers and credentials removed",
+      "portable_reproduction_route": "reviewer supplies a separate paper account or verifies released aggregates",
+      "terms_observed_on": "2026-08-26",
+      "public_terms_review_status": "COMPLETE_CONSERVATIVE_DECISION_RECORDED",
+      "external_publication_clearance_recorded": false,
+      "derived_result_publication": "ACCOUNT_AGGREGATES_ONLY_MARKET_DATA_EXCLUDED_OWNER_AND_CURRENT_TERMS_REVIEW_REQUIRED",
+      "terms_evidence": "The current customer agreement prohibits reproducing, distributing, selling, or commercially exploiting Alpaca-supplied market data without written consent. The project therefore excludes market-data rows, credentials, account identifiers, orders, and positions from publication bundles; sanitized paper-account aggregates remain subject to owner approval and a final current-terms check."
+    },
+    "BINANCE_EXCHANGE_MARKET_DATA": {
+      "access_kind": "exchange API accessed through CCXT",
+      "official_terms": "https://www.binance.com/en/terms",
+      "raw_redistribution": "WITHHELD_PENDING_EXPLICIT_RIGHTS_CONFIRMATION",
+      "permitted_release": "code, query specification, symbols, timestamps, hashes and derived non-row-level results",
+      "portable_reproduction_route": "fresh API acquisition under the reviewer's own access and then hash/coverage comparison",
+      "terms_observed_on": "2026-08-26",
+      "public_terms_review_status": "COMPLETE_CONSERVATIVE_DECISION_RECORDED",
+      "external_publication_clearance_recorded": false,
+      "derived_result_publication": "NOT_EXPLICITLY_CLEARED_BY_PUBLIC_API_DOCUMENTATION",
+      "terms_evidence": "Binance's current official developer documentation authorizes supported API access to public market data and describes analytics and dashboard integrations, but the reviewed public documentation does not provide an explicit redistribution grant for historical rows or research-derived outputs. Raw rows remain withheld and external publication requires a final provider or qualified-rights confirmation."
+    },
+    "DERIBIT_MARKET_DATA": {
+      "access_kind": "exchange market data including the DVOL index",
+      "official_terms": "https://statics.deribit.com/files/TermsofServiceDeribit.pdf",
+      "raw_redistribution": "PROHIBITED_WITHOUT_EXPLICIT_DERIBIT_APPROVAL",
+      "permitted_release": "code, query specification, coverage manifest, hashes and non-row-level research results only",
+      "portable_reproduction_route": "reviewer independently acquires the data under applicable Deribit terms",
+      "terms_observed_on": "2026-08-24",
+      "public_terms_review_status": "COMPLETE_CONSERVATIVE_DECISION_RECORDED",
+      "external_publication_clearance_recorded": false,
+      "derived_result_publication": "DERIBIT_APPROVAL_REQUIRED_FOR_MARKET_DATA_AND_DERIVED_DATA",
+      "terms_evidence": "Article 4.6 restricts non-personal processing, publishing and forwarding of Market Data and Derived Data without explicit approval."
+    },
+    "EIA_PUBLIC_DATA": {
+      "access_kind": "U.S. Energy Information Administration public government data",
+      "official_terms": "https://www.eia.gov/about/copyrights_reuse.php",
+      "raw_redistribution": "PERMITTED_WITH_SOURCE_AND_PUBLICATION_DATE_ACKNOWLEDGMENT_SUBJECT_TO_PROTECTED_MATERIAL_EXCEPTIONS",
+      "permitted_release": "EIA data and files with source/date acknowledgment; protected third-party materials and logos remain excluded",
+      "portable_reproduction_route": "fresh download from the official dated WPSR archive",
+      "terms_observed_on": "2026-08-24",
+      "public_terms_review_status": "COMPLETE_CONSERVATIVE_DECISION_RECORDED",
+      "external_publication_clearance_recorded": true,
+      "derived_result_publication": "PUBLIC_GOVERNMENT_DATA_REUSE_DOCUMENTED_WITH_ACKNOWLEDGMENT_AND_PROTECTED_MATERIAL_EXCEPTIONS",
+      "terms_evidence": "EIA states that its U.S. government publications and website data may be used or distributed with acknowledgment, while separately protected materials remain excluded."
+    },
+    "FRED_ECONOMIC_DATA": {
+      "access_kind": "Federal Reserve Bank of St. Louis FRED services with series-specific ownership",
+      "official_terms": "https://fred.stlouisfed.org/legal/",
+      "raw_redistribution": "WITHHELD_PENDING_SERIES_BY_SERIES_COPYRIGHT_AND_USE_REVIEW",
+      "permitted_release": "series identifiers, retrieval code, timestamps, hashes, attribution and non-row-level derived results",
+      "portable_reproduction_route": "reviewer independently retrieves each series subject to its current source-specific notices",
+      "terms_observed_on": "2026-08-24",
+      "public_terms_review_status": "COMPLETE_CONSERVATIVE_DECISION_RECORDED",
+      "external_publication_clearance_recorded": false,
+      "derived_result_publication": "SERIES_BY_SERIES_RIGHTS_REVIEW_REQUIRED",
+      "terms_evidence": "FRED requires attribution and preserves third-party series restrictions; access through FRED does not override the underlying owner's rights."
+    },
+    "MASSIVE_POLYGON_MARKET_DATA": {
+      "access_kind": "licensed vendor market data",
+      "official_terms": "https://massive.com/legal/market-data-terms-of-service",
+      "raw_redistribution": "PROHIBITED_WITHOUT_SEPARATE_PERMISSION",
+      "permitted_release": "source-independent code and methodology only until an applicable business order form or express written consent is recorded",
+      "portable_reproduction_route": "reviewer supplies separately licensed Massive/Polygon access",
+      "terms_observed_on": "2026-08-26",
+      "public_terms_review_status": "COMPLETE_CONSERVATIVE_DECISION_RECORDED",
+      "external_publication_clearance_recorded": false,
+      "derived_result_publication": "REQUIRES_APPLICABLE_ORDER_FORM_OR_EXPRESS_WRITTEN_CONSENT",
+      "terms_evidence": "Massive's market-data terms, last updated August 28, 2025, restrict publication or transfer of market data and expressly include charts, analytics, research, and other derived works. The account-specific order form has not been reviewed and no express publication consent is recorded."
+    },
+    "NASDAQ_SHARADAR": {
+      "access_kind": "licensed Nasdaq Data Link dataset",
+      "official_terms": "https://data.nasdaq.com/terms",
+      "raw_redistribution": "PROHIBITED_WITHOUT_SEPARATE_PERMISSION",
+      "permitted_release": "source-independent code and methodology only until the applicable order form or prior written approval permits external distribution",
+      "portable_reproduction_route": "reviewer supplies a separately licensed Sharadar dataset",
+      "terms_observed_on": "2026-08-26",
+      "public_terms_review_status": "COMPLETE_CONSERVATIVE_DECISION_RECORDED",
+      "external_publication_clearance_recorded": false,
+      "derived_result_publication": "REQUIRES_APPLICABLE_ORDER_FORM_PERMISSION_OR_PRIOR_WRITTEN_APPROVAL",
+      "terms_evidence": "Nasdaq Data Link's public data-license terms prohibit redistributing licensed data and state that derived data cannot be distributed outside the client except as allowed by the order form or with prior written approval. No applicable order-form permission or written approval is recorded."
+    },
+    "PHILADELPHIA_FED_RTDSM": {
+      "access_kind": "public institutional macro-vintage dataset",
+      "official_documentation": "https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists",
+      "official_terms": "https://www.philadelphiafed.org/-/media/frbp/assets/institutional/about-us/terms-of-use.pdf",
+      "raw_redistribution": "WITHHELD_PENDING_EXPLICIT_RIGHTS_CONFIRMATION",
+      "permitted_release": "download recipe, series names, vintage semantics, coverage manifest, hashes and derived results",
+      "portable_reproduction_route": "fresh download from the official source",
+      "terms_observed_on": "2026-08-26",
+      "public_terms_review_status": "COMPLETE_CONSERVATIVE_DECISION_RECORDED",
+      "external_publication_clearance_recorded": false,
+      "derived_result_publication": "RESEARCH_USE_AND_PREFERRED_CITATION_DOCUMENTED_RAW_REDISTRIBUTION_NOT_CLEARED",
+      "terms_evidence": "The RTDSM page states that the dataset may be used by macroeconomic researchers and identifies the preferred technical citation. It does not state an explicit raw-data redistribution grant, so the bundle contains recipes, provenance, and derived results but no RTDSM rows."
+    },
+    "SEC_PUBLIC_DATA_AND_FILINGS": {
+      "access_kind": "SEC government-created datasets and public EDGAR filings",
+      "official_terms": "https://www.sec.gov/about/webmaster-frequently-asked-questions",
+      "raw_redistribution": "PERMITTED_FOR_GOVERNMENT_CREATED_AND_EDGAR_PUBLIC_CONTENT_SUBJECT_TO_IDENTIFIED_EXCEPTIONS",
+      "permitted_release": "source excerpts and public filing/data records with provenance, while third-party protected exceptions remain excluded",
+      "portable_reproduction_route": "fresh retrieval from SEC official datasets and EDGAR accession URLs",
+      "terms_observed_on": "2026-08-24",
+      "public_terms_review_status": "COMPLETE_CONSERVATIVE_DECISION_RECORDED",
+      "external_publication_clearance_recorded": true,
+      "derived_result_publication": "GOVERNMENT_CREATED_AND_EDGAR_PUBLIC_CONTENT_REUSE_DOCUMENTED_SUBJECT_TO_EXCEPTIONS",
+      "terms_evidence": "The SEC states that government-created sec.gov content and EDGAR public filing content are free to access and reuse, while limited exceptions exist."
+    },
+    "YAHOO_FINANCE_MARKET_DATA": {
+      "access_kind": "third-party market-data service",
+      "official_terms": "https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html",
+      "raw_redistribution": "PROHIBITED_WITHOUT_EXPLICIT_PERMISSION",
+      "permitted_release": "instrument/date specification and source-independent code only until the relevant market-data rights are confirmed",
+      "portable_reproduction_route": "reviewer independently acquires equivalent licensed benchmark data",
+      "terms_observed_on": "2026-08-26",
+      "public_terms_review_status": "COMPLETE_CONSERVATIVE_DECISION_RECORDED",
+      "external_publication_clearance_recorded": false,
+      "derived_result_publication": "NOT_CLEARED_FOR_UNOFFICIAL_FINANCE_DATA_ACCESS_PATH",
+      "terms_evidence": "Yahoo's current public terms preserve Yahoo and vendor rights in service content. The project did not use a documented licensed Yahoo Finance market-data API with an external-publication grant, so raw rows remain withheld and research-derived publication clearance is not inferred."
+    }
+  },
+  "project_default": "DO_NOT_BUNDLE_RAW_THIRD_PARTY_ROWS_UNLESS_A SOURCE-SPECIFIC WRITTEN GRANT IS RECORDED",
+  "claim_boundary": "This policy establishes a conservative release decision. It does not interpret contracts, grant rights, or prove that a third party will continue to provide data."
+}

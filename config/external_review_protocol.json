@@ -1,0 +1,130 @@
+{
+  "schema": "canli.alphac-external-review-protocol.v1",
+  "owner_and_author": "Arhan Canli",
+  "status": "PREPARATION_ONLY_ZERO_EXTERNAL_REVIEWS",
+  "observed_on": "2026-08-24",
+  "outreach_authorized": false,
+  "external_account_actions_authorized": false,
+  "review_claims": {
+    "AUTHOR_TECHNICAL_AUDIT": "The author traces the manuscript to governed evidence and approves every claim.",
+    "FRESH_CONTEXT_READER_REVIEW": "A human reader assesses clarity without verbal guidance from the author.",
+    "EXTERNAL_DOMAIN_REVIEW": "Conflict-free external specialists provide substantive methods or reproducibility review.",
+    "INDEPENDENT_REPLICATION": "A person outside the project executes the released protocol in an environment they control.",
+    "OPEN_PREPRINT_REVIEW": "A public review platform binds comments and author responses to an immutable preprint version.",
+    "FORMAL_PEER_REVIEW": "A journal or conference manages independent review under its editorial policy."
+  },
+  "minimum_review_plan": {
+    "all_sleeve_records": [
+      "AUTHOR_TECHNICAL_AUDIT",
+      "FRESH_CONTEXT_READER_REVIEW"
+    ],
+    "flagship_manuscripts": [
+      "AUTHOR_TECHNICAL_AUDIT",
+      "FRESH_CONTEXT_READER_REVIEW",
+      "EXTERNAL_DOMAIN_REVIEW",
+      "INDEPENDENT_REPLICATION"
+    ],
+    "minimum_external_domain_reviewers_per_flagship": 2,
+    "required_external_scopes": [
+      "STATISTICS_ECONOMETRICS_OR_QUANTITATIVE_FINANCE",
+      "DATA_LINEAGE_AND_REPRODUCIBILITY"
+    ],
+    "flagship_registry_keys": [
+      "alphavintage_macro_surprise",
+      "alphaforge_crypto_carry",
+      "alphamax_equity_momentum",
+      "alphatrend_managed_futures",
+      "crypto_multifactor_engine"
+    ]
+  },
+  "governed_templates": {
+    "author_technical_audit": "docs/design/AUTHOR_TECHNICAL_AUDIT_TEMPLATE.md",
+    "fresh_context_reader": "docs/design/FRESH_CONTEXT_READER_TEMPLATE.md",
+    "external_reviewer_brief": "docs/design/EXTERNAL_REVIEWER_BRIEF_TEMPLATE.md",
+    "author_response_matrix": "docs/design/EXTERNAL_REVIEW_RESPONSE_MATRIX_TEMPLATE.md",
+    "review_acquisition_plan": "docs/design/EXTERNAL_REVIEW_ACQUISITION_PLAN.md",
+    "automation_may_invent_author_answers_or_approval": false
+  },
+  "independence_rules": {
+    "financial_stake_in_strategy_permitted": false,
+    "approval_contingent_compensation_permitted": false,
+    "undisclosed_conflict_permitted": false,
+    "ai_agent_as_reviewer_permitted": false,
+    "named_reviewer_preferred_for_solicited_review": true,
+    "venue_protected_anonymity_permitted": true
+  },
+  "required_receipt_fields": [
+    "manuscript_sha256",
+    "reviewer_identity_or_venue_protected_identifier",
+    "reviewer_qualifications",
+    "conflicts",
+    "compensation",
+    "review_scope",
+    "comments",
+    "author_responses",
+    "resulting_commit",
+    "unresolved_objections",
+    "review_date"
+  ],
+  "candidate_open_routes": {
+    "PREreview": {
+      "purpose": "REQUEST_OPEN_REVIEW_OF_A_PUBLIC_PREPRINT",
+      "official_url": "https://prereview.org/how-to-use",
+      "eligibility_note": "A direct request requires a public preprint identifier from a currently supported server; the community Slack route asks for a DOI and enough scope information for reviewer matching.",
+      "review_claimed": false
+    },
+    "PCI_REGISTERED_REPORTS": {
+      "purpose": "TWO_STAGE_REVIEW_FOR_FUTURE_TRIALS_BEFORE_OUTCOMES_ARE_KNOWN",
+      "official_url": "https://rr.peercommunityin.org/about/about",
+      "review_claimed": false
+    },
+    "JOSS": {
+      "purpose": "OPEN_REVIEW_OF_FEATURE_COMPLETE_OPEN_SOURCE_RESEARCH_SOFTWARE",
+      "official_url": "https://joss.readthedocs.io/en/latest/submitting.html",
+      "eligible_now": false,
+      "current_blockers": [
+        "MORE_THAN_SIX_MONTHS_GENUINE_PUBLIC_DEVELOPMENT_HISTORY_REQUIRED",
+        "DEMONSTRATED_RESEARCH_USE_REQUIRED",
+        "FEATURE_COMPLETE_OPEN_SOURCE_RELEASE_REQUIRED",
+        "PUBLIC_TEST_DOCUMENTATION_AND_CONTRIBUTION_WORKFLOW_REQUIRED",
+        "VENUE_SPECIFIC_AI_DISCLOSURE_REQUIRED"
+      ],
+      "review_claimed": false
+    },
+    "ARXIV": {
+      "purpose": "DISCIPLINARY_PREPRINT_FOR_A_REFEREEABLE_METHODS_CONTRIBUTION",
+      "official_url": "https://info.arxiv.org/help/submit/index.html",
+      "eligibility_note": "The author must self-submit a topical, refereeable contribution; moderation and any endorsement do not constitute peer review.",
+      "review_claimed": false
+    },
+    "ZENODO": {
+      "purpose": "IMMUTABLE_ARCHIVE_AND_CITATION_IDENTITY",
+      "official_url": "https://help.zenodo.org/docs/deposit/about-records/",
+      "eligibility_note": "A published record can receive a DataCite DOI, but repository preservation is not editorial or peer review.",
+      "review_claimed": false
+    },
+    "OPENREVIEW": {
+      "purpose": "REVIEW_INFRASTRUCTURE_ONLY_WHEN_A_MATCHED_VENUE_ACCEPTS_SUBMISSIONS",
+      "official_url": "https://docs.openreview.net/",
+      "eligibility_note": "OpenReview hosts venue workflows; it is not a general self-posting route that independently grants review status.",
+      "review_claimed": false
+    }
+  },
+  "current_counts": {
+    "fresh_context_reader_reviews": 0,
+    "external_domain_reviews": 0,
+    "independent_replications": 0,
+    "open_preprint_reviews": 0,
+    "formal_peer_reviews": 0,
+    "accepted_peer_reviewed_publications": 0
+  },
+  "authorship_policy": {
+    "author": "Arhan Canli",
+    "ai_is_author": false,
+    "ai_is_independent_reviewer": false,
+    "ai_detector_score_is_authorship_evidence": false,
+    "venue_specific_ai_disclosure_required": true,
+    "final_human_approval_required": true
+  },
+  "claim_boundary": "This protocol is a local plan. It proves no outreach, review, replication, submission, acceptance or publication."
+}

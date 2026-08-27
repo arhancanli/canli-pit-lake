@@ -1,0 +1,107 @@
+{
+  "schema": "canli.alphac-scholarly-repository-requirements.v1",
+  "observed_on": "2026-08-24",
+  "status": "OFFICIAL_SOURCE_REQUIREMENTS_SNAPSHOT_NO_ACCOUNT_ACTION",
+  "repositories": {
+    "ZENODO": {
+      "route": "PRIMARY_ARCHIVE_FOR_DISTINCT_PAPER_AND_REPRODUCIBILITY_OBJECTS",
+      "official_sources": [
+        "https://help.zenodo.org/docs/deposit/about-records/",
+        "https://help.zenodo.org/docs/deposit/create-new-upload/",
+        "https://help.zenodo.org/docs/deposit/describe-records/",
+        "https://help.zenodo.org/docs/deposit/describe-records/resource-type/",
+        "https://help.zenodo.org/docs/deposit/describe-records/licenses/",
+        "https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/",
+        "https://help.zenodo.org/docs/deposit/manage-versions/"
+      ],
+      "verified_requirements": [
+        "A record contains descriptive metadata, files, and a persistent identifier.",
+        "The deposit form requires a resource type and a license.",
+        "Title, publication date, creators, and description are part of the record metadata.",
+        "Zenodo registers a DOI when a record is published unless the object already has a DOI.",
+        "A DOI may be reserved before publication, but reservation is a real account action.",
+        "Published record files and persistent identifiers are immutable; changed files require a new version.",
+        "Mixed significant resource types may justify separate records."
+      ],
+      "project_policy": {
+        "paper_and_reproducibility_bundle_are_distinct_objects": true,
+        "duplicate_identifier_for_same_object_permitted": false,
+        "doi_may_be_claimed_before_external_readback": false,
+        "publication_date_may_be_guessed_from_local_preparation_date": false,
+        "license_may_be_selected_without_owner_confirmation": false
+      }
+    },
+    "SSRN": {
+      "route": "EXCLUDED_PENDING_DIRECT_AUTHOR_ELIGIBILITY_CONFIRMATION_OR_POLICY_CHANGE",
+      "official_sources": [
+        "https://www.elsevier.support/ssrn/answer/get-started"
+      ],
+      "verified_requirements": [
+        "A free SSRN user account is required to submit.",
+        "The submission needs an English paper title, date written, and English abstract or summary.",
+        "Author names, affiliations, and email addresses are required.",
+        "Copyright-holder permission is required when applicable.",
+        "An uploaded paper must be PDF.",
+        "An AI disclosure statement must appear with the abstract and in the PDF when AI was used.",
+        "Current guidance lists research written by high-school students and faculty among content types that are typically not accepted.",
+        "Rejections receive no individualized reason and are not appealable under the stated policy."
+      ],
+      "project_policy": {
+        "current_sleeve_records_targeted": 0,
+        "author_eligibility_confirmed": false,
+        "direct_platform_confirmation_received": false,
+        "bulk_submission_permitted": false,
+        "repository_posting_may_be_called_peer_review": false,
+        "owner_account_action_required": true,
+        "author_email_may_be_invented": false,
+        "copyright_permission_may_be_assumed": false,
+        "ai_assistance_may_be_undisclosed": false
+      }
+    },
+    "ARXIV": {
+      "route": "DEFERRED_METHODOLOGY_FLAGSHIP_ONLY_NOT_CURRENT_SLEEVE_ROUTE",
+      "official_sources": [
+        "https://info.arxiv.org/help/submit/index.html",
+        "https://info.arxiv.org/help/endorsement.html",
+        "https://info.arxiv.org/help/moderation/index.html"
+      ],
+      "verified_requirements": [
+        "Submissions must be topical, refereeable scientific contributions using accepted scholarly communication.",
+        "Only registered authors may submit, and new users or categories may require endorsement.",
+        "Submissions are moderated for topical and scientific fit.",
+        "Authors are expected to self-submit and must grant a distribution license.",
+        "TeX or LaTeX is preferred; PDF is accepted subject to format rules.",
+        "Endorsement is not peer review."
+      ],
+      "project_policy": {
+        "current_sleeve_records_targeted": 0,
+        "methodology_flagship_authored": false,
+        "scope_fit_confirmed": false,
+        "endorsement_confirmed": false,
+        "acceptance_may_be_assumed": false
+      }
+    },
+    "OSF_PREPRINTS": {
+      "route": "EXCLUDED_PENDING_PAPER_SPECIFIC_AUTHORSHIP_AND_PROVIDER_SCOPE_REVIEW",
+      "official_sources": [
+        "https://help.osf.io/article/376-preprints-home-page",
+        "https://help.osf.io/article/691-preprint-moderation-policies"
+      ],
+      "verified_requirements": [
+        "Community preprint services use pre-moderation and pending submissions are private until accepted or rejected.",
+        "Accepted preprints receive a DOI and persistent URL.",
+        "Authors must have sharing rights, disclose conflicts, and remove information that should not be public.",
+        "OSF policy says content completely or mostly generated by LLM or AI tools is not appropriate.",
+        "OSF policy says organizations should not use user accounts as publication aggregators, clearinghouses, or DOI-minting services."
+      ],
+      "project_policy": {
+        "default_route_permitted": false,
+        "paper_specific_human_authorship_audit_completed": false,
+        "provider_specific_scope_review_completed": false,
+        "bulk_sleeve_submission_permitted": false,
+        "moderation_outcome_may_be_assumed": false
+      }
+    }
+  },
+  "claim_boundary": "This dated snapshot records requirements observed on official repository pages. It is not legal advice, an account action, a submission, a DOI reservation, moderation, acceptance, peer review, or independent replication. Requirements must be rechecked immediately before any owner-authorized submission."
+}

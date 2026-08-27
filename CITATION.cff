@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use canli-pit-lake, please cite the software and its author."
+title: "canli-pit-lake: A point-in-time market data lake with derived availability semantics"
+type: software
+authors:
+  - family-names: "Canli"
+    given-names: "Arhan"
+repository-code: "https://github.com/arhancanli/canli-pit-lake"
+url: "https://canlicapital.com"
+license: MIT
+keywords:
+  - point-in-time data
+  - survivorship bias
+  - corporate actions
+  - look-ahead bias
+  - quantitative research infrastructure
+abstract: >-
+  canli-pit-lake is the point-in-time data layer of the ALPHAC research engine, published
+  standalone. Every analytical read requires an explicit as-of instant and returns only records
+  available at that instant; quality flags carry per-bit availability lags so a flag derived from
+  future bars cannot be seen by a decision at the current bar; corporate actions are filtered on
+  when they became knowable rather than on their ex-date; gaps are reported rather than filled;
+  and delisted instruments persist so survivorship bias cannot enter.

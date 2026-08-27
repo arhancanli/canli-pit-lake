@@ -1,0 +1,163 @@
+{
+  "schema": "canli.foundry-acceptance-receipt-contract.v1",
+  "status": "FROZEN_NOT_SATISFIED",
+  "claim_boundary": "This contract defines the evidence required before Foundry may be described as operational. It is not a deployment receipt and no required assertion is satisfied merely because this file exists.",
+  "receipt_schema": "canli.foundry-acceptance-receipt.v1",
+  "binding_sources": {
+    "deployment_manifest": "config/foundry_deployment_manifest.json",
+    "runtime_contract": "config/foundry_runtime_contract.json",
+    "lifecycle_contract": "config/foundry_trial_state_machine.json",
+    "trial_policy": "config/trial_accounting.json"
+  },
+  "common_requirements": {
+    "same_source_commit": true,
+    "same_infrastructure_fingerprint": true,
+    "same_worker_image_digest": true,
+    "content_hash_required": true,
+    "utc_timestamp_required": true,
+    "secret_scanning_required": true,
+    "evidence_hashes_required": true
+  },
+  "receipts": {
+    "reviewed_terraform_plan": {
+      "required_assertions": [
+        "application_droplets_have_no_public_network",
+        "research_and_holdout_vpcs_are_distinct_and_unpeered",
+        "each_private_vpc_has_a_distinct_default_route_nat_gateway",
+        "reviewed_operator_key_is_installed_on_private_hosts_at_creation",
+        "postgres_is_private_and_trusted_sources_are_narrow",
+        "object_buckets_are_private_versioned_and_prevent_destroy",
+        "broker_credentials_are_absent_from_plan_and_state"
+      ],
+      "required_measurements": []
+    },
+    "cloud_firewall_export": {
+      "required_assertions": [
+        "research_ingress_is_deny_default",
+        "research_egress_is_deny_default",
+        "holdout_ingress_is_deny_default",
+        "holdout_egress_is_deny_default",
+        "execution_network_is_not_a_destination"
+      ],
+      "required_measurements": []
+    },
+    "host_firewall_export": {
+      "required_assertions": [
+        "research_host_input_forward_and_output_default_drop",
+        "holdout_host_input_forward_and_output_default_drop",
+        "egress_is_scoped_by_unix_identity",
+        "alpaca_hosts_are_absent_from_proxy_allowlists"
+      ],
+      "required_measurements": []
+    },
+    "negative_network_probe": {
+      "required_assertions": [
+        "worker_public_internet_denied",
+        "worker_alpaca_order_endpoint_denied_unauthenticated",
+        "all_foundry_identities_execution_host_denied",
+        "holdout_to_research_vpc_denied",
+        "worker_publisher_signer_and_holdout_credentials_denied",
+        "data_gateway_only_allowlisted_destinations_reachable"
+      ],
+      "required_measurements": [
+        "probes_executed",
+        "probes_denied"
+      ]
+    },
+    "redacted_secret_scope_inventory": {
+      "required_assertions": [
+        "separate_deployment_principal_used",
+        "api_optimizer_principals_not_reused_or_broadened",
+        "research_roles_have_no_broker_credentials",
+        "holdout_publisher_and_signer_scopes_are_separate",
+        "secret_values_are_absent_from_receipt"
+      ],
+      "required_measurements": [
+        "scopes_reviewed"
+      ]
+    },
+    "database_role_tests": {
+      "required_assertions": [
+        "researchd_cannot_mutate_trials_directly",
+        "worker_can_only_claim_and_complete_jobs",
+        "status_role_cannot_read_private_columns",
+        "audit_and_legacy_migration_rows_are_append_only",
+        "migration_validator_and_publisher_functions_are_role_separated"
+      ],
+      "required_measurements": [
+        "role_denials_observed",
+        "contract_tests_passed"
+      ]
+    },
+    "object_permission_tests": {
+      "required_assertions": [
+        "research_worker_cannot_read_holdout_objects",
+        "holdout_cannot_read_research_objects",
+        "publisher_can_read_sanitized_objects_only",
+        "object_versions_and_content_hashes_are_preserved"
+      ],
+      "required_measurements": [
+        "permission_denials_observed"
+      ]
+    },
+    "state_machine_tests": {
+      "required_assertions": [
+        "identity_reservation_is_transactional",
+        "mandatory_review_and_budget_limits_fail_closed",
+        "holdout_consumption_is_one_shot",
+        "terminal_states_cannot_reopen",
+        "no_state_grants_broker_write_access"
+      ],
+      "required_measurements": [
+        "state_machine_tests_passed"
+      ]
+    },
+    "migration_replay_sanitizer_packet": {
+      "required_assertions": [
+        "selected_identity_was_complete_evidenced_kill",
+        "legacy_import_allocated_no_new_identity_ordinal",
+        "private_snapshot_expanded_and_every_object_hash_matched",
+        "clean_replay_used_one_attempt_and_no_network",
+        "replay_result_hash_matched_historical_kill",
+        "sanitizer_emitted_only_allowlisted_public_fields",
+        "published_state_remained_killed"
+      ],
+      "required_measurements": [
+        "private_snapshot_objects_verified",
+        "new_identities_spent",
+        "replay_attempts"
+      ]
+    },
+    "restore_and_post_restore_replay": {
+      "required_assertions": [
+        "restore_target_was_isolated_from_production",
+        "database_contract_and_row_counts_matched",
+        "content_addressed_objects_matched",
+        "post_restore_killed_trial_replay_passed",
+        "post_restore_sanitized_packet_hash_matched"
+      ],
+      "required_measurements": [
+        "recovery_point_seconds",
+        "recovery_time_seconds",
+        "database_rows_verified",
+        "objects_verified"
+      ]
+    },
+    "honest_public_status": {
+      "required_assertions": [
+        "status_was_exported_through_foundry_status_role",
+        "private_hypotheses_provider_details_and_credentials_are_absent",
+        "public_counts_match_database_queries",
+        "latest_run_hash_and_replay_status_match",
+        "operational_label_was_enabled_only_after_all_other_receipts_passed"
+      ],
+      "required_measurements": [
+        "public_trials",
+        "identities_spent"
+      ]
+    }
+  },
+  "accepted_status": "ACCEPTED_OPERATIONAL",
+  "incomplete_status": "INCOMPLETE_NOT_OPERATIONAL",
+  "failed_status": "FAILED_NOT_OPERATIONAL"
+}

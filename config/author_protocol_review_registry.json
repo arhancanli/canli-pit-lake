@@ -1,0 +1,97 @@
+{
+  "schema": "canli.alphac-author-protocol-review-registry.v1",
+  "status": "PREPARED_ZERO_AUTHOR_PROTOCOL_APPROVALS",
+  "author": "Arhan Canli",
+  "automation_may_invent_answers_or_approval": false,
+  "reviews": [
+    {
+      "key": "merger-announcement-identity-v2",
+      "title": "Merger announcement identity v2",
+      "family": "merger_arbitrage",
+      "protocol": "docs/design/FEASIBILITY_MERGER_ANNOUNCEMENT_IDENTITY_V2.md",
+      "evidence_artifact": "artifacts/feasibility/merger_arbitrage/announcement_confirmatory_design.json",
+      "evidence_content_hash": "sha256:e2d294361c96994931849cef2e44faa464e3f2ab6a9ba1e05e9c4d6742f82b74",
+      "expected_approval_decision": "APPROVED_FOR_DISJOINT_CONFIRMATION_CORPUS_ACQUISITION",
+      "next_stage": "Acquire and freeze the 2006-2015 disjoint SEC confirmation corpus without prices or returns.",
+      "author_questions": [
+        {
+          "id": "IDENTITY_IN_OWN_WORDS",
+          "prompt": "Describe the exact point-in-time merger-announcement identity in your own words, including what makes an SEC source qualify."
+        },
+        {
+          "id": "EXPLORATION_INFLUENCE",
+          "prompt": "Explain how the failed 2016-2025 exploratory result influenced this redesign and why it cannot validate the new identity."
+        },
+        {
+          "id": "STRATA_AND_POWER",
+          "prompt": "Explain why DEFM14A and SC 14D9 remain separately gated and whether the declared denominators and exact-confidence thresholds are acceptable."
+        },
+        {
+          "id": "FAIL_CLOSED_CASES",
+          "prompt": "Explain how conflicts, complex consideration, missing cells, and later confirmation are handled without discretionary rescue or backdating."
+        },
+        {
+          "id": "INFORMATION_BOUNDARY",
+          "prompt": "List the information that remains unopened and explain which later action would spend the first return hypothesis."
+        },
+        {
+          "id": "CORRECTIONS_OR_APPROVAL",
+          "prompt": "Record every required correction, or explain why the exact bound protocol is acceptable for the next declared stage."
+        }
+      ],
+      "technical_checks": [
+        "ORIGINAL_FAILED_RESULT_REMAINS_FAILED",
+        "EXPLORATION_AND_CONFIRMATION_PERIODS_ARE_DISJOINT",
+        "BOTH_FILING_STRATA_MUST_PASS_INDEPENDENTLY",
+        "SELECTION_IS_PRE_DOCUMENT_PRE_LABEL_PRE_RETURN",
+        "RESOLVER_IS_DETERMINISTIC_AND_NEVER_BACKDATES",
+        "CONFIRMATION_CORPUS_PRICES_AND_RETURNS_REMAIN_UNOPENED"
+      ]
+    },
+    {
+      "key": "treasury-auction-state-machine",
+      "title": "Treasury auction schedule state machine",
+      "family": "treasury_auction_concession",
+      "protocol": "docs/design/FEASIBILITY_TREASURY_AUCTION_STATE_MACHINE.md",
+      "evidence_artifact": "artifacts/feasibility/treasury_auction_concession/schedule_state_machine_audit.json",
+      "evidence_content_hash": "sha256:46dfc56e7a2bd92cf55cacc1cb69ce4d09d8803a56376ab93faeb0d4b45ebef2",
+      "expected_approval_decision": "APPROVED_FOR_SEPARATE_RETURN_PREREGISTRATION",
+      "next_stage": "Write and seal a separate return preregistration before any market data is opened.",
+      "author_questions": [
+        {
+          "id": "STATE_MACHINE_IN_OWN_WORDS",
+          "prompt": "Describe the event clock and state machine in your own words, including tentative, confirmed, post-only, cancelled, and closed paths."
+        },
+        {
+          "id": "POSITION_IDENTITY",
+          "prompt": "Explain the pre-auction and post-auction position identity and which economic direction is deliberately unchanged."
+        },
+        {
+          "id": "REVISION_TREATMENT",
+          "prompt": "Explain why revised, late, post-event, and missing schedules receive their declared treatment without final-calendar hindsight."
+        },
+        {
+          "id": "OVERLAP_ACCOUNTING",
+          "prompt": "Explain how overlapping event windows must be netted for execution while preserving event-level attribution and costs."
+        },
+        {
+          "id": "INFORMATION_BOUNDARY",
+          "prompt": "List the information still prohibited at this stage and the fields that a later return preregistration must freeze."
+        },
+        {
+          "id": "CORRECTIONS_OR_APPROVAL",
+          "prompt": "Record every required correction, or explain why the exact bound protocol is acceptable for the next declared stage."
+        }
+      ],
+      "technical_checks": [
+        "ALL_156_EVENTS_HAVE_ONE_DETERMINISTIC_PATH",
+        "REVISIONS_LATE_UPDATES_AND_MISSING_RECORDS_FAIL_CLOSED",
+        "POSITION_SIGN_AND_EVENT_WINDOWS_ARE_NOT_RETUNED",
+        "OVERLAPS_PRESERVE_EVENT_LEVEL_ATTRIBUTION",
+        "MARKET_AND_RETURN_COLUMNS_ARE_ABSENT",
+        "SEPARATE_RETURN_PREREGISTRATION_REMAINS_REQUIRED"
+      ]
+    }
+  ],
+  "claim_boundary": "This registry identifies protocols awaiting Arhan Canli's review. It contains no author answers or approval and authorizes no corpus acquisition, return preregistration, market-data access, execution, external review, or publication claim."
+}

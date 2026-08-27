@@ -1,0 +1,109 @@
+{
+  "schema": "canli.alphac-forward-full-evidence-reservation-template.v2",
+  "status": "TEMPLATE_NOT_IN_FORCE_NO_RETURN_AUTHORIZATION",
+  "author": "Arhan Canli",
+  "scope": {
+    "applies_to_known_results": false,
+    "earliest_possible_reservation_ordinal": 230,
+    "requires_separate_policy_promotion": true
+  },
+  "identity_batch": {
+    "family_trial_account": null,
+    "batch_id": null,
+    "direction_locked": null,
+    "economic_hypothesis": null,
+    "identity_configs": [],
+    "every_identity_counts_in_union_dsr": true,
+    "all_identities_reserved_before_first_return": true,
+    "interim_result_access_forbidden": true
+  },
+  "primary_estimator": {
+    "return_frequency": "daily_utc",
+    "newey_west_lag_rule": "max(7,floor(4*(n_obs/100)^(2/9)))",
+    "minimum_oos_observations": 756,
+    "psr_benchmark_annualized": 0.0,
+    "dsr_selection_unit": "complete_union_hypothesis_identities"
+  },
+  "pbo_matrix": {
+    "required": true,
+    "minimum_identity_columns": 2,
+    "identity_columns": [],
+    "return_alignment": "intersection_without_internal_missing_rows",
+    "n_splits": null,
+    "maximum_combinations": null,
+    "seed": null,
+    "undefined_policy": "FINAL_INCOMPLETE_NOT_ADMITTED"
+  },
+  "diagnostic_scenarios": {
+    "selection_permitted": false,
+    "all_scenarios_must_publish": true,
+    "baseline_scenario_id": null,
+    "cost_stress_scenarios": [],
+    "execution_stress_scenarios": [],
+    "capacity_scenarios": [],
+    "minimum_capacity_points": 3,
+    "required_capacity_usd": 500000,
+    "scenario_hashes_frozen_before_returns": true
+  },
+  "book_evidence": {
+    "book_return_snapshot_path": null,
+    "book_return_snapshot_sha256": null,
+    "book_series_ids": [],
+    "candidate_weight": null,
+    "alignment_rule": "intersection_without_internal_missing_rows",
+    "stress_mask_path": null,
+    "stress_mask_sha256": null,
+    "bootstrap": {
+      "samples": 2000,
+      "block_size": 21,
+      "seed": 20260816,
+      "one_sided_confidence": 0.95
+    },
+    "leave_one_period_definition": null
+  },
+  "book_drawdown": {
+    "simulation_specification_path": null,
+    "simulation_specification_sha256": null,
+    "expected_maximum_drawdown_required": true,
+    "p95_maximum_drawdown_required": true,
+    "overlay_configuration_path": null,
+    "overlay_configuration_sha256": null
+  },
+  "execution_evidence": {
+    "applicable_dimensions": [],
+    "not_applicable_dimensions": [],
+    "minimum_scenarios_per_applicable_dimension": 3,
+    "scenario_manifest_path": null,
+    "scenario_manifest_sha256": null
+  },
+  "data_and_environment": {
+    "point_in_time_data_manifest_path": null,
+    "point_in_time_data_manifest_sha256": null,
+    "runner_path": null,
+    "runner_sha256": null,
+    "project_sha256": null,
+    "lockfile_sha256": null,
+    "input_snapshot_required_before_first_execution_leg": true,
+    "public_redistribution_rights_established": null
+  },
+  "decision": {
+    "contract_path": "config/sleeve_admission_contract.json",
+    "contract_sha256": null,
+    "admit_requires_every_applicable_gate": true,
+    "possible_dispositions": [
+      "ADMIT",
+      "KILL",
+      "INCOMPLETE",
+      "INVALID"
+    ],
+    "known_result_may_not_fill_template": true
+  },
+  "required_promotion_before_use": [
+    "SATISFIABILITY_AUDIT_PASSES",
+    "TRIAL_ACCOUNTING_BATCH_AND_DIAGNOSTIC_CLASSIFICATION_PROMOTED",
+    "SERIALITY_GUARD_SUPPORTS_PREDECLARED_BATCH",
+    "PUBLIC_PROJECTION_TESTS_PASS",
+    "OWNER_PROMOTION_RECORDED"
+  ],
+  "claim_boundary": "This is a fail-closed design template, not an active policy, reservation, candidate, result, or return authorization. Null and empty fields must be filled and hash-bound before validation. It cannot be applied to a known result."
+}

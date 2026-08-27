@@ -1,0 +1,101 @@
+{
+  "claim_boundary": "This tracked compact receipt preserves governed counts and hashes needed to rebuild the pre-outcome design in a clean checkout. It does not include the raw workstation artifacts and therefore does not independently reproduce their row-level audit.",
+  "content_hash": "sha256:5bc7c9bc6087d05aa28e1a00431355c9a68b12013e5cc25cedf27ece9824faf3",
+  "governed_values": {
+    "feasibility": {
+      "return_data_opened": false,
+      "specific_active_intent_rate": 0.2
+    },
+    "header_audit": {
+      "eligible_disjoint_by_year": {
+        "2010": 13,
+        "2011": 13,
+        "2012": 16,
+        "2013": 19,
+        "2014": 15,
+        "2015": 17,
+        "2016": 23,
+        "2017": 10,
+        "2018": 21,
+        "2019": 14,
+        "2020": 10,
+        "2021": 7,
+        "2022": 15,
+        "2023": 5,
+        "2024": 12,
+        "2025": 8
+      },
+      "eligible_disjoint_rows": 218,
+      "minimum_year_count": 5,
+      "rows": 800
+    },
+    "metadata": {
+      "decision": "PASS_TO_DOCUMENT_FEASIBILITY",
+      "unique_initial_accessions": 22353
+    },
+    "original_document_sample": {
+      "rows": 160,
+      "rows_by_year": {
+        "2010": 10,
+        "2011": 10,
+        "2012": 10,
+        "2013": 10,
+        "2014": 10,
+        "2015": 10,
+        "2016": 10,
+        "2017": 10,
+        "2018": 10,
+        "2019": 10,
+        "2020": 10,
+        "2021": 10,
+        "2022": 10,
+        "2023": 10,
+        "2024": 10,
+        "2025": 10
+      },
+      "unique_accessions": 160
+    },
+    "point_gate_audit": {
+      "content_hash": "sha256:668e65f17c9e83bb5118db75f3489b4ecfbf5c1bd351f41c07f529673bc88f90",
+      "governance": {
+        "audit_may_rescue_known_outcome": false,
+        "existing_point_thresholds_changed": false,
+        "labels_opened": false,
+        "return_data_opened": false,
+        "return_hypotheses_spent": 0
+      },
+      "minimum_all_success_denominators": {
+        "ownership_rows": 29,
+        "precision_predicted_positives": 59,
+        "recall_human_positives": 14
+      },
+      "stage": "PROSPECTIVE_PRE_LABEL_PRE_RETURN_GATE_AUDIT"
+    }
+  },
+  "raw_source_bindings": {
+    "feasibility_result": {
+      "path": "artifacts/feasibility/active_ownership_13d_item4_v3/result.json",
+      "sha256": "6443ae40f358330bf9ca4512d09aebc834b962385de703483a2c2f2e795901c5"
+    },
+    "header_audit": {
+      "path": "artifacts/feasibility/active_ownership_13d_schema_v2/header_audit.parquet",
+      "sha256": "4c737b774f5d3399b4ee0a5bceaa05f003ce93c41a2056d9bd11f2e5f4919073"
+    },
+    "metadata_result": {
+      "path": "artifacts/feasibility/active_ownership_13d_schema_v2/result.json",
+      "sha256": "8f0c419d54f51789acb72a72ba1c266e013b70873bf8819463c55b241d3a00b7"
+    },
+    "original_document_sample": {
+      "path": "artifacts/feasibility/active_ownership_13d_item4_v3/locked_document_sample.csv",
+      "sha256": "2a61d0daf9c9d3093f0b7275711ffab9248920187e89622e31999f979c88d5a0"
+    },
+    "point_gate_audit": {
+      "content_hash": "sha256:668e65f17c9e83bb5118db75f3489b4ecfbf5c1bd351f41c07f529673bc88f90",
+      "path": "artifacts/analysis/active_ownership_human_gate_audit.json",
+      "sha256": "c29adea9cf32ea818578a555bddc7cf27b5d0f26238945dcc2ebab19714d3d01"
+    }
+  },
+  "schema": "canli.alphac-active-ownership-confirmatory-design-inputs.v1",
+  "sealed_on": "2026-08-26",
+  "status": "SEALED_COMPACT_INPUT_RECEIPT_RAW_WORKSPACE_SOURCES_NOT_INCLUDED"
+}

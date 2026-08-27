@@ -1,0 +1,7 @@
+{
+ "why": "These engine tests read files from the private research workspace, which is not part of this public extraction. They are removed rather than skipped, so the suite here has no silently-passing holes. Every other engine test whose imports this extraction satisfies is present and runs.",
+ "count": 1,
+ "tests": {
+  "tests/unit/test_crypto_carry_portable_lake.py": "FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Users-arhancanli/5a4b95b1-9c97-4ecd-ae5f-3a8b28154d39/scratchpad/canli-pit-lake/scripts/build_crypto_carry_portable_lake.py'"
+ }
+}

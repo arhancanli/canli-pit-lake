@@ -1,0 +1,72 @@
+# AlphaForge — US equities sleeve profile (S5). Deep-merges over configs/base.yaml.
+# Resolve with:  af --profile equity <command>
+#
+# Setting data.asset_class=equity makes alphaforge.config.sleeve.sleeve_for() resolve the
+# D1 + XNYS (252-session) sleeve EVERYWHERE the spine asks for its anchor TF / calendar:
+# the feature engine grid, forward_returns/label session hops, the universe rank_tf, the
+# covariance annualizer, and the walk-forward purge/embargo. Only the keys that differ
+# from base are listed; everything else is inherited.
+
+data:
+  asset_class: equity
+  timeframe: "1d"
+  # Equity bars come from the Polygon S3 flat files (survivorship-free day-aggs), NOT a
+  # ccxt venue. This field is unused on the equity research path (ingest-equities, universe
+  # rebuild, research ic/walkforward all read the lake); it only labels the crypto-only
+  # ccxt ingest/clock/live paths, so the value is a placeholder for the equity profile.
+  #
+  # BAR-FEED STATUS (verified 2026-08-01, disclosed — NOT worked around here): the flat-files
+  # GetObject now returns HTTP 403 for every date while ListObjects still succeeds, i.e. the
+  # credential is live but the entitlement lapsed, so the lake this profile reads (data/lake)
+  # is frozen at its 2026-07-15 session. The Sharadar research lake (configs/sharadar.yaml,
+  # data/lake_sharadar) is NOT a substitute for the live path: its own bulk export is now
+  # sample-only (30 tickers, 2018) and its last bar is 2026-06-18 — four weeks STALER than
+  # this one. Repointing lake_dir there would make the live book older, not fresher, so it
+  # deliberately was not done. The lake_dir/universe/portfolio keys below are unchanged.
+  exchange: polygon
+  # Survivorship-free history floor; the full Sharadar lake reaches back to 1997. This
+  # is a one-time floor for the deep-history measure-once IC protocol (NOT a new trial:
+  # same pre-registered configs, longer T) — see docs/design/PRE_REGISTRATION.md. The
+  # `af research ic` default start derives from this key.
+  backfill_start: "1997-01-01T00:00:00Z"
+
+universe:
+  # Equities trade for BREADTH (the sqrt(N) decorrelation edge), so the liquid cross
+  # section is far wider than the 20-name crypto book: top-200 by 30-session median dollar
+  # volume, with entry/exit hysteresis. This is a credible cross-section for the first
+  # Rank-IC read while staying tractable for the (not-yet-columnar) backtester; widen
+  # toward ~500-1000 once the scale arc (P6/P7) lands — the scale-guard tripwire gates it.
+  size: 2000          # WIDE: small/mid-cap where value/quality/momentum premia actually live
+  entry_rank: 1800    # (the 25yr Sharadar lake has the breadth; top-200 was a Polygon-era cap)
+  exit_rank: 2300
+
+portfolio:
+  # Breadth: hold the top-50 / bottom-50 by signal (not the v1 default 10/10). On a 200-name
+  # universe, 10/10 throws away ~95% of the cross-section; 50/50 harvests the breadth the
+  # universe exists for (fundamental law of active management: IR ≈ IC·√breadth). The single
+  # highest-impact, non-data-mining Sharpe lever (deep-audit DESK 3).
+  rank_top_k: 100     # K=100/side on a top-2000 universe (~10% selection; breadth = IR·√N)
+  dollar_neutral: true
+
+signals:
+  # THE holding-period horizon h (sessions), shared by: the non-overlapping Rank-IC grid
+  # + EWMA-IC blend weighting, the walk-forward PURGE (purge_bars = h), and the mu_ann
+  # annualization. PRE-REGISTERED at 63 (quarterly) per docs/design/PRE_REGISTRATION.md:
+  # a 12-month-formation momentum signal is slow, so quarterly is the theory-justified
+  # low-turnover/high-capacity cadence; committing to ONE cadence (no h=21-vs-63 search)
+  # is what keeps the trial-count N tiny so the DSR/PBO/SPA gates can clear honestly.
+  horizon_bars: 63
+
+costs:
+  # US-equity frictions (only consulted because asset_class=equity). Deliberately
+  # conservative so the net-of-cost walk-forward (S12) is honest rather than flattering:
+  equity_commission_bps: 1.0        # ~1 bp/side all-in (exchange/SEC/TAF + per-share)
+  equity_half_spread_bps: 3.0       # liquid top-200 half-spread (mega-caps ~1bp; conservative)
+  equity_borrow_bps_annual: 50.0    # 0.5%/yr general-collateral short borrow, charged per day
+  impact_coef: 1.0                  # sqrt-impact Y on D1 ADV (shared with crypto)
+  latency_addon_bps: 2.0            # decision->fill arrival drift placeholder
+
+risk:
+  # Thin survivorship-free small-caps: a large flatten on a low-ADV name would crash the
+  # sqrt-impact model. Clamp de-risking at the 5%-ADV edge instead (closes over the next bars).
+  clamp_reduce_only_adv: true

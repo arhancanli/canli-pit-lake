@@ -1,0 +1,74 @@
+# AlphaForge — AlphaVintage sleeve profile (CPI-surprise size spread). Deep-merges over base.yaml.
+# Resolve with:  scripts/live_cycle.py --profile alphavintage
+#
+# AlphaVintage is the MACRO-VINTAGE sleeve: it trades the IWM/SPY size spread off the standardized
+# AR(3) surprise in point-in-time CPI (headline PCPI + core PCPIX). It is the only sleeve in the
+# book whose input is a REVISION-AWARE macro release rather than price, funding or a balance
+# sheet, which is the source of its diversification.
+#
+# *** THIS PROFILE DOES NOT SELECT ITS OWN BOOK ***
+# Every other profile hands live_cycle a book produced by the optimizer from a walk-forward run.
+# AlphaVintage does not: it was validated as a probe (scripts/probe_cpi_surprise_size.py) and its
+# target book is written directly by scripts/alphavintage_target.py into
+# artifacts/walkforward/alphavintage_live/legs/leg_01/positions.parquet. The universe and
+# portfolio keys below therefore do NOT choose instruments — the rule does, and it can only ever
+# hold IWM and SPY. They are set to sane values so nothing downstream reads an absent field.
+#
+# WHY A SEPARATE PROFILE: same reason as configs/alphaledger.yaml — this sleeve trades its own
+# Alpaca account (PA39G6N49JRY, $1.0M) so its track record is independently verifiable and is not
+# commingled with AlphaMax's or AlphaLedger's equity history.
+#
+# *** LEVERAGE: LIVE RUNS AT HALF THE PROBE'S NOTIONAL ***
+# The pre-registered spec sizes gross per leg at |w| x NAV, i.e. 2.0x gross at the clip. That
+# exceeds live_cycle's _GROSS_HARD_CAP of 1.5x, which engages the GLOBAL kill switch rather than
+# skipping the sleeve, and it equals this account's Reg T overnight limit exactly ($2.0M on $1.0M)
+# leaving zero cushion on a month-long hold. alphavintage_target.py therefore scales every weight
+# by 0.5. Sharpe is scale-invariant so the validated Sharpe still applies unchanged; expected
+# dollar return, vol and drawdown are all halved. The full rationale is in that script's header.
+
+data:
+  asset_class: equity
+  timeframe: "1d"
+  # Placeholder on the equity research path (labels the crypto-only ccxt paths); the lake is the
+  # actual source. Same disclosure as configs/equity.yaml.
+  exchange: polygon
+  backfill_start: "1997-01-01T00:00:00Z"
+
+universe:
+  # Nominal. The rule trades exactly two ETFs and ignores any ranked cross-section; these values
+  # exist so no downstream consumer reads a missing key. See the header.
+  size: 2000
+  entry_rank: 1800
+  exit_rank: 2300
+
+portfolio:
+  rank_top_k: 100
+  # True by construction here, not by constraint: the rule is +w on IWM and -w on SPY, so the
+  # book's net is identically zero before the optimizer is ever consulted.
+  dollar_neutral: true
+
+signals:
+  # MONTHLY. CPI releases monthly and the position is held from one vintage to the next; 21 bars
+  # is the honest horizon. A faster cadence would pay turnover against a signal that cannot update.
+  horizon_bars: 21
+
+costs:
+  # DELIBERATELY RECONCILED TO THE PROBE. probe_cpi_surprise_size.py assumed COST_ONEWAY = 6bp per
+  # leg, and commission 1.0 + half_spread 3.0 + latency 2.0 = 6.0bp one-way reproduces exactly
+  # that. Live and tested therefore assume the same execution cost, so any divergence in results
+  # is the signal and not a quietly softer cost model.
+  #
+  # ONE HONEST GAP, recorded rather than buried: the probe modelled NO BORROW COST, but the live
+  # sleeve is short SPY every day it is on. equity_borrow_bps_annual below is the real drag the
+  # backtest omitted. SPY is general collateral and among the cheapest borrows in existence, so
+  # 50bp/yr is a conservative stand-in, and at the live 0.5x short leg it costs ~25bp/yr. This
+  # makes the LIVE sleeve strictly harsher than the backtest, which is the correct direction for
+  # an unmodelled cost to point.
+  equity_commission_bps: 1.0
+  equity_half_spread_bps: 3.0
+  equity_borrow_bps_annual: 50.0
+  impact_coef: 1.0
+  latency_addon_bps: 2.0
+
+risk:
+  clamp_reduce_only_adv: true

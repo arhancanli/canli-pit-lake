@@ -1,0 +1,64 @@
+# AlphaForge — AlphaLedger sleeve profile (eq_asset_growth). Deep-merges over configs/base.yaml.
+# Resolve with:  af --profile alphaledger <command>   /   scripts/live_cycle.py --profile alphaledger
+#
+# AlphaLedger is the balance-sheet sleeve: long/short on corporate ASSET GROWTH (firms that
+# expand their asset base aggressively subsequently underperform). It is the only sleeve in the
+# book that reads a balance sheet rather than price, funding or macro, which is why it is the
+# book's largest diversifier: rho -0.367 to AlphaMax, measured 2026-08-07.
+#
+# WHY THIS FILE EXISTS AT ALL, rather than reusing configs/equity.yaml: the two sleeves trade the
+# same asset class through SEPARATE Alpaca accounts (PA397834GG9R for AlphaMax, PA3XYDWXBLBO for
+# AlphaLedger), so each needs its own profile to key its own account, its own trading DB and its
+# own live record. Sharing a profile would have been simpler and would have commingled two track
+# records in one account-level equity history, destroying the independent verifiability that is
+# the entire reason for separate accounts.
+#
+# *** OPEN EVIDENCE QUESTION — READ BEFORE FUNDING THIS SLEEVE ***
+# docs/design/PREREG_SLEEVE4_INVESTMENT.md pins the universe to
+# data/research/universe_allowlist_20260619.json (sha256 2fd82d30...) and states that altering any
+# row VOIDS the pre-registration. artifacts/walkforward/prereg_investment/ has NOT been confirmed
+# to match that pinned cohort. Until it is, this sleeve's headline evidence (21y Sharpe 0.83,
+# NW t +3.19) rests on a document whose own stated conditions may not hold. Wiring the plumbing is
+# safe — nothing trades until a scheduler calls it — but the question is not settled by wiring.
+#
+# Everything not listed here is inherited from base.yaml. The keys below deliberately MATCH
+# configs/equity.yaml wherever the two sleeves share a market, so any divergence in their live
+# results comes from the SIGNAL and not from a quietly different cost model or universe.
+
+data:
+  asset_class: equity
+  timeframe: "1d"
+  # See configs/equity.yaml for the bar-feed disclosure: this field labels the crypto-only ccxt
+  # paths and is a placeholder on the equity research path, which reads the lake.
+  exchange: polygon
+  backfill_start: "1997-01-01T00:00:00Z"
+
+universe:
+  # IDENTICAL to configs/equity.yaml. The asset-growth premium is documented to live in small and
+  # mid caps, the same breadth AlphaMax trades, and holding the cross-section fixed across the two
+  # sleeves is what makes their measured -0.367 correlation attributable to the signals rather
+  # than to one of them simply owning different companies.
+  size: 2000
+  entry_rank: 1800
+  exit_rank: 2300
+
+portfolio:
+  rank_top_k: 100
+  dollar_neutral: true
+
+signals:
+  # QUARTERLY, matching the pre-registration and AlphaMax. Fundamentals update on filing cadence,
+  # so a faster horizon would rebalance on stale accounting and pay turnover for nothing.
+  horizon_bars: 63
+
+costs:
+  # Identical to the equity sleeve, deliberately: a different cost model would make the two
+  # sleeves' net results incomparable and could flatter whichever got the softer assumptions.
+  equity_commission_bps: 1.0
+  equity_half_spread_bps: 3.0
+  equity_borrow_bps_annual: 50.0
+  impact_coef: 1.0
+  latency_addon_bps: 2.0
+
+risk:
+  clamp_reduce_only_adv: true

@@ -1,0 +1,71 @@
+# AlphaForge base configuration. Loaded by alphaforge.config.settings.load_settings();
+# every value can be overridden by configs/<profile>.yaml then by AF_* environment variables.
+
+paths:
+  lake_dir: data/lake
+  features_dir: data/features
+  quality_dir: data/quality
+  predictions_dir: data/predictions
+  artifacts_dir: artifacts
+  var_dir: var
+
+data:
+  exchange: binanceusdm
+  timeframe: "1h"
+  backfill_start: "2020-01-01T00:00:00Z"
+  ingest_grace_ms: 30000
+
+universe:
+  size: 20
+  rank_window_days: 30
+  rebalance: monthly
+  entry_rank: 16        # hysteresis: enter at top-16
+  exit_rank: 26         # leave only when falling below 26
+
+quality:
+  ewma_span_bars: 168           # trailing EWMA sigma / volume-median span (7 days of 1h)
+  outlier_k: 8.0                # |log return| > k * sigma => OUTLIER_RETURN
+  bad_print_vol_frac: 0.25      # suspect print: volume < frac * trailing median volume
+  bad_print_reversion_frac: 0.5 # ...and |ln(c_{t+1}/c_{t-1})| < frac * |r_t| (snap-back)
+  downtime_frac: 0.8            # missing hour on >= 80% of active instruments = exchange downtime
+  stale_run_bars: 12            # identical closes with volume for >= 12 bars = stuck feed
+  min_history_bars: 24          # warmup before sigma/median estimates are trusted
+
+signals:
+  horizon_bars: 72      # h: alpha horizon AND cost-amortization holding period (one constant)
+  ic_target: 0.02
+
+costs:
+  perp_maker_bps: 2.0
+  perp_taker_bps: 5.0
+  default_half_spread_bps: 2.5
+  impact_coef: 1.0
+  latency_addon_bps: 2.0   # conservative placeholder until calibrated from paper fills
+
+portfolio:
+  risk_aversion: 7.0
+  gross_max: 1.0
+  net_max: 0.5
+  w_max: 0.15
+  turnover_max: 0.10
+  vol_target_ann: 0.15
+  vol_scale_max: 1.5
+  no_trade_band: 0.0010
+
+risk:
+  max_position_frac: 0.15   # hard per-position cap, fraction of equity
+  max_gross: 1.0            # hard post-trade gross cap, fraction of equity
+  max_net: 0.5              # hard post-trade |net| cap, fraction of equity
+  max_order_adv_frac: 0.01  # order notional <= 1% of ADV (sqrt-impact validity guard)
+  price_collar_frac: 0.05   # |decision_price - close| <= 5% of close (stale-signal guard)
+  dd_halve_gross: -0.10
+  dd_flat_halt: -0.15
+  flat_cooldown_bars: 336   # bars (14d of 1h) flat-and-halted after a full halt before AUTO-REARM (resets HWM, resumes); time-based because a flat book can't self-recover. KillSwitch stays the manual absorbing halt.
+  var_confidence: 0.99
+  var_window_days: 365      # historical VaR/CVaR lookback, DAILY returns (finding 29)
+  staleness_max_bars: 2     # no fresh bar within 2 bar intervals => no trading
+
+live:
+  cycle_grace_s: 90
+  tick_sleep_s: 45      # wall-clock re-check cadence (macOS monotonic clocks freeze in sleep)
+  paper: true

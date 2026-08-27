@@ -1,0 +1,24 @@
+# AlphaForge — Crypto TREND (directional TSMOM) candidate sleeve. Deep-merges over configs/base.yaml.
+# Resolve with:  af --profile crypto_trend <command>
+#
+# Inherits the crypto_perp sleeve (H1, 24/7) from base. The difference is the DIRECTIONAL `trend`
+# allocator (TrendVolTarget): each perp held long or short on the sign of its OWN trend, inverse-vol
+# weighted, NET exposure allowed. This is a genuinely different premium from the deployed crypto
+# CARRY sleeve (funding-rate harvest), so if it survives the gauntlet it diversifies the book.
+# Honest caveat to watch: a directional crypto book carries BTC beta — the gauntlet + the
+# correlation-to-carry check decide whether it is a real decorrelated edge or just dressed-up beta.
+
+portfolio:
+  gross_max: 1.0
+  net_max: 1.0                 # RELAXED from 0.5: a directional trend book runs net long/short.
+  w_max: 0.34                  # per-perp cap ~1/3 gross (top-20 universe; allows low-breadth tilt).
+  vol_scale_max: 3.0           # trend vol is naturally low; allow scaling toward the vol target.
+
+signals:
+  horizon_bars: 72             # 3-day holding/rebalance horizon (H1 bars) — slow trend, low turnover.
+
+risk:
+  max_net: 1.0                 # mirror the relaxed net cap so the directional book survives the
+  max_gross: 1.0               # post-trade risk check.
+  max_position_frac: 0.34
+  clamp_reduce_only_adv: true  # thin-perp flattens clamp at the 5%-ADV edge instead of crashing.

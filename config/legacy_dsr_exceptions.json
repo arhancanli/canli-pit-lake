@@ -1,0 +1,30 @@
+{
+  "schema": "alphac.legacy-dsr-exceptions.v1",
+  "status": "CODE_RESOLVED_HISTORICAL_CLAIMS_RETIRED",
+  "claim_boundary": "No executable raw-row DSR implementation remains. Historical summary-only DSR claims stay retired because their exact return series were not preserved; code repair does not rehabilitate those artifacts.",
+  "exceptions": {},
+  "resolved_paths": {
+    "scripts/probe_alphamax_betaneutral.py": "Persisted returns restated; future runs use the identity-aligned union.",
+    "scripts/probe_alphamax_construction.py": "Eight arms forensically booked and restated; future runs use the identity-aligned union.",
+    "scripts/probe_alphamax_constructions.py": "Gauntlet restated; bespoke pseudo-count sensitivities removed.",
+    "scripts/probe_alphamax_shorttail.py": "Persisted returns restated; future runs use the identity-aligned union.",
+    "scripts/probe_econtrend.py": "Persisted OOS returns restated; future registration and DSR use the union.",
+    "scripts/exp2_crypto_vrp.py": "Future execution preflights and records its proxy hypothesis through the union; current pause blocks the unregistered identity before data work.",
+    "scripts/probe_alphamax_hyst_live.py": "Every arm now preflights and registers through the union; current pause blocks its unregistered identities before data work.",
+    "scripts/probe_alphamax_turnover.py": "Every cadence-arm cell now preflights and registers through the union; current pause blocks unregistered identities before data work.",
+    "scripts/probe_alphamax_volscale.py": "Five already-booked overlays now record and deflate through the identity-aligned union.",
+    "scripts/probe_alphamax_weighting.py": "All 48 forensically booked return configurations (primary, no-drift, and volatility-guard grids) now preflight against immutable configs and use union DSR.",
+    "scripts/probe_alphatrend_arp.py": "Every construction arm now preflights and registers through the union; current pause blocks unregistered identities before data work.",
+    "scripts/probe_alphatrend_breadth.py": "Both fixed baskets and both post-hoc selector procedures now preflight and register through the union; current pause blocks unregistered identities before data work."
+  },
+  "union_registration_paths": [
+    "scripts/exp2_crypto_vrp.py",
+    "scripts/probe_alphamax_hyst_live.py",
+    "scripts/probe_alphamax_turnover.py",
+    "scripts/probe_alphamax_volscale.py",
+    "scripts/probe_alphamax_weighting.py",
+    "scripts/probe_alphatrend_arp.py",
+    "scripts/probe_alphatrend_breadth.py"
+  ],
+  "enforcement": "tests/unit/test_no_raw_row_dsr_paths.py fails on any unlisted executable path and on stale exception entries."
+}

@@ -1,0 +1,106 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "canli-pit-lake"
+version = "0.1.0"
+description = "A point-in-time market data lake: ingestion, corporate actions, quality gates and as-of reads that cannot see the future"
+authors = [{ name = "Arhan Canli" }]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+keywords = ["point-in-time", "market-data", "corporate-actions", "survivorship-bias", "quantitative-research", "data-pipeline"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Typing :: Typed",
+]
+dependencies = [
+    "boto3>=1.43.31",
+    "ccxt>=4.3",
+    "duckdb>=1.0",
+    "exchange-calendars>=4.5",
+    "httpx>=0.27",
+    "numpy>=2.0",
+    "pandas>=2.2",
+    # pyarrow 25 dropped its py.typed marker; the typed line keeps mypy --strict honest
+    # rather than papering over 22 real type surfaces with ignore_missing_imports.
+    "pyarrow>=16.0,<25",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.14.2",
+    "pyyaml>=6.0",
+    "structlog>=24.1",
+    "tenacity>=8.3",
+]
+
+[project.urls]
+Homepage = "https://canlicapital.com"
+Repository = "https://github.com/arhancanli/canli-pit-lake"
+"Engine (full system)" = "https://github.com/arhancanli/alphac"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.2",
+    "hypothesis>=6.100",
+    "freezegun>=1.5",
+    # Pinned to the exact versions the engine is verified against. This repo's
+    # claim is byte-identity with that engine, and a claim of identity checked by
+    # a different toolchain version is not a check: the source here cannot be
+    # edited to satisfy a newer linter without breaking the very property the
+    # parity test asserts. So the toolchain is pinned instead of the source.
+    "ruff==0.15.16",
+    "mypy==2.1.0",
+    "pandas-stubs==3.0.3.260530",
+    # Type checking reads pandas' own inline types alongside the stubs, so the
+    # pandas/numpy versions change mypy's answer on unmodified source. Pinned in
+    # the DEV group only: the verification environment is reproducible while the
+    # library itself keeps an open runtime range for consumers.
+    "pandas==3.0.3",
+    "numpy==2.4.6",
+    "types-pyyaml>=6.0",
+    "boto3-stubs[s3]>=1.43.31",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/alphaforge"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM", "RUF", "DTZ"]
+ignore = ["SIM108"]
+
+[tool.ruff.lint.isort]
+# `alphaforge` is a PEP 420 namespace package here (no root __init__.py), which is
+# what lets this extraction and its sibling compose instead of colliding. Ruff
+# infers first-party membership from that root file, so without this line it sorts
+# alphaforge imports as third-party and reports I001 on unmodified engine source.
+known-first-party = ["alphaforge"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = "src"
+packages = ["alphaforge"]
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = ["ccxt.*", "duckdb.*", "exchange_calendars.*", "boto3.*", "botocore.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-m 'not network'"
+markers = [
+    "network: hits a live vendor endpoint; excluded by default and never run in CI",
+    "workspace_evidence: bound to research artifacts outside this extraction",
+    "no_cover: engine coverage marker, inert here",
+]

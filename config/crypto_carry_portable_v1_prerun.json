@@ -1,0 +1,110 @@
+{
+  "schema": "canli.alphac-crypto-carry-portable-prerun-contract.v1",
+  "status": "CANDIDATE_DATA_CONTRACT_FROZEN_BEFORE_RETURN_COMPUTE",
+  "author": "Arhan Canli",
+  "identity": {
+    "family_trial_account": "crypto_carry",
+    "return_identity_id": "crypto_carry_portable_v1",
+    "relationship_to_historical_result": "NEW_PROSPECTIVE_IDENTITY_NOT_A_REPLICATION",
+    "reason": "Current official archives revise 1256 overlapping OHLCV fields and do not expose 14 required ICPUSDT funding archives. A run using current archives and a source-eligible universe is therefore a new strategy identity."
+  },
+  "pre_result_evidence_bindings": {
+    "portability_manifest": {
+      "path": "artifacts/publication/crypto_carry_portability_manifest.json",
+      "content_hash": "sha256:b869915f883805223433adf44aecd36b5aee5395d2a3a5357860e52c22abea32"
+    },
+    "instrument_metadata": {
+      "path": "artifacts/publication/crypto_carry_instrument_metadata.json",
+      "content_hash": "sha256:f8415572ae29e9a978e58a9ce5704163e08601904acb59ae45c1ca21f36304d7"
+    },
+    "fresh_input_comparison": {
+      "path": "artifacts/publication/crypto_carry_fresh_input_comparison.json",
+      "content_hash": "sha256:256efc5d74fc493dcc844737b4980911d1497e5012190066eb523a88c4e87bd5"
+    },
+    "historical_replay_correction": {
+      "path": "artifacts/publication/crypto_carry_replay_correction.json",
+      "content_hash": "sha256:d71a5044369d3544c314fe83eab1a36b58a086fdabf3c945db6f4706d43243ca"
+    },
+    "prospective_input_snapshot_protocol": {
+      "path": "artifacts/audit/walkforward_input_snapshot_protocol.json",
+      "content_hash": "sha256:84d48c7cbba5d6c307d27f15ade8ac491bb56efcbf377bdefa5c006a5c34576f"
+    }
+  },
+  "source_contract": {
+    "market_data_authority": "FRESH_CHECKSUM_VERIFIED_OFFICIAL_BINANCE_MONTHLY_ARCHIVES",
+    "archive_selection_authority": "BOUND_FROZEN_PORTABILITY_MANIFEST",
+    "instrument_eligibility_rule": "EXCLUDE_EVERY_SYMBOL_WITH_ONE_OR_MORE_UNAVAILABLE_REQUIRED_ARCHIVE_OBJECTS",
+    "eligibility_rule_applied_without_return_information": true,
+    "expected_archive_ineligible_symbols": [
+      "ICPUSDT"
+    ],
+    "expected_eligible_instrument_count": 57,
+    "local_frozen_market_rows_may_fill_fresh_gaps": false,
+    "unbound_api_rows_may_fill_fresh_gaps": false,
+    "fresh_archive_rows_override_revised_frozen_rows": true,
+    "filter_rows_to_bound_run_window": true,
+    "filter_rows_to_bound_instrument_lifecycle": true,
+    "funding_available_at_rule": "ts_funding + 5 minutes",
+    "deterministic_snapshot_ingested_at": "2026-08-24T00:00:00+00:00",
+    "snapshot_ingested_at_semantics": "Portable snapshot construction stamp used only for audit and deterministic deduplication; it is not an exchange publication timestamp or a claim that the archive was acquired at that instant.",
+    "raw_archive_redistribution_authorized": false
+  },
+  "metadata_contract": {
+    "authority": "BOUND_FROZEN_LOCAL_SCD2_METADATA_PACKET",
+    "fresh_exchange_metadata_reacquired": false,
+    "portable_valid_from_rule": "Set each retained current metadata row valid_from_ms to the declared run start; preserve the source valid_from_ms only as audit lineage.",
+    "limitation": "The packet is sufficient to reconstruct the declared local run semantics but is not fresh historical exchangeInfo evidence and does not establish independent replication."
+  },
+  "universe_contract": {
+    "method": "PIT_MONTHLY_TRAILING_MEDIAN_DAILY_QUOTE_VOLUME_WITH_HYSTERESIS",
+    "rank_timeframe": "1h",
+    "rank_window_days": 30,
+    "minimum_distinct_volume_days": 20,
+    "minimum_listing_age_days": 30,
+    "rebalance": "monthly",
+    "size": 20,
+    "entry_rank": 16,
+    "exit_rank": 26,
+    "first_run_month_may_be_empty_until_bound_window_contains_sufficient_trailing_data": true,
+    "source_of_parameters": "configs/base.yaml values frozen here before return compute"
+  },
+  "walkforward_contract": {
+    "start_inclusive": "2021-06-01T00:00:00+00:00",
+    "end_exclusive": "2026-06-01T00:00:00+00:00",
+    "train_bars": 6048,
+    "test_bars": 1512,
+    "purge_bars": 72,
+    "embargo_bars": 168,
+    "rebalance_bars": 168,
+    "allocator": "rank",
+    "alpha_names": [
+      "carry_fund_21"
+    ],
+    "no_trade_band": 0.001,
+    "expected_walkforward_legs": 25,
+    "all_strategy_and_execution_knobs_other_than_source_eligible_universe_must_match_historical_config": true
+  },
+  "acceptance_contract": {
+    "all_eligible_archive_and_normalized_object_hashes_must_match": true,
+    "eligible_symbols_must_have_zero_local_only_ohlcv_rows": true,
+    "eligible_symbols_must_have_zero_local_only_funding_rows": true,
+    "fresh_only_rows_inside_lifecycle_must_be_zero": true,
+    "persistent_portable_lake_manifest_required": true,
+    "complete_preregistration_required": true,
+    "validated_return_identity_reservation_required": true,
+    "locked_python_environment_required": true,
+    "private_input_snapshot_required_before_first_trade": true,
+    "historical_replication_label_permitted": false,
+    "independent_replication_label_permitted": false
+  },
+  "governance": {
+    "hypotheses_spent_by_this_contract": 0,
+    "new_return_trials_executed_by_this_contract": 0,
+    "return_metrics_computed_by_this_contract": false,
+    "return_execution_authorized": false,
+    "reservation_created": false,
+    "reservation_may_be_created_only_after_all_non_return_prerequisites_pass": true
+  },
+  "claim_boundary": "This contract freezes a source-availability decision before any portable-v1 return is computed. It does not prove performance, reserve or spend a hypothesis identity, authorize a return run, repair the historical replay, establish data redistribution rights, or constitute independent replication.",
+  "content_hash": "sha256:e153521aa08d1ee1a27a64ff008e3ea25ba72858017133cb781178dcfb8b48e3"
+}

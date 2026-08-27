@@ -1,0 +1,66 @@
+{
+  "claim_boundary": "Binds already published no-return exploratory metadata and reserves a disjoint confirmation period. It opens no confirmation document, price, return, or outcome and proves no redesigned identity, alpha, or sleeve admission.",
+  "content_hash": "sha256:11e1d46af1ed039a3c00d6d15e7479baf5d5bc4872103d4a0b4b876cae09a768",
+  "governed_values": {
+    "aggregate_prior_item101_8k_rate": 0.6702290076335878,
+    "confirmation_corpus_opened": false,
+    "confirmation_documents_acquired": 0,
+    "confirmation_labels_completed": 0,
+    "confirmation_period": {
+      "end": "2015-12-31",
+      "start": "2006-01-01"
+    },
+    "exploration_decision": "DATA_GATED",
+    "exploration_period": {
+      "end": "2025-12-31",
+      "start": "2016-01-01"
+    },
+    "forbidden_market_columns": [],
+    "return_data_opened": false,
+    "return_hypotheses_spent": 0,
+    "strata": {
+      "DEFM14A": {
+        "anchors": 1523,
+        "first_filing_date": "2016-01-08",
+        "last_filing_date": "2025-12-31",
+        "later_item201_or_102_8k_rate": 0.9238345370978333,
+        "prior_item101_8k_rate": 0.613263296126067
+      },
+      "SC 14D9": {
+        "anchors": 442,
+        "first_filing_date": "2016-01-05",
+        "last_filing_date": "2025-12-29",
+        "later_item201_or_102_8k_rate": 0.8959276018099548,
+        "prior_item101_8k_rate": 0.8665158371040724
+      }
+    },
+    "target_anchors": 1965,
+    "timeline_columns": [
+      "cik",
+      "accession",
+      "filing_date",
+      "acceptance_datetime",
+      "form",
+      "items",
+      "primary_document",
+      "source_url",
+      "filing_ts",
+      "prior_8k_accession",
+      "prior_8k_acceptance",
+      "later_outcome_accession",
+      "later_outcome_acceptance"
+    ]
+  },
+  "raw_source_bindings": {
+    "exploratory_result": {
+      "path": "artifacts/feasibility/merger_arbitrage/result.json",
+      "sha256": "f28fbf54dfce33888c3d5e96e08d3c85549543105bd7fde68989f13bcc2827ea"
+    },
+    "exploratory_timeline": {
+      "path": "artifacts/feasibility/merger_arbitrage/target_anchor_timeline.parquet",
+      "sha256": "c39467ad09778b25a42550a0130eb42769a29aeb77547b9ce2c4db5e2940e6f7"
+    }
+  },
+  "schema": "canli.alphac-merger-announcement-confirmatory-inputs.v1",
+  "status": "SEALED_EXPLORATORY_INPUT_RECEIPT_CONFIRMATION_CORPUS_UNOPENED"
+}

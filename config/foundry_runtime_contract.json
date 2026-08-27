@@ -1,0 +1,111 @@
+{
+  "schema": "canli.foundry-runtime-contract.v1",
+  "version": "1.0.0",
+  "status": "FROZEN_NOT_DEPLOYED",
+  "claim_boundary": "This contract defines the required runtime confinement. It does not claim that a host, image, firewall, proxy or service has passed deployment acceptance.",
+  "image": {
+    "production_reference_requires_digest": true,
+    "signature_verification_required": true,
+    "mutable_tags_permitted": false,
+    "pull_policy_after_install": "never"
+  },
+  "defaults": {
+    "rootless": true,
+    "read_only_root": true,
+    "read_only_tmpfs": false,
+    "no_new_privileges": true,
+    "drop_capabilities": "all",
+    "seccomp": "runtime-default-or-stricter",
+    "host_docker_socket": false,
+    "interactive_shell": false,
+    "environment_host": false
+  },
+  "components": {
+    "researchd": {
+      "unix_user": "researchd",
+      "database_role": "foundry_researchd",
+      "network": ["postgres_private"],
+      "secrets": ["database_dsn"],
+      "broker_write_access": false
+    },
+    "worker": {
+      "unix_user": "foundryworker",
+      "database_role": "foundry_worker",
+      "network": ["postgres_private", "data_gateway_loopback"],
+      "secrets": ["worker_database_dsn"],
+      "broker_write_access": false,
+      "quota": {
+        "cpu_millis": 1500,
+        "memory_mebibytes": 2048,
+        "process_limit": 256,
+        "disk_mebibytes": 8192,
+        "wall_seconds": 3600
+      }
+    },
+    "validator": {
+      "unix_user": "foundryvalidator",
+      "database_role": "foundry_validator",
+      "network": ["postgres_private", "egress_proxy_loopback"],
+      "secrets": ["validator_database_dsn", "validator_research_read_key"],
+      "broker_write_access": false
+    },
+    "data_gateway": {
+      "unix_user": "foundrygateway",
+      "database_role": null,
+      "network": ["egress_proxy_loopback"],
+      "secrets": ["approved_data_provider_keys", "research_object_key"],
+      "broker_write_access": false
+    },
+    "sanitizer_publisher": {
+      "unix_user": "foundrypublisher",
+      "database_role": "foundry_publisher",
+      "network": ["postgres_private", "egress_proxy_loopback"],
+      "secrets": ["publisher_database_dsn", "publisher_sanitized_write_key"],
+      "broker_write_access": false
+    },
+    "migration_operator": {
+      "unix_user": "foundrymigrator",
+      "database_role": "foundry_migrator",
+      "network": ["postgres_private"],
+      "secrets": ["ephemeral_migration_database_dsn"],
+      "disabled_after_first_migration": true,
+      "broker_write_access": false
+    },
+    "sentinel": {
+      "unix_user": "foundrysentinel",
+      "database_role": "foundry_status",
+      "network": ["postgres_private", "egress_proxy_loopback"],
+      "secrets": ["status_database_dsn", "alert_delivery_key"],
+      "broker_write_access": false
+    },
+    "holdout_worker": {
+      "unix_user": "foundryholdout",
+      "database_role": null,
+      "network": ["holdout_proxy_loopback"],
+      "secrets": ["one_shot_holdout_key"],
+      "broker_write_access": false
+    },
+    "holdout_egress_proxy": {
+      "unix_user": "foundryholdoutegress",
+      "database_role": null,
+      "network": ["holdout_objects_only"],
+      "secrets": [],
+      "broker_write_access": false
+    }
+  },
+  "forbidden_environment_keys": [
+    "ALPACA_API_KEY",
+    "ALPACA_SECRET_KEY",
+    "BROKER_WRITE_TOKEN",
+    "BROKER_CREDENTIAL"
+  ],
+  "negative_tests": [
+    "worker_to_public_internet_denied",
+    "worker_to_alpaca_order_endpoint_denied",
+    "research_to_execution_node_denied",
+    "holdout_to_research_vpc_denied",
+    "worker_cannot_read_publisher_secret",
+    "worker_cannot_read_holdout_secret",
+    "public_status_cannot_read_private_fields"
+  ]
+}

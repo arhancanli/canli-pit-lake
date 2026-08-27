@@ -1,0 +1,67 @@
+# AlphaForge — Managed-Futures TREND sleeve (the 4th algorithm). Deep-merges over configs/base.yaml.
+# Resolve with:  af --profile managed_futures <command>
+#
+# ETFs ARE equities, so asset_class=equity resolves the D1 + XNYS (252-session) sleeve EVERYWHERE
+# (feature grid, forward returns, covariance annualizer, walk-forward purge/embargo). Points at the
+# dedicated data/lake_mf research lake (scripts/mf_etf_load.py: a fixed 17-ETF basket across equity
+# index / rates / commodities / FX, Yahoo total-return adjusted, fixed-basket universe).
+#
+# The signal is the DIRECTIONAL `trend` allocator (TrendVolTarget): each ETF held long or short on
+# the sign of its OWN multi-horizon trend (mf_trend_63/126/252), inverse-vol weighted, NET exposure
+# allowed. That net directionality is the source of the positive skew + crash protection, so the
+# net cap is relaxed to full gross — a market-neutral 0.5 net would clip the very edge being traded.
+
+paths:
+  lake_dir: data/lake_mf
+  var_dir: var_mf
+
+data:
+  asset_class: equity
+  timeframe: "1d"
+  exchange: polygon            # placeholder (unused on the research lake path)
+  backfill_start: "2001-01-01T00:00:00Z"
+
+universe:
+  # Fixed 17-ETF basket: membership is PRE-WRITTEN by mf_etf_load.py (every ETF a member from its
+  # first bar, never leaves) and READ, not rebuilt by a liquidity ranker. These sizes are inert for
+  # this profile (no rebuild) but kept wide enough to never cull the basket if one ever runs.
+  size: 20
+  entry_rank: 20
+  exit_rank: 25
+
+portfolio:
+  gross_max: 1.0
+  net_max: 1.0                 # RELAXED from 0.5: a directional trend book runs net long/short.
+  w_max: 0.34                  # per-ETF cap ~1/3 gross (17-name basket; allows low-breadth tilt).
+  vol_target_ann: 0.15
+  vol_scale_max: 3.0           # diversified trend vol is naturally low (~5%); allow scaling toward
+                               # target. Sharpe-invariant — only sets the book's absolute vol level.
+
+signals:
+  horizon_bars: 21             # monthly holding/rebalance — the managed-futures cadence (slow
+                               # 3/6/12-month trend, low turnover). Drives the IC grid + WF purge.
+
+risk:
+  max_position_frac: 0.34      # mirror portfolio w_max so the hard risk cap doesn't clip positions
+  max_net: 1.0                 # mirror the relaxed net cap so the directional book survives the
+  max_gross: 1.0               # post-trade risk check (a 0.5 hard net cap would gut the trend bet).
+  clamp_reduce_only_adv: true  # thin-universe: a large flatten on a low-ADV ETF (DBA/UNG early)
+                               # would crash the sqrt-impact model; clamp de-risks at the 5%-ADV
+                               # edge and closes the rest over the next bars (lets the book run at
+                               # full capital instead of the small-book workaround).
+  # A trend book is SUPPOSED to ride drawdowns: the drawdown IS the trend reversing, and halving/
+  # flattening there locks the loss and forfeits the new trend the strategy is trying to catch. The
+  # tight -10/-15 crypto/equity ladder is theoretically wrong for trend, so it is widened to a true
+  # catastrophe backstop (the ~10% maxDD book never trips it in normal operation). Principled, not
+  # tuned: the ladder's job here is tail-risk insurance, not in-strategy risk control.
+  dd_halve_gross: -0.30
+  dd_flat_halt: -0.45
+
+costs:
+  # ETF frictions (liquid majors): ~1bp commission, tight spreads, cheap borrow. Conservative so
+  # the net-of-cost walk-forward is honest. USO/UNG trade wider but the trend book holds them slowly.
+  equity_commission_bps: 1.0
+  equity_half_spread_bps: 3.0
+  equity_borrow_bps_annual: 50.0
+  impact_coef: 1.0
+  latency_addon_bps: 2.0

@@ -1,0 +1,116 @@
+{
+  "schema": "canli.foundry-deployment-manifest.v1",
+  "version": "1.0.0",
+  "status": "PLANNED_NOT_APPLIED",
+  "owner": "Arhan Canli",
+  "claim_boundary": "This manifest describes the reviewed Foundry v1 deployment target. It is not a cloud inventory, deployment receipt, network test, restore test or claim that Foundry is operating.",
+  "provider": {
+    "name": "DigitalOcean",
+    "region": "nyc3",
+    "terraform_provider_version": "2.100.0",
+    "dedicated_deployment_principal_required": true,
+    "existing_api_optimizer_principals_reusable": false
+  },
+  "networks": {
+    "research": {
+      "cidr": "10.44.0.0/20",
+      "public_service_ports": [],
+      "public_networking": false
+    },
+    "holdout": {
+      "cidr": "10.45.0.0/24",
+      "public_service_ports": [],
+      "public_networking": false,
+      "peered_with_research": false
+    },
+    "egress": {
+      "type": "dedicated_managed_nat_per_vpc",
+      "shared_between_research_and_holdout": false,
+      "default_route_required_before_private_host_creation": true,
+      "host_and_cloud_firewalls_remain_authoritative": true,
+      "documented_monthly_base_cost_usd_as_of_2026_08_26": 80
+    },
+    "execution": {
+      "managed_by_this_manifest": false,
+      "reachable_from_research": false,
+      "reachable_from_holdout": false
+    }
+  },
+  "compute": {
+    "operator_access": {
+      "dedicated_ssh_key_required_at_host_creation": true,
+      "private_hosts_accept_ssh_from_research_vpc_only": true,
+      "ephemeral_bastion_required_for_remote_ssh": true
+    },
+    "research_node": {
+      "size": "s-2vcpu-4gb",
+      "rootless_services": [
+        "researchd",
+        "worker",
+        "validator",
+        "data_gateway",
+        "sanitizer",
+        "sentinel",
+        "status_adapter"
+      ]
+    },
+    "holdout_node": {
+      "size": "s-1vcpu-1gb",
+      "rootless_services": ["holdout_worker"]
+    },
+    "ephemeral_bastion": {
+      "default_enabled": false,
+      "persistent": false,
+      "operator_cidr_required": true
+    }
+  },
+  "database": {
+    "engine": "PostgreSQL",
+    "version": "18",
+    "size": "db-s-1vcpu-1gb",
+    "node_count": 1,
+    "private_vpc_only": true,
+    "tls_mode": "verify-full",
+    "trusted_sources_only": true,
+    "queue_mechanism": "FOR UPDATE SKIP LOCKED"
+  },
+  "object_storage": {
+    "buckets": {
+      "research": "private-content-addressed",
+      "holdout": "private-one-shot-separate-key",
+      "publication": "private-sanitized-output-only"
+    },
+    "application_keys_managed_in_main_terraform_state": false,
+    "reason": "Application secret values must not enter the main infrastructure state. Scoped keys are issued through a separate credential ceremony and recorded only in a redacted scope inventory."
+  },
+  "credentials": {
+    "broker_credentials_present": false,
+    "roles": [
+      "infrastructure_provisioner",
+      "researchd_database",
+      "worker_database",
+      "migration_database_ephemeral",
+      "validator_database",
+      "publisher_database",
+      "research_objects",
+      "validator_read_only",
+      "holdout_one_shot",
+      "publisher_sanitized_write",
+      "public_artifact_read",
+      "evidence_signer"
+    ]
+  },
+  "acceptance_receipts_required": [
+    "reviewed_terraform_plan",
+    "cloud_firewall_export",
+    "host_firewall_export",
+    "negative_network_probe",
+    "redacted_secret_scope_inventory",
+    "database_role_tests",
+    "object_permission_tests",
+    "state_machine_tests",
+    "migration_replay_sanitizer_packet",
+    "restore_and_post_restore_replay",
+    "honest_public_status"
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "schema": "canli.alphac-identity-trial-evidence-bindings.v1",
+  "claim_boundary": "A binding credits only the named packet sections after every listed byte hash and semantic relation validates. Packet completion additionally requires all eleven sections; complete does not mean admitted, profitable, live, or predictive.",
+  "bindings": {
+    "e2b76a7604131f00": {
+      "binding_type": "earnings_narrative_replay_v1",
+      "config_hash": "41ce2b1f40450a6e",
+      "research_family_key": "equity_narrative_change",
+      "verdict": "KILL",
+      "reproduction_command": "uv run python scripts/probe_earnings_narrative_change.py",
+      "identity_projection_excludes": [
+        "prereg",
+        "probe"
+      ],
+      "section_evidence": {
+        "preregistration_and_hashes": [
+          {
+            "type": "preregistration",
+            "source_path": "docs/design/PREREG_EARNINGS_NARRATIVE_CHANGE.md",
+            "sha256": "60486da41f1e2c88e62b6e56d436d780f645420ffaeb13364540d0c4040cc3b9",
+            "public_path": "/research/prereg-earnings-narrative-change"
+          },
+          {
+            "type": "return_identity_reservation",
+            "source_path": "artifacts/probe/earnings_narrative_change/return_identity_reservation.json",
+            "sha256": "1cca246e42c70803830ce69e9efda1ee6978b92ba88b6adee7830d479eabae79"
+          }
+        ],
+        "point_in_time_data_and_survivorship_controls": [
+          {
+            "type": "input_data_manifest",
+            "source_path": "artifacts/probe/earnings_narrative_change/input_data_manifest.json",
+            "sha256": "3f69cc02bd0038d9fc3ad4c8f61b832e884127cbef93e862194e22b06f25e006",
+            "public_path": "/glassbox/earnings_narrative_change_input_data_manifest.json"
+          },
+          {
+            "type": "preregistered_point_in_time_protocol",
+            "source_path": "docs/design/PREREG_EARNINGS_NARRATIVE_CHANGE.md",
+            "sha256": "60486da41f1e2c88e62b6e56d436d780f645420ffaeb13364540d0c4040cc3b9",
+            "public_path": "/research/prereg-earnings-narrative-change"
+          }
+        ],
+        "execution_and_cost_model": [
+          {
+            "type": "executable_runner",
+            "source_path": "scripts/probe_earnings_narrative_change.py",
+            "sha256": "b64c366b95c2f9595de3f6bf292f3958db7d9f2b1b5cab38ebedd94a082e3a05"
+          },
+          {
+            "type": "result_with_cost_stress",
+            "source_path": "artifacts/probe/earnings_narrative_change/result.json",
+            "sha256": "8e416ba075894a67eb74e262d74f467127a6274ae9e78d59d66b35822068a091",
+            "public_path": "/glassbox/earnings_narrative_change_result.json"
+          }
+        ],
+        "result_uncertainty_stress_capacity_and_diversification": [
+          {
+            "type": "full_result",
+            "source_path": "artifacts/probe/earnings_narrative_change/result.json",
+            "sha256": "8e416ba075894a67eb74e262d74f467127a6274ae9e78d59d66b35822068a091",
+            "public_path": "/glassbox/earnings_narrative_change_result.json"
+          },
+          {
+            "type": "bootstrap_diversification_report",
+            "source_path": "artifacts/probe/earnings_narrative_change/diversification.json",
+            "sha256": "db1ae528574297b72916720ce8f048231800a6ad4834bfc8b05a4ed65f058c8e",
+            "public_path": "/glassbox/earnings_narrative_change_diversification.json"
+          },
+          {
+            "type": "complete_oos_curve",
+            "source_path": "artifacts/probe/earnings_narrative_change/equity.parquet",
+            "sha256": "3e0a378f00d395f777100ed34e656a110d52d52b7bef59d627f4a00817865832"
+          },
+          {
+            "type": "portfolio_weights",
+            "source_path": "artifacts/probe/earnings_narrative_change/weights.parquet",
+            "sha256": "1bea937404539d7a46634b9adc8247144ddf6f370f48c25f357ac6a9a502b687"
+          }
+        ],
+        "admission_or_kill_decision": [
+          {
+            "type": "kill_result",
+            "source_path": "artifacts/probe/earnings_narrative_change/result.json",
+            "sha256": "8e416ba075894a67eb74e262d74f467127a6274ae9e78d59d66b35822068a091",
+            "public_path": "/glassbox/earnings_narrative_change_result.json"
+          },
+          {
+            "type": "admission_contract_v6",
+            "source_path": "config/archive/sleeve_admission_contract_v6_superseded.json",
+            "sha256": "5f628a44ae73ed9c412b225ac9dc56c4e59c1bc0645e2ebde251501e938b9932"
+          }
+        ],
+        "code_environment_and_reproduction": [
+          {
+            "type": "executable_runner",
+            "source_path": "scripts/probe_earnings_narrative_change.py",
+            "sha256": "b64c366b95c2f9595de3f6bf292f3958db7d9f2b1b5cab38ebedd94a082e3a05"
+          },
+          {
+            "type": "python_project",
+            "source_path": "pyproject.toml",
+            "sha256": "ddaf8b60999275f6d3fb93b3073f256d75d1383bfc8bab14263dc58645841006"
+          },
+          {
+            "type": "locked_environment",
+            "source_path": "uv.lock",
+            "sha256": "5caca664242722a3a3112663d7a19b7b5000583e30ade3753e1b8ffdecfd6f06"
+          }
+        ]
+      }
+    },
+    "8446702cb8dd1768": {
+      "binding_type": "eia_petroleum_inventory_replay_v1",
+      "config_hash": "ccde1e9dc1523998",
+      "research_family_key": "energy_inventory",
+      "verdict": "KILL",
+      "reproduction_command": "uv run python scripts/probe_eia_petroleum_inventory.py",
+      "identity_projection_excludes": [
+        "prereg",
+        "probe"
+      ],
+      "section_evidence": {
+        "preregistration_and_hashes": [
+          {
+            "type": "preregistration",
+            "source_path": "docs/design/PREREG_EIA_PETROLEUM_INVENTORY.md",
+            "sha256": "dc1f7dd8888a51c1b53fe3b04c4fd941d2027075e2b7150c72941736d740e66c"
+          }
+        ],
+        "point_in_time_data_and_survivorship_controls": [
+          {
+            "type": "validated_first_release_and_market_input_manifest",
+            "source_path": "artifacts/probe/eia_petroleum_inventory/input_data_manifest.json",
+            "sha256": "80e62a4db5a79055b8899660d71e8e30b474e4af3172ff8aa6238efe61bddddd",
+            "public_path": "/glassbox/eia_petroleum_inventory_input_data_manifest.json"
+          },
+          {
+            "type": "dated_first_release_manifest",
+            "source_path": "data/lake_inventory_releases/manifest.json",
+            "sha256": "386577605c5bea567ce166efbf600419f79858ff20ed57a68b625bc1da4c9623"
+          }
+        ],
+        "execution_and_cost_model": [
+          {
+            "type": "executable_runner",
+            "source_path": "scripts/probe_eia_petroleum_inventory.py",
+            "sha256": "7369f31b47adb04e401e85dd62f4c8acffb5e7c1fd768b7ed1beb54b4da8a00f"
+          },
+          {
+            "type": "result_with_cost_stress",
+            "source_path": "artifacts/probe/eia_petroleum_inventory/result.json",
+            "sha256": "949f2b073b96fd8068519dca06ff9a54ed79778535b67ad66da4b23e06ae8694",
+            "public_path": "/glassbox/eia_petroleum_inventory_result.json"
+          }
+        ],
+        "result_uncertainty_stress_capacity_and_diversification": [
+          {
+            "type": "full_result",
+            "source_path": "artifacts/probe/eia_petroleum_inventory/result.json",
+            "sha256": "949f2b073b96fd8068519dca06ff9a54ed79778535b67ad66da4b23e06ae8694",
+            "public_path": "/glassbox/eia_petroleum_inventory_result.json"
+          },
+          {
+            "type": "complete_oos_curve",
+            "source_path": "artifacts/probe/eia_petroleum_inventory/equity.parquet",
+            "sha256": "3345a48fadac6017c3d93a0bf7ced4686642be0327b3ad9fcdedca4a081cb55b"
+          },
+          {
+            "type": "locked_scores",
+            "source_path": "artifacts/probe/eia_petroleum_inventory/scores.parquet",
+            "sha256": "e7e4adeb0d9fff678996c1358069379e15a1af38605ea5881a5859151dcbf801"
+          },
+          {
+            "type": "portfolio_weights",
+            "source_path": "artifacts/probe/eia_petroleum_inventory/weights.parquet",
+            "sha256": "1cbb9e62bac715e91ddf6579a6fb46fcc6a1681b183bb2c0152015c9f1222a0c"
+          }
+        ],
+        "admission_or_kill_decision": [
+          {
+            "type": "kill_result",
+            "source_path": "artifacts/probe/eia_petroleum_inventory/result.json",
+            "sha256": "949f2b073b96fd8068519dca06ff9a54ed79778535b67ad66da4b23e06ae8694",
+            "public_path": "/glassbox/eia_petroleum_inventory_result.json"
+          },
+          {
+            "type": "admission_contract_v6",
+            "source_path": "config/archive/sleeve_admission_contract_v6_superseded.json",
+            "sha256": "5f628a44ae73ed9c412b225ac9dc56c4e59c1bc0645e2ebde251501e938b9932"
+          }
+        ],
+        "code_environment_and_reproduction": [
+          {
+            "type": "executable_runner",
+            "source_path": "scripts/probe_eia_petroleum_inventory.py",
+            "sha256": "7369f31b47adb04e401e85dd62f4c8acffb5e7c1fd768b7ed1beb54b4da8a00f"
+          },
+          {
+            "type": "python_project",
+            "source_path": "pyproject.toml",
+            "sha256": "ddaf8b60999275f6d3fb93b3073f256d75d1383bfc8bab14263dc58645841006"
+          },
+          {
+            "type": "locked_environment",
+            "source_path": "uv.lock",
+            "sha256": "5caca664242722a3a3112663d7a19b7b5000583e30ade3753e1b8ffdecfd6f06"
+          }
+        ]
+      }
+    },
+    "e5f48adc25065ce9": {
+      "binding_type": "fundamental_single_corrected_reproduction_v1",
+      "packet_completion_expected": false,
+      "config_hash": "fb1c1bb857e08760",
+      "research_family_key": "equity_fundamental_quality",
+      "verdict": "KILL",
+      "section_evidence": {
+        "preregistration_and_hashes": [
+          {
+            "type": "preregistration",
+            "source_path": "docs/design/PREREG_FUNDAMENTAL_SINGLES.md",
+            "sha256": "730789738cf079f53c0c5a0383190de242c20b88ed1561dd32b6715f1363ce11"
+          }
+        ],
+        "point_in_time_data_and_survivorship_controls": [
+          {
+            "type": "fail_closed_corrected_replay_authorization",
+            "source_path": "artifacts/audit/operating_margin_corrected_replay_authorization.json",
+            "sha256": "50cb648a88c219b2c55b5b9861b570264f38c70dd69a2626edb7790cd4d8e0e3",
+            "public_path": "/glassbox/operating_margin_corrected_replay_authorization.json"
+          },
+          {
+            "type": "versioned_corrected_lake_manifest",
+            "source_path": "artifacts/audit/sharadar_corporate_action_corrected_lake.json",
+            "sha256": "2ff4354d2f569b182901ae1a079270e78438c8fd1e7c35b115e79dd0bc65306a"
+          }
+        ],
+        "admission_or_kill_decision": [
+          {
+            "type": "corrected_reproduction_kill_seal",
+            "source_path": "artifacts/audit/operating_margin_corrected_reproduction.json",
+            "sha256": "ba428993f028dacd7278d086cc5f48355ff2d0eed555bfd89e96be6b7f175a17",
+            "public_path": "/glassbox/operating_margin_corrected_reproduction.json"
+          },
+          {
+            "type": "corrected_reproduction_result",
+            "source_path": "artifacts/probe/fundamental_single_replays/e5f48adc25065ce9/corrected_corporate_actions_f812e1576bf430ee/result.json",
+            "sha256": "ec8d2959a1eb91d96162c35ab762dd36636da91157fcd238fedaf10bd840dc0b"
+          }
+        ],
+        "code_environment_and_reproduction": [
+          {
+            "type": "corrected_replay_environment",
+            "source_path": "artifacts/probe/fundamental_single_replays/e5f48adc25065ce9/corrected_corporate_actions_f812e1576bf430ee/replay_environment.json",
+            "sha256": "dc007cb1c3b121222da021a60f532cab3b9fc754d8eab15fe67990e926283963"
+          },
+          {
+            "type": "corrected_reproduction_result",
+            "source_path": "artifacts/probe/fundamental_single_replays/e5f48adc25065ce9/corrected_corporate_actions_f812e1576bf430ee/result.json",
+            "sha256": "ec8d2959a1eb91d96162c35ab762dd36636da91157fcd238fedaf10bd840dc0b"
+          },
+          {
+            "type": "executable_runner",
+            "source_path": "scripts/replay_fundamental_single_identity.py",
+            "sha256": "328ef67e29b2c941a3cd4781a370d4e3d6fce5882fc170332c6eac70467df0ad"
+          },
+          {
+            "type": "python_project",
+            "source_path": "pyproject.toml",
+            "sha256": "ddaf8b60999275f6d3fb93b3073f256d75d1383bfc8bab14263dc58645841006"
+          },
+          {
+            "type": "locked_environment",
+            "source_path": "uv.lock",
+            "sha256": "5caca664242722a3a3112663d7a19b7b5000583e30ade3753e1b8ffdecfd6f06"
+          }
+        ]
+      }
+    }
+  }
+}

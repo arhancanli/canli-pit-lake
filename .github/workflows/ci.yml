@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Pinned at the process boundary: PYTHONHASHSEED is consumed at interpreter
+  # startup, so setting it inside conftest would be silently ignored.
+  PYTHONHASHSEED: "0"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+
+      - name: Install
+        run: |
+          uv venv --python 3.12
+          uv pip install -e .
+          uv pip install --group dev
+
+      - name: Lint
+        run: uv run ruff check .
+
+      - name: Types (strict)
+        run: uv run mypy
+
+      - name: Tests
+        run: uv run pytest -q
+
+      # The load-bearing one. This repository claims to be a byte-identical
+      # extraction of the engine; without this the claim is decoration.
+      - name: Parity with the ALPHAC engine
+        run: uv run python tools/check_parity.py

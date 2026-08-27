@@ -1,0 +1,214 @@
+{
+  "schema": "canli.foundry-trial-state-machine.v1",
+  "version": "1.0.0",
+  "status": "DESIGN_FROZEN_NOT_DEPLOYED",
+  "owner": "Arhan Canli",
+  "claim_boundary": "This contract freezes the allowed Foundry trial lifecycle. It does not establish that Foundry is deployed, that any trial has run through it, or that a candidate has earned admission.",
+  "bindings": {
+    "identity_budget": "config/trial_accounting.json",
+    "admission_contract": "config/sleeve_admission_contract.json",
+    "live_change_contract": "config/live_change_contract.json"
+  },
+  "invariants": {
+    "broker_write_access_from_foundry": false,
+    "identity_is_spent_at": "RESERVED",
+    "outcome_data_forbidden_before": "RUNNING",
+    "holdout_max_consumptions_per_identity": 1,
+    "terminal_states_have_no_outbound_transitions": true,
+    "gate_failure_cannot_be_overridden_by_human_approval": true,
+    "model_generated_code_requires_human_review": true,
+    "all_state_changes_are_append_only_audit_events": true
+  },
+  "states": {
+    "FEASIBILITY": {
+      "identity_spent": false,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Feasibility"
+    },
+    "FEASIBILITY_BLOCKED": {
+      "identity_spent": false,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Data gated"
+    },
+    "PROPOSED": {
+      "identity_spent": false,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Proposed"
+    },
+    "RESERVED": {
+      "identity_spent": true,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Identity reserved"
+    },
+    "SNAPSHOT_FROZEN": {
+      "identity_spent": true,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Snapshot frozen"
+    },
+    "RUNNING": {
+      "identity_spent": true,
+      "return_outcome_access": true,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Running"
+    },
+    "VALIDATING": {
+      "identity_spent": true,
+      "return_outcome_access": true,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Validating"
+    },
+    "HOLDOUT_PENDING": {
+      "identity_spent": true,
+      "return_outcome_access": true,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Holdout pending"
+    },
+    "HOLDOUT_AUTHORIZED": {
+      "identity_spent": true,
+      "return_outcome_access": true,
+      "holdout_access": true,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Holdout authorized"
+    },
+    "HOLDOUT_CONSUMED": {
+      "identity_spent": true,
+      "return_outcome_access": true,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Holdout consumed"
+    },
+    "PAPER_SHADOW": {
+      "identity_spent": true,
+      "return_outcome_access": true,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Paper shadow"
+    },
+    "DATA_GATED": {
+      "identity_spent": true,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Data gated"
+    },
+    "FAILED": {
+      "identity_spent": true,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": false,
+      "public_label": "Infrastructure failure"
+    },
+    "ADMITTED": {
+      "identity_spent": true,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": true,
+      "public_label": "Admitted"
+    },
+    "KILLED": {
+      "identity_spent": true,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": true,
+      "public_label": "Killed"
+    },
+    "CANCELLED": {
+      "identity_spent": false,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": true,
+      "public_label": "Cancelled before reservation"
+    },
+    "CANCELLED_AFTER_RESERVATION": {
+      "identity_spent": true,
+      "return_outcome_access": false,
+      "holdout_access": false,
+      "broker_write_access": false,
+      "terminal": true,
+      "public_label": "Cancelled after reservation"
+    }
+  },
+  "transitions": [
+    {"from": "FEASIBILITY", "to": "FEASIBILITY_BLOCKED", "authorization": "system", "action": "record_feasibility_block"},
+    {"from": "FEASIBILITY", "to": "PROPOSED", "authorization": "human", "roles": ["research_author"], "action": "submit_preregistration"},
+    {"from": "FEASIBILITY_BLOCKED", "to": "FEASIBILITY", "authorization": "human", "roles": ["data_steward"], "action": "confirm_feasibility_unblock"},
+    {"from": "FEASIBILITY_BLOCKED", "to": "CANCELLED", "authorization": "human", "roles": ["research_author"], "action": "cancel_before_reservation"},
+    {"from": "PROPOSED", "to": "RESERVED", "authorization": "human", "roles": ["owner", "research_approver"], "action": "reserve_identity"},
+    {"from": "PROPOSED", "to": "CANCELLED", "authorization": "human", "roles": ["research_author", "research_approver"], "action": "cancel_before_reservation"},
+    {"from": "RESERVED", "to": "SNAPSHOT_FROZEN", "authorization": "system", "action": "freeze_snapshot"},
+    {"from": "RESERVED", "to": "DATA_GATED", "authorization": "system", "action": "record_data_gate"},
+    {"from": "RESERVED", "to": "CANCELLED_AFTER_RESERVATION", "authorization": "human", "roles": ["owner", "research_approver"], "action": "cancel_spent_identity"},
+    {"from": "SNAPSHOT_FROZEN", "to": "RUNNING", "authorization": "system", "action": "start_bounded_run"},
+    {"from": "SNAPSHOT_FROZEN", "to": "DATA_GATED", "authorization": "system", "action": "record_data_gate"},
+    {"from": "SNAPSHOT_FROZEN", "to": "FAILED", "authorization": "system", "action": "record_infrastructure_failure"},
+    {"from": "RUNNING", "to": "VALIDATING", "authorization": "system", "action": "complete_bounded_run"},
+    {"from": "RUNNING", "to": "FAILED", "authorization": "system", "action": "record_infrastructure_failure"},
+    {"from": "VALIDATING", "to": "HOLDOUT_PENDING", "authorization": "system", "action": "pass_pre_holdout_gates"},
+    {"from": "VALIDATING", "to": "KILLED", "authorization": "system", "action": "apply_failing_gate"},
+    {"from": "VALIDATING", "to": "DATA_GATED", "authorization": "system", "action": "record_data_gate"},
+    {"from": "VALIDATING", "to": "FAILED", "authorization": "system", "action": "record_infrastructure_failure"},
+    {"from": "HOLDOUT_PENDING", "to": "HOLDOUT_AUTHORIZED", "authorization": "human", "roles": ["holdout_approver"], "action": "authorize_one_shot_holdout"},
+    {"from": "HOLDOUT_PENDING", "to": "KILLED", "authorization": "human", "roles": ["owner", "research_approver"], "action": "close_without_holdout"},
+    {"from": "HOLDOUT_AUTHORIZED", "to": "HOLDOUT_CONSUMED", "authorization": "system", "action": "consume_holdout_once"},
+    {"from": "HOLDOUT_AUTHORIZED", "to": "FAILED", "authorization": "system", "action": "record_infrastructure_failure"},
+    {"from": "HOLDOUT_CONSUMED", "to": "PAPER_SHADOW", "authorization": "human", "roles": ["owner", "research_approver"], "action": "authorize_paper_shadow"},
+    {"from": "HOLDOUT_CONSUMED", "to": "KILLED", "authorization": "system", "action": "apply_failing_gate"},
+    {"from": "PAPER_SHADOW", "to": "ADMITTED", "authorization": "human", "roles": ["owner"], "action": "admit_under_active_contract"},
+    {"from": "PAPER_SHADOW", "to": "KILLED", "authorization": "human", "roles": ["owner", "research_approver"], "action": "close_paper_shadow"},
+    {"from": "PAPER_SHADOW", "to": "DATA_GATED", "authorization": "system", "action": "record_data_gate"},
+    {"from": "DATA_GATED", "to": "SNAPSHOT_FROZEN", "authorization": "human", "roles": ["data_steward", "research_approver"], "action": "authorize_data_gate_retry"},
+    {"from": "DATA_GATED", "to": "KILLED", "authorization": "human", "roles": ["owner", "research_approver"], "action": "close_data_gated_identity"},
+    {"from": "FAILED", "to": "SNAPSHOT_FROZEN", "authorization": "human", "roles": ["operator", "research_approver"], "action": "authorize_same_identity_retry"},
+    {"from": "FAILED", "to": "KILLED", "authorization": "human", "roles": ["owner", "research_approver"], "action": "close_failed_identity"}
+  ],
+  "public_projection": {
+    "allowed_fields": [
+      "public_trial_id",
+      "state",
+      "public_label",
+      "reserved_at",
+      "updated_at",
+      "identity_spent",
+      "artifact_hash",
+      "replay_status",
+      "claim_boundary"
+    ],
+    "forbidden_fields": [
+      "broker_credentials",
+      "provider_credentials",
+      "holdout_values",
+      "private_hypothesis_text",
+      "licensed_raw_data",
+      "worker_network_details"
+    ]
+  }
+}

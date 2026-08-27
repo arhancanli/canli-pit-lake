@@ -1,0 +1,128 @@
+{
+  "schema": "canli.alphac-sleeve-family-lineage.v1",
+  "as_of": "2026-08-16",
+  "claim_boundary": "This registry governs novelty only. A NOVEL_ATLAS label means no documented identity-level match was found in the enumerated internal ledgers; it is not evidence of economic novelty, performance, or admission.",
+  "authoritative_sources": {
+    "current_book": "/Users/arhancanli/meridian/public/paper-state.json#book.sleeves",
+    "public_kill_ledger": "/Users/arhancanli/meridian/public/glassbox/kill_log.json",
+    "retired_queue": "config/sleeve_discovery.json#retired_candidates"
+  },
+  "current_sleeves": [
+    {"id": "alphaforge", "aliases": ["crypto_carry_wk"], "mechanism": "crypto funding-rate carry"},
+    {"id": "alphamax", "aliases": ["k30_dn_63"], "mechanism": "US equity cross-sectional momentum"},
+    {"id": "managed_futures", "aliases": ["AlphaTrend"], "mechanism": "multi-asset time-series momentum"},
+    {"id": "alphavintage", "aliases": ["AlphaVintage"], "mechanism": "PIT CPI-surprise equity size spread"}
+  ],
+  "families": {
+    "earnings_narrative_change": {"classification": "RETIRED_KILLED", "aliases": [], "evidence": ["docs/design/PREREG_EARNINGS_NARRATIVE_CHANGE.md", "artifacts/probe/earnings_narrative_change/result.json"], "return_outcome": {"return_data_opened": true, "return_hypotheses_spent": 1, "return_identity_id": "earnings_narrative_change_v1", "verdict": "KILL", "result": "artifacts/probe/earnings_narrative_change/result.json", "technically_eligible": false}},
+    "analyst_revision_drift": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "merger_arbitrage": {
+      "classification": "ACTIVE_FEASIBILITY",
+      "aliases": [],
+      "evidence": [
+        "config/sleeve_discovery.json#candidates:merger_arbitrage",
+        "docs/design/FEASIBILITY_MERGER_ARBITRAGE.md",
+        "artifacts/feasibility/merger_arbitrage/result.json",
+        "docs/design/FEASIBILITY_MERGER_ANNOUNCEMENT_IDENTITY_V2.md",
+        "artifacts/feasibility/merger_arbitrage/announcement_confirmatory_design.json"
+      ],
+      "reason": "The original blended metadata gate remains failed. A materially new announcement resolver now has a sealed 2006-2015 disjoint, pre-corpus, pre-label, pre-return confirmation design; it remains identity-redesign-required until Arhan approves the exact design and both filing strata independently pass."
+    },
+    "tender_offer_spread": {
+      "classification": "ACTIVE_FEASIBILITY",
+      "aliases": [],
+      "evidence": [
+        "config/sleeve_discovery.json#candidates:merger_arbitrage.tender_only_document_feasibility",
+        "docs/design/FEASIBILITY_TENDER_OFFER_SPREAD.md",
+        "artifacts/feasibility/tender_offer_spread/result.json"
+      ],
+      "reason": "The locked 100-document audit is complete and DATA_GATED: unique cash-price and recommendation-resolution gates failed without opening returns."
+    },
+    "index_reconstitution_flow": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "active_ownership_escalation": {
+      "classification": "ACTIVE_FEASIBILITY",
+      "aliases": [],
+      "evidence": [
+        "config/sleeve_discovery.json#candidates:active_ownership_escalation",
+        "docs/design/FEASIBILITY_ACTIVE_OWNERSHIP_13D.md",
+        "docs/design/FEASIBILITY_ACTIVE_OWNERSHIP_13D_SCHEMA_V2.md",
+        "docs/design/FEASIBILITY_ACTIVE_OWNERSHIP_13D_ITEM4.md",
+        "docs/design/FEASIBILITY_ACTIVE_OWNERSHIP_13D_ITEM4_V2.md",
+        "artifacts/feasibility/active_ownership_13d_item4_v2/result.json"
+      ],
+      "reason": "Schema-aware metadata passed, but the unchanged 160-document Item 4 v2 audit remained DATA_GATED at 86.875% extraction versus the locked 90% gate."
+    },
+    "spin_off_dislocation": {
+      "classification": "IDENTITY_REDESIGN_REQUIRED",
+      "aliases": [],
+      "evidence": [
+        "docs/design/LITERATURE_SPIN_OFF_DISLOCATION.md",
+        "docs/design/FEASIBILITY_SPIN_OFF_DISLOCATION.md",
+        "docs/design/FEASIBILITY_SPIN_OFF_DOCUMENT_SCHEMA.md",
+        "artifacts/feasibility/spin_off_dislocation/document_schema_result.json"
+      ],
+      "reason": "Initial Form 10 acceptance cannot define the distribution event: the locked sample had 0/98 distribution-date mentions and only 8/98 ratio mentions. Any amendment-known replacement is a materially new identity and must be sealed before returns."
+    },
+    "repurchase_issuance_flow": {"classification": "DUPLICATE_OVERLAP", "aliases": ["eq_net_issuance"], "evidence": ["public_kill_ledger#screen_stage_kills:eq_net_issuance", "docs/design/LITERATURE_REPURCHASE_ISSUANCE_FLOW.md", "docs/design/FEASIBILITY_REPURCHASE_ISSUANCE_FLOW.md", "artifacts/feasibility/repurchase_issuance_flow/identity_overlap_audit.json"], "reason": "Completed-flow accounting is a cleaner measurement inside the previously tested corporate-equity-supply family, not independent breadth."},
+    "customer_supplier_propagation": {
+      "classification": "ACTIVE_FEASIBILITY",
+      "aliases": [],
+      "evidence": [
+        "docs/design/LITERATURE_CUSTOMER_SUPPLIER_PROPAGATION.md",
+        "docs/design/FEASIBILITY_CUSTOMER_SUPPLIER_PROPAGATION.md",
+        "artifacts/feasibility/customer_supplier_propagation/result.json"
+      ],
+      "reason": "Official 10-K lineage is broad, but the locked v1 named-customer extraction gate failed at 106/300 documents and cannot define a point-in-time public-company graph."
+    },
+    "securities_lending_supply": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "short_interest_revision": {"classification": "RETIRED_KILLED", "aliases": ["equity_short_interest_dtc"], "evidence": ["public_kill_ledger#screen_stage_kills:equity_short_interest_dtc"]},
+    "closed_end_fund_discount": {"classification": "RETIRED_KILLED", "aliases": ["cef_discount"], "evidence": ["public_kill_ledger#screen_stage_kills:cef_discount"], "forward_experiment": {"status": "FORWARD_ONLY", "evaluation": "~2027-07-19 after at least 48 weekly observations", "source": "scripts/probe_cef_discount.py"}},
+    "bond_etf_nav_dislocation": {
+      "classification": "ACTIVE_FEASIBILITY",
+      "aliases": [],
+      "evidence": [
+        "docs/design/LITERATURE_BOND_ETF_NAV_DISLOCATION.md",
+        "docs/design/FEASIBILITY_BOND_ETF_NAV_DISLOCATION.md",
+        "artifacts/feasibility/bond_etf_nav_dislocation/result.json"
+      ],
+      "reason": "The official issuer route exposes only 249/2,514 target sessions per fund and one current holdings snapshot. Licensed TRACE plus historical valuation and synchronized execution data are required before returns."
+    },
+    "credit_equity_relative_value": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "fallen_angel_flow": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "municipal_taxable_basis": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "options_dispersion": {"classification": "ACTIVE_FEASIBILITY", "aliases": [], "evidence": ["config/sleeve_discovery.json#candidates:options_dispersion", "docs/design/LITERATURE_OPTIONS_DISPERSION.md", "docs/design/FEASIBILITY_OPTIONS_DISPERSION.md"]},
+    "options_skew_carry": {"classification": "DUPLICATE_OVERLAP", "aliases": ["equity_vrp"], "evidence": ["public_kill_ledger#screen_stage_kills:equity_vrp"], "reason": "The proposed skew premium is inside the previously tested equity option variance-premium family until a sealed identity-level distinction is approved."},
+    "options_term_structure": {"classification": "DUPLICATE_OVERLAP", "aliases": ["equity_vrp"], "evidence": ["public_kill_ledger#screen_stage_kills:equity_vrp"], "reason": "Option term carry overlaps the killed equity variance-premium campaign and cannot be counted as novel without a sealed distinction."},
+    "dealer_gamma_pressure": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "volatility_futures_curve": {"classification": "DUPLICATE_OVERLAP", "aliases": ["equity_vrp", "xasset_carry"], "evidence": ["public_kill_ledger#screen_stage_kills:equity_vrp", "public_kill_ledger#screen_stage_kills:xasset_carry"], "reason": "VIX curve carry overlaps prior variance-premium and cross-asset carry tests; novelty is not established."},
+    "treasury_auction_concession": {"classification": "IDENTITY_REDESIGN_REQUIRED", "aliases": [], "evidence": ["docs/design/FEASIBILITY_TREASURY_AUCTION_CONCESSION.md", "docs/design/FEASIBILITY_TREASURY_AUCTION_IDENTITY_TIMING.md", "artifacts/feasibility/treasury_auction_concession/calendar_revision_audit.json"], "reason": "The exact-date T-10 identity is not point-in-time observable across the locked panel. Any revision-aware replacement is a materially new identity and must be sealed before returns."},
+    "pre_fomc_announcement_drift": {"classification": "ACTIVE_FEASIBILITY", "aliases": [], "evidence": ["config/sleeve_discovery.json#candidates:pre_fomc_announcement_drift"]},
+    "swap_spread_dislocation": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "inflation_breakeven_relative_value": {"classification": "ACTIVE_FEASIBILITY", "aliases": [], "evidence": ["docs/design/LITERATURE_INFLATION_BREAKEVEN_RELATIVE_VALUE.md", "docs/design/FEASIBILITY_INFLATION_BREAKEVEN_RELATIVE_VALUE.md", "artifacts/feasibility/inflation_breakeven_relative_value/result.json"]},
+    "mortgage_convexity_pressure": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "cross_currency_basis": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "fx_option_risk_reversal": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "cftc_hedging_pressure": {"classification": "RETIRED_KILLED", "aliases": ["cot_positioning"], "evidence": ["public_kill_ledger#screen_stage_kills:cot_positioning"]},
+    "commodity_calendar_seasonality": {"classification": "DUPLICATE_OVERLAP", "aliases": ["futcarry_xs", "xasset_carry"], "evidence": ["public_kill_ledger#screen_stage_kills:futcarry_xs", "public_kill_ledger#screen_stage_kills:xasset_carry"], "reason": "Calendar-spread seasonality shares the tested futures carry family; a distinct preregistration is required before novelty can be claimed."},
+    "electricity_load_weather_spread": {"classification": "ACTIVE_FEASIBILITY", "aliases": [], "evidence": ["config/sleeve_discovery.json#candidates:electricity_load_weather_spread", "docs/design/LITERATURE_ELECTRICITY_LOAD_WEATHER.md", "docs/design/FEASIBILITY_ELECTRICITY_LOAD_WEATHER.md", "artifacts/feasibility/electricity_load_weather/result.json"]},
+    "natural_gas_storage_weather": {
+      "classification": "DUPLICATE_OVERLAP",
+      "aliases": ["commodity_inventory_seasonal"],
+      "evidence": [
+        "artifacts/probe/eia_petroleum_inventory/result.json",
+        "docs/design/LITERATURE_NATURAL_GAS_STORAGE_WEATHER.md",
+        "docs/design/FEASIBILITY_NATURAL_GAS_STORAGE_WEATHER.md",
+        "artifacts/feasibility/natural_gas_storage_weather/result.json"
+      ],
+      "reason": "Weather conditioning and Henry Hub implementation are distinct measurements, but the economic source remains weekly physical-inventory surprise. Any return trial inherits the killed petroleum trial in the family-wise count."
+    },
+    "carbon_allowance_carry": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "freight_derivative_dislocation": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "crypto_liquidation_pressure": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "crypto_cross_venue_basis": {"classification": "RETIRED_KILLED", "aliases": ["multivenue_funding", "crypto_dated_basis", "funding_termstructure"], "evidence": ["public_kill_ledger#screen_stage_kills:multivenue_funding", "public_kill_ledger#screen_stage_kills:crypto_dated_basis", "public_kill_ledger#screen_stage_kills:funding_termstructure"]},
+    "stablecoin_dislocation": {"classification": "ACTIVE_FEASIBILITY", "aliases": [], "evidence": ["config/sleeve_discovery.json#feasibility_reviews:stablecoin_dislocation", "docs/design/LITERATURE_STABLECOIN_DISLOCATION.md", "docs/design/FEASIBILITY_STABLECOIN_DISLOCATION.md"]},
+    "crypto_options_surface": {"classification": "DUPLICATE_OVERLAP", "aliases": ["crypto_vrp"], "evidence": ["public_kill_ledger#screen_stage_kills:crypto_vrp"], "reason": "The proposed surface compensation sits inside the killed crypto variance-premium family until a sealed distinction is approved."},
+    "catastrophe_bond_event_risk": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []},
+    "sovereign_cds_fx_dislocation": {"classification": "NOVEL_ATLAS", "aliases": [], "evidence": []}
+  }
+}

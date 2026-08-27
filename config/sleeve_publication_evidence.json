@@ -1,0 +1,137 @@
+{
+  "schema": "canli.alphac-sleeve-publication-evidence-catalog.v1",
+  "claim_boundary": "This catalog maps already persisted research evidence into preparation bundles. It does not reopen returns, register trials, establish clean-environment replay, or grant redistribution rights to raw vendor data.",
+  "sleeves": {
+    "alphaforge_crypto_carry": {
+      "trial_family_key": "crypto_carry",
+      "result_objects": [
+        {"source": "artifacts/walkforward/crypto_carry_wk/walkforward.json", "release_name": "selected_walkforward.json", "role": "selected weekly carry walk-forward"},
+        {"source": "artifacts/grand_backtest/20260616T143620Z/matrix.json", "release_name": "grand_matrix.json", "role": "complete multi-factor matrix and PBO context"},
+        {"source": "artifacts/research/crypto_carry_2022_tail.json", "release_name": "tail_stress_2022.json", "role": "persisted 2022 tail diagnosis"},
+        {"source": "artifacts/probe/crypto_carry_frozen_current_code_replay/walkforward.json", "release_name": "current_state_replay.json", "role": "materially divergent current-code/current-derived-input replay"},
+        {"source": "artifacts/probe/crypto_carry_frozen_current_code_replay/replay_receipt.json", "release_name": "current_state_replay_receipt.json", "role": "truthful non-exact replay receipt and input-freeze audit"},
+        {"source": "artifacts/probe/crypto_carry_replay_drift/first_rebalance_attribution.json", "release_name": "first_rebalance_attribution.json", "role": "exact first-decision universe-drift attribution"},
+        {"source": "artifacts/probe/crypto_carry_replay_drift/full_path_attribution.json", "release_name": "full_path_attribution.json", "role": "complete surviving-ledger comparison and causal-identifiability boundary"},
+        {"source": "artifacts/audit/walkforward_input_snapshot_protocol.json", "release_name": "prospective_input_snapshot_protocol.json", "role": "prospective immutable private input-snapshot enforcement receipt"},
+        {"source": "artifacts/publication/crypto_carry_replay_correction.json", "release_name": "open_replay_correction.json", "role": "material correction and external-submission blocker"}
+      ],
+      "code_bindings": ["scripts/audit_crypto_carry_2022_tail.py", "scripts/replay_crypto_carry_frozen_inputs.py", "scripts/audit_crypto_carry_first_rebalance_drift.py", "scripts/audit_crypto_carry_full_path_drift.py", "scripts/seal_walkforward_input_snapshot_protocol.py", "scripts/seal_crypto_carry_replay_correction.py", "src/alphaforge/validation/input_snapshot.py", "src/alphaforge/features/library/carry.py", "src/alphaforge/portfolio/strategy.py", "src/alphaforge/execution/paper.py"],
+      "reproduction_commands": ["uv run python scripts/audit_crypto_carry_2022_tail.py", "uv run python scripts/replay_crypto_carry_frozen_inputs.py --seal-existing", "uv run python scripts/audit_crypto_carry_first_rebalance_drift.py", "uv run python scripts/audit_crypto_carry_full_path_drift.py", "uv run python scripts/seal_walkforward_input_snapshot_protocol.py", "uv run python scripts/seal_crypto_carry_replay_correction.py"],
+      "bundle_corrections": [
+        {
+          "date": "2026-08-23",
+          "status": "OPEN_MATERIAL_CORRECTION_EXTERNAL_SUBMISSION_BLOCKED",
+          "summary": "The selected historical result does not reproduce on the current code/current derived-input state. EOS exactly explains the first sizing difference. Every surviving ledger has now been compared; missing historical code and derived-input snapshots make a unique additive full-path causal split structurally unidentifiable. A prospective private snapshot control is enforced, but cannot repair the historical omission.",
+          "evidence": ["evidence/current_state_replay_receipt.json", "evidence/first_rebalance_attribution.json", "evidence/full_path_attribution.json", "evidence/prospective_input_snapshot_protocol.json", "evidence/open_replay_correction.json"]
+        }
+      ]
+    },
+    "alphamax_equity_momentum": {
+      "trial_family_key": "alphamax_equity_momentum",
+      "result_objects": [
+        {"source": "artifacts/sweep/alphamax_construction/arms.json", "release_name": "construction_arms.json", "role": "preregistered construction comparison"},
+        {"source": "artifacts/walkforward/k30_dn_63/walkforward.json", "release_name": "selected_walkforward.json", "role": "selected historical walk-forward"},
+        {"source": "artifacts/publication/alphamax_upstream_replay_manifest.json", "release_name": "upstream_replay_manifest.json", "role": "rights-withheld fresh-input acquisition and source binding"},
+        {"source": "artifacts/publication/alphamax_upstream_clean_workspace.json", "release_name": "upstream_clean_workspace.json", "role": "author-run failed exact fresh-vendor strategy reproduction"},
+        {"source": "artifacts/probe/alphamax_weighting/report.json", "release_name": "weighting_probe.json", "role": "weighting sensitivity"},
+        {"source": "artifacts/probe/alphamax_betaneutral/report.json", "release_name": "beta_neutral_probe.json", "role": "beta-neutral sensitivity"},
+        {"source": "artifacts/probe/alphamax_shorttail/report.json", "release_name": "short_tail_probe.json", "role": "short-tail sensitivity"}
+      ],
+      "code_bindings": ["scripts/probe_alphamax_construction.py", "scripts/probe_alphamax_weighting.py", "scripts/probe_alphamax_betaneutral.py", "scripts/probe_alphamax_shorttail.py", "src/alphaforge/features/library/equity_price.py"],
+      "reproduction_commands": ["uv run python scripts/probe_alphamax_construction.py", "uv run python scripts/probe_alphamax_weighting.py", "uv run python scripts/probe_alphamax_betaneutral.py", "uv run python scripts/probe_alphamax_shorttail.py"]
+    },
+    "alphatrend_managed_futures": {
+      "trial_family_key": "managed_futures_trend",
+      "result_objects": [{"source": "artifacts/research/alphatrend_family.json", "release_name": "family_result.json", "role": "complete managed-futures identity family"}],
+      "code_bindings": ["scripts/audit_alphatrend_family.py"],
+      "reproduction_commands": ["uv run python scripts/audit_alphatrend_family.py"]
+    },
+    "crypto_defensive": {
+      "trial_family_key": "crypto_defensive",
+      "result_objects": [{"source": "artifacts/research/crypto_defensive_family.json", "release_name": "family_result.json", "role": "complete defensive-factor identity family"}],
+      "code_bindings": ["scripts/audit_remaining_research_families.py"],
+      "reproduction_commands": ["uv run python scripts/audit_remaining_research_families.py"]
+    },
+    "crypto_momentum": {
+      "trial_family_key": "crypto_momentum",
+      "result_objects": [{"source": "artifacts/research/crypto_momentum_family.json", "release_name": "family_result.json", "role": "complete crypto-momentum identity family"}],
+      "code_bindings": ["scripts/audit_crypto_momentum_family.py", "src/alphaforge/features/library/momentum.py"],
+      "reproduction_commands": ["uv run python scripts/audit_crypto_momentum_family.py"]
+    },
+    "crypto_multifactor_engine": {
+      "trial_family_key": "crypto_multifactor_engine",
+      "result_objects": [
+        {"source": "artifacts/research/crypto_multifactor_family.json", "release_name": "family_result.json", "role": "complete multi-factor identity family"},
+        {"source": "artifacts/grand_backtest/20260616T143620Z/matrix.json", "release_name": "grand_matrix.json", "role": "matrix-level PBO and deployment evidence"}
+      ],
+      "code_bindings": ["scripts/audit_crypto_multifactor_family.py", "scripts/grand_backtest.py", "src/alphaforge/analytics/grand_matrix.py"],
+      "reproduction_commands": ["uv run python scripts/audit_crypto_multifactor_family.py"]
+    },
+    "crypto_reversal": {
+      "trial_family_key": "crypto_short_horizon_reversal",
+      "result_objects": [{"source": "artifacts/research/crypto_reversal_family.json", "release_name": "family_result.json", "role": "complete short-horizon reversal identity family"}],
+      "code_bindings": ["scripts/audit_remaining_research_families.py"],
+      "reproduction_commands": ["uv run python scripts/audit_remaining_research_families.py"]
+    },
+    "crypto_vrp": {
+      "trial_family_key": "crypto_volatility_risk_premium",
+      "result_objects": [
+        {"source": "artifacts/research/crypto_vrp_family.json", "release_name": "family_result.json", "role": "complete VRP proxy identity family"},
+        {"source": "artifacts/exp2/20260625T094710Z/exp2_metrics.json", "release_name": "proxy_metrics.json", "role": "persisted proxy-trial metrics"}
+      ],
+      "code_bindings": ["scripts/audit_crypto_vrp_family.py", "scripts/exp2_crypto_vrp.py"],
+      "reproduction_commands": ["uv run python scripts/audit_crypto_vrp_family.py"]
+    },
+    "energy_inventory": {
+      "trial_family_key": "energy_inventory",
+      "result_objects": [
+        {"source": "artifacts/research/energy_inventory_family.json", "release_name": "family_result.json", "role": "complete energy-inventory identity family"},
+        {"source": "artifacts/probe/eia_petroleum_inventory/result.json", "release_name": "probe_result.json", "role": "preregistered probe result"}
+      ],
+      "code_bindings": ["scripts/audit_remaining_research_families.py", "scripts/probe_eia_petroleum_inventory.py"],
+      "reproduction_commands": ["uv run python scripts/audit_remaining_research_families.py"]
+    },
+    "equity_insider_activity": {
+      "trial_family_key": "equity_insider_activity",
+      "result_objects": [
+        {"source": "artifacts/research/equity_insider_family.json", "release_name": "family_result.json", "role": "complete insider-activity identity family"},
+        {"source": "artifacts/probe/insider_purchase_clusters/result.json", "release_name": "probe_result.json", "role": "preregistered probe result"}
+      ],
+      "code_bindings": ["scripts/audit_remaining_research_families.py", "scripts/probe_insider_clusters.py"],
+      "reproduction_commands": ["uv run python scripts/audit_remaining_research_families.py"]
+    },
+    "equity_low_beta": {
+      "trial_family_key": "equity_low_beta",
+      "result_objects": [{"source": "artifacts/research/equity_low_beta_family.json", "release_name": "family_result.json", "role": "complete low-beta identity family"}],
+      "code_bindings": ["scripts/audit_remaining_research_families.py"],
+      "reproduction_commands": ["uv run python scripts/audit_remaining_research_families.py"]
+    },
+    "equity_narrative_change": {
+      "trial_family_key": "equity_narrative_change",
+      "result_objects": [
+        {"source": "artifacts/research/equity_narrative_family.json", "release_name": "family_result.json", "role": "complete narrative-change identity family"},
+        {"source": "artifacts/probe/earnings_narrative_change/result.json", "release_name": "probe_result.json", "role": "preregistered narrative-change result"}
+      ],
+      "code_bindings": ["scripts/audit_equity_narrative_family.py", "scripts/probe_earnings_narrative_change.py"],
+      "reproduction_commands": ["uv run python scripts/audit_equity_narrative_family.py"]
+    },
+    "equity_quality": {
+      "trial_family_key": "equity_fundamental_quality",
+      "result_objects": [{"source": "artifacts/research/equity_quality_family.json", "release_name": "family_result.json", "role": "complete quality identity family"}],
+      "code_bindings": ["scripts/audit_equity_fundamental_families.py"],
+      "reproduction_commands": ["uv run python scripts/audit_equity_fundamental_families.py"]
+    },
+    "equity_value_investment": {
+      "trial_family_key": "equity_fundamental_value_investment",
+      "result_objects": [{"source": "artifacts/research/equity_value_investment_family.json", "release_name": "family_result.json", "role": "complete value/investment identity family"}],
+      "code_bindings": ["scripts/audit_equity_fundamental_families.py"],
+      "reproduction_commands": ["uv run python scripts/audit_equity_fundamental_families.py"]
+    },
+    "macro_economic_trend": {
+      "trial_family_key": "macro_economic_trend",
+      "result_objects": [{"source": "artifacts/research/macro_economic_trend_family.json", "release_name": "family_result.json", "role": "complete point-in-time macro identity family"}],
+      "code_bindings": ["scripts/audit_remaining_research_families.py"],
+      "reproduction_commands": ["uv run python scripts/audit_remaining_research_families.py"]
+    }
+  }
+}
