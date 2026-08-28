@@ -152,6 +152,31 @@ Parquet you can open with anything.
 ## Quick start
 
 ```bash
+pip install canli-pit-lake
+```
+
+There is no call that returns "the current value". In research code that call is
+where look-ahead gets in, so `as_of` is a required positional argument and the
+type checker refuses the version without it:
+
+```python
+from alphaforge.core.instruments import InstrumentStore
+
+store.get("AAPL", as_of=decision_timestamp)   # what was knowable THEN
+store.get("AAPL")
+# TypeError: InstrumentStore.get() missing 1 required positional argument: 'as_of'
+```
+
+The same rule runs through the rest of the layer: corporate actions filter on
+`available_at` rather than `ex_date`, so a split is invisible until it was
+announced; universe membership is stored as intervals, so a survivorship-free
+universe is what you get by default rather than an option you remember to switch
+on; and quality flags carry their own availability lag, because knowing a bar was
+bad is itself information that arrived at a particular time.
+
+### Working on it, or checking it
+
+```bash
 git clone https://github.com/arhancanli/canli-pit-lake.git
 cd canli-pit-lake
 uv venv --python 3.12 && uv pip install -e ".[dev]"
