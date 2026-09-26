@@ -275,10 +275,10 @@ would change before the timing did.
 
 | check | result |
 |---|---|
-| tests | **941 passed**, 12 network tests deselected by default |
-| types | `mypy --strict`, **0 issues** across 42 source files |
+| tests | **949 passed**, 12 network tests deselected by default |
+| types | `mypy --strict`, **0 issues** across 43 source files |
 | lint | `ruff`, **clean** |
-| parity with the engine | **146 files byte-identical** |
+| parity with the engine | **147 files byte-identical** |
 
 ---
 

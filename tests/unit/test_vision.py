@@ -17,12 +17,14 @@ import httpx
 import pytest
 
 from alphaforge.core.errors import DataGapError, SchemaError
+from alphaforge.core.types import MarketType
 from alphaforge.data.ingest.retry import transient_retry
 from alphaforge.data.schemas import Dataset, validate_table
 from alphaforge.data.sources.ccxt_source import FUNDING_PUBLICATION_LAG_MS
 from alphaforge.data.sources.vision import (
     S3_LIST_ENDPOINT,
     BinanceVisionClient,
+    TransientHTTPStatusError,
     YearMonth,
 )
 
@@ -449,6 +451,67 @@ class TestTransport:
             client.list_symbols()
         assert calls["n"] == 1  # status errors are not transport errors
 
+    def test_a_transient_status_is_retried_then_served(self) -> None:
+        calls = {"n": 0}
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            calls["n"] += 1
+            if calls["n"] == 1:
+                return httpx.Response(503, text="Service Unavailable")
+            return httpx.Response(
+                200,
+                text=_listing_xml(
+                    request_prefix=KLINES_PREFIX, prefixes=(f"{KLINES_PREFIX}BTCUSDT/",)
+                ),
+            )
+
+        client = _client(
+            handler,
+            retry=transient_retry(
+                (httpx.TransportError, TransientHTTPStatusError), max_attempts=3, base_s=0.001
+            ),
+        )
+        assert client.list_symbols() == ["BTCUSDT"]
+        assert calls["n"] == 2
+
+    def test_a_transient_status_that_never_clears_is_a_status_error(self) -> None:
+        calls = {"n": 0}
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            calls["n"] += 1
+            return httpx.Response(503, text="Service Unavailable")
+
+        client = _client(
+            handler,
+            retry=transient_retry(
+                (httpx.TransportError, TransientHTTPStatusError), max_attempts=3, base_s=0.001
+            ),
+        )
+        with pytest.raises(httpx.HTTPStatusError):
+            client.list_symbols()
+        assert calls["n"] == 3
+
+    def test_the_default_policy_retries_transient_statuses_and_not_gaps(self) -> None:
+        client = BinanceVisionClient(
+            http=httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(404)))
+        )
+        assert TransientHTTPStatusError in client._retry.retry.exception_types  # type: ignore[attr-defined]
+        calls = {"n": 0}
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            calls["n"] += 1
+            return httpx.Response(404)
+
+        gap_client = _client(
+            handler,
+            retry=transient_retry(
+                (httpx.TransportError, TransientHTTPStatusError), max_attempts=3, base_s=0.001
+            ),
+        )
+        with pytest.raises(DataGapError):
+            gap_client.fetch_ohlcv_month("BTCUSDT", 2021, 1)
+        assert calls["n"] == 1
+
     def test_politeness_delay_sleeps_before_each_request(self, monkeypatch) -> None:
         sleeps: list[float] = []
         monkeypatch.setattr("time.sleep", sleeps.append)
@@ -466,3 +529,68 @@ class TestTransport:
 
     def test_s3_url_constant(self) -> None:
         assert S3_LIST_ENDPOINT.startswith("https://s3-ap-northeast-1.amazonaws.com/")
+
+
+# ---------------------------------------------------------------------- spot market (2026-09-23)
+
+
+class TestSpotMarket:
+    """Spot klines: the hedge leg of the cash-and-carry research. Same 12-column archive format
+    under data/spot/monthly/klines/, stamped BINANCE:SPOT:<SYM>; spot settles no funding."""
+
+    def test_spot_klines_come_from_the_spot_prefix_and_are_stamped_spot(self) -> None:
+        seen: list[str] = []
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            seen.append(request.url.path)
+            csv_text = "\n".join(_kline_row(JAN_2025 * 1000 + i * H1_MS * 1000) for i in range(2))
+            return httpx.Response(200, content=_zip_bytes(csv_text))
+
+        tbl = _client(handler, market=MarketType.SPOT).fetch_ohlcv_month(
+            "BTCUSDT", 2025, 1, now=FAR_FUTURE
+        )
+        validate_table(tbl, Dataset.OHLCV)
+        assert seen == ["/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2025-01.zip"]
+        assert tbl.column("instrument_id").to_pylist() == ["BINANCE:SPOT:BTCUSDT"] * 2
+        # 2025+ spot files stamp microseconds; normalized to milliseconds like the perp files.
+        assert tbl.column("ts_open").to_pylist() == [
+            datetime(2025, 1, 1, h, tzinfo=UTC) for h in range(2)
+        ]
+
+    def test_the_default_client_is_still_the_perp_client(self) -> None:
+        seen: list[str] = []
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            seen.append(request.url.path)
+            return httpx.Response(200, content=_zip_bytes(_kline_row(JAN_2020)))
+
+        tbl = _client(handler).fetch_ohlcv_month("BTCUSDT", 2020, 1, now=FAR_FUTURE)
+        assert seen == ["/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2020-01.zip"]
+        assert tbl.column("instrument_id").to_pylist() == ["BINANCE:PERP:BTCUSDT"]
+
+    def test_a_spot_client_refuses_funding(self) -> None:
+        def handler(request: httpx.Request) -> httpx.Response:  # pragma: no cover - never called
+            raise AssertionError("no request may be made")
+
+        with pytest.raises(ValueError, match="no funding"):
+            _client(handler, market=MarketType.SPOT).fetch_funding_month("BTCUSDT", 2025, 1)
+
+    def test_spot_listing_uses_the_spot_prefix(self) -> None:
+        prefixes: list[str] = []
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            prefixes.append(request.url.params.get("prefix", ""))
+            return httpx.Response(
+                200,
+                content=_listing_xml(
+                    request_prefix="data/spot/monthly/klines/",
+                    prefixes=("data/spot/monthly/klines/BTCUSDT/",),
+                ),
+            )
+
+        assert _client(handler, market=MarketType.SPOT).list_symbols() == ["BTCUSDT"]
+        assert prefixes == ["data/spot/monthly/klines/"]
+
+    def test_only_perp_and_spot_are_accepted(self) -> None:
+        with pytest.raises(ValueError, match="PERP or SPOT"):
+            BinanceVisionClient(market="bogus")  # type: ignore[arg-type]

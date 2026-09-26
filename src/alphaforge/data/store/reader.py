@@ -33,6 +33,7 @@ from pathlib import Path
 from typing import Final
 
 import duckdb
+import numpy as np
 import pyarrow as pa
 
 from alphaforge.core.calendar import calendar_for
@@ -45,6 +46,8 @@ from alphaforge.data.schemas import (
     ohlcv_dataset,
     schema_for,
 )
+from alphaforge.data.store.corrections import WINDOW as _CORRECTION_WINDOW
+from alphaforge.data.store.corrections import apply_split_corrections, load_split_corrections
 from alphaforge.data.store.lake import LakePaths
 
 __all__ = ["PITDataReader"]
@@ -95,6 +98,18 @@ class PITDataReader:
         self._paths = paths
         self._con = duckdb.connect()  # in-memory: pure query engine, owns no storage
         self._con.execute("SET TimeZone = 'UTC'")
+        # Receipted split corrections beside the lake (alphaforge.data.store.corrections). Loaded
+        # once; a file whose content hash does not match raises here rather than serving rows.
+        self._split_corrections, self._corrections_sha256 = load_split_corrections(paths.root)
+
+    @property
+    def corrections_sha256(self) -> str | None:
+        """Content hash of the split-correction file this reader applies, or ``None``.
+
+        Part of what a measured run read: the same partitions under a different correction file
+        are different inputs.
+        """
+        return self._corrections_sha256
 
     @property
     def lake_paths(self) -> LakePaths:
@@ -211,7 +226,10 @@ class PITDataReader:
         dataset = Dataset.CORPORATE_ACTIONS
         if end <= start or not instrument_ids:
             return empty_table(dataset)
-        files = self._files(dataset, instrument_ids, start=start, end=end)
+        # A misdated split's correction moves it up to _CORRECTION_WINDOW sessions, so read that
+        # much wider, correct, then apply the requested window to the corrected ex-dates.
+        pad = (2 * _CORRECTION_WINDOW + 4) * Timeframe.D1.ms if self._split_corrections else 0
+        files = self._files(dataset, instrument_ids, start=start - pad, end=end + pad)
         if not files:
             return empty_table(dataset)
         sql = f"""
@@ -224,9 +242,17 @@ class PITDataReader:
               AND epoch_ms(available_at) <= ?
             ORDER BY instrument_id, ex_date
         """
-        params = [list(instrument_ids), start, end, as_of]
+        params = [list(instrument_ids), start - pad, end + pad, as_of]
         result: pa.Table = self._con.execute(sql, params).to_arrow_table()
-        return result.cast(schema_for(dataset))
+        result = result.cast(schema_for(dataset))
+        if not self._split_corrections:
+            return result
+        result = apply_split_corrections(result, self._split_corrections)
+        ex_ms = np.asarray(result.column("ex_date").cast(pa.int64()).to_numpy(), dtype=np.int64)
+        in_window = pa.array((ex_ms >= start) & (ex_ms < end))
+        return result.filter(in_window).sort_by(
+            [("instrument_id", "ascending"), ("ex_date", "ascending")]
+        )
 
     def fundamentals(
         self,

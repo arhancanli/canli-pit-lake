@@ -25,7 +25,17 @@ def _sha256(path: Path) -> str:
 
 
 def _canonical(value: Any) -> bytes:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+    # ensure_ascii is left at its default (True), which escapes non-ASCII to \uXXXX.
+    # That is the convention every other exporter here uses and the one the public
+    # reproduce.py kit recomputes with: 33 published artifacts store their non-ASCII
+    # escaped, and this contract was the only one storing raw UTF-8 bytes.
+    #
+    # It went unnoticed because the two settings produce IDENTICAL bytes for any
+    # pure-ASCII document, which every artifact was until this contract cited
+    # "Lopez de Prado" with its accent. That single character made the published
+    # verification kit report this artifact as FAILED, and since the nightly publish
+    # gates on L1, it halted the whole ceremony on 2026-08-23, 08-24 and 08-26.
+    return json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
 
 
 def _content_hash(document: dict[str, Any]) -> str:

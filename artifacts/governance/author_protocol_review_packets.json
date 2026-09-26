@@ -3,7 +3,7 @@
   "author": "Arhan Canli",
   "author_approvals": 0,
   "claim_boundary": "These are blank hash-bound protocol review packets. They prove no author answers, approval, identity, next-stage authorization, external review, or publication.",
-  "content_hash": "sha256:df72b345f51736215be22a6a174fc2d9e2bf6cee20adf5017e4f47575f82ee2a",
+  "content_hash": "sha256:b97dca89d52b9c02c43431036298859a951c434831cb9578be40f4e045ea5cdc",
   "packets": 2,
   "questions": 12,
   "records": [
@@ -12,10 +12,10 @@
       "approved": false,
       "family": "merger_arbitrage",
       "markdown": "merger-announcement-identity-v2/REVIEW.md",
-      "markdown_sha256": "ccf1b9a9ebd21d553d46e82590fe322d6d7c1efb4639a5414eacd1d3db9668f9",
+      "markdown_sha256": "45409f6755862ab81202a4f687ca490074543f0aa7c97310ecc98b31e261b3bf",
       "packet": "merger-announcement-identity-v2/review_packet.json",
-      "packet_content_hash": "sha256:1b5e4a781dfd0fb9f188e541b38920cf6e93be07e9a5027cdae4172545e62dad",
-      "packet_sha256": "2bdb98f0769d8431291fbca4808e495e28f2d75e47740fff1e5188087c814bcb",
+      "packet_content_hash": "sha256:8d0c46293333484d3e0d1b1f02d0ef93f976a2f9cc3ece671e3d37afcc9e86cf",
+      "packet_sha256": "0b3d5ae0bf36616e2f3dac7f7c7a4aa95f645360394e29e75d9cda897bd01a7c",
       "questions": 6,
       "review_key": "merger-announcement-identity-v2",
       "status": "AWAITING_ARHAN_REVIEW_NO_APPROVAL_CLAIMED",
@@ -46,7 +46,7 @@
     },
     "registry": {
       "path": "config/author_protocol_review_registry.json",
-      "sha256": "03634d2674280126136932acd0afe04e7a144d98366081b5e180a6763c1c8462"
+      "sha256": "b3bdf69402c2fc140ae63548574ebccbe2f2c969b2e4cf05e479d0cb41b5dede"
     }
   },
   "status": "PASS_BLANK_PROTOCOL_PACKETS_ZERO_AUTHOR_APPROVALS",

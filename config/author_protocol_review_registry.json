@@ -10,7 +10,7 @@
       "family": "merger_arbitrage",
       "protocol": "docs/design/FEASIBILITY_MERGER_ANNOUNCEMENT_IDENTITY_V2.md",
       "evidence_artifact": "artifacts/feasibility/merger_arbitrage/announcement_confirmatory_design.json",
-      "evidence_content_hash": "sha256:e2d294361c96994931849cef2e44faa464e3f2ab6a9ba1e05e9c4d6742f82b74",
+      "evidence_content_hash": "sha256:ae10f38a55e86758ee2f949d9297603c59da901d82728918904f983366372795",
       "expected_approval_decision": "APPROVED_FOR_DISJOINT_CONFIRMATION_CORPUS_ACQUISITION",
       "next_stage": "Acquire and freeze the 2006-2015 disjoint SEC confirmation corpus without prices or returns.",
       "author_questions": [

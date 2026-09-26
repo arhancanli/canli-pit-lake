@@ -5,7 +5,7 @@
     "return_preregistration_is_separate": true,
     "return_preregistration_requires_both_strata_to_pass": true
   },
-  "authorship_disclosure": "AI-assisted technical draft prepared under the project owner's direction; Arhan Canli has not yet reviewed or approved the exact design.",
+  "authorship_disclosure": "Technical draft prepared under the project owner's direction; Arhan Canli has not yet reviewed or approved the exact design.",
   "candidate_status": "identity-redesign-required",
   "claim_boundary": "Freezes a disjoint no-return confirmation design for a materially new announcement identity. It proves no corpus coverage, resolver accuracy, return, Sharpe, drawdown, correlation, capacity, or sleeve admission.",
   "confidence_gates_per_stratum": {
@@ -38,7 +38,7 @@
     "end": "2015-12-31",
     "start": "2006-01-01"
   },
-  "content_hash": "sha256:e2d294361c96994931849cef2e44faa464e3f2ab6a9ba1e05e9c4d6742f82b74",
+  "content_hash": "sha256:ae10f38a55e86758ee2f949d9297603c59da901d82728918904f983366372795",
   "corpus_acquired": false,
   "corpus_frozen": false,
   "decision": "AUTHOR_APPROVAL_REQUIRED",
