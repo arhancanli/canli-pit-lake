@@ -315,5 +315,5 @@ ALPHAC_PATH=~/alphaforge python tools/check_parity.py  # against a local checkou
 MIT. Copyright © 2026 Arhan Canli. Machine-readable citation metadata is in
 [`CITATION.cff`](CITATION.cff).
 
-Created and maintained by **[Arhan Canli](https://github.com/arhancanli)**. Development uses
-reviewed AI-assisted tooling; ownership, design decisions, and published claims are mine.
+Created and maintained by **[Arhan Canli](https://github.com/arhancanli)**. Ownership, design
+decisions, and published claims are mine.
