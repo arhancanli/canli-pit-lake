@@ -53,6 +53,8 @@ portfolio:
   no_trade_band: 0.0010
 
 risk:
+  book_ladder:                 # BOOK-level drawdown brake (drawdown control v1)
+    source: https              # every sleeve reads the public artifact; activated by the contract
   max_position_frac: 0.15   # hard per-position cap, fraction of equity
   max_gross: 1.0            # hard post-trade gross cap, fraction of equity
   max_net: 0.5              # hard post-trade |net| cap, fraction of equity

@@ -243,6 +243,33 @@ class PortfolioCfg(BaseModel):
         return self
 
 
+class BookLadderCfg(BaseModel):
+    """Where a sleeve reads the BOOK-level drawdown multiplier (drawdown control v1, 2026-09-14).
+
+    The combined book's 11 percent bound is enforced at the book: the publisher replays the
+    published combined marks through the declared ladder and writes the multiplier in force;
+    every sleeve multiplies its own target gross by it (:mod:`alphaforge.risk.book_ladder`).
+    This section only says WHERE to read it. Whether it is applied at all is the contract's
+    ``activation.live`` flag at ``contract_path``, the same file the public site publishes, so
+    there is exactly one switch. ``source="file"`` reads ``path`` (default
+    ``<var_dir>/book_ladder/current.json``, the local publisher's consumer file);
+    ``source="https"`` reads ``url`` (the public artifact, for a sleeve on another machine).
+    Relative paths resolve against the repository root.
+    """
+
+    model_config = _SECTION_CONFIG
+
+    # "https" since the 2026-09-15 activation: every sleeve, on this machine or another, reads
+    # the one public artifact the publisher writes, so a sleeve cannot read a stale local copy.
+    # configs/base.yaml states the same value; the two are kept equal by test_settings.
+    source: Literal["file", "https"] = "https"
+    path: Path | None = None
+    url: str = "https://canlicapital.com/glassbox/book_drawdown_ladder.json"
+    contract_path: Path = Path("config/drawdown_control_contract.json")
+    max_age_days: int = Field(default=4, ge=1)
+    timeout_s: float = Field(default=5.0, gt=0.0)
+
+
 class RiskCfg(BaseModel):
     """Risk-engine thresholds (execDesign §7; consumed by ``alphaforge.risk``).
 
@@ -294,6 +321,7 @@ class RiskCfg(BaseModel):
     var_confidence: float = Field(default=0.99, gt=0.0, lt=1.0)
     var_window_days: int = Field(default=365, gt=1)
     staleness_max_bars: int = Field(default=2, gt=0)
+    book_ladder: BookLadderCfg = Field(default_factory=BookLadderCfg)
 
     @model_validator(mode="after")
     def _check_orderings(self) -> Self:

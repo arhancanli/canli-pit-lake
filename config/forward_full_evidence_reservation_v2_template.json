@@ -1,10 +1,10 @@
 {
   "schema": "canli.alphac-forward-full-evidence-reservation-template.v2",
-  "status": "TEMPLATE_NOT_IN_FORCE_NO_RETURN_AUTHORIZATION",
+  "status": "IN_FORCE",
   "author": "Arhan Canli",
   "scope": {
     "applies_to_known_results": false,
-    "earliest_possible_reservation_ordinal": 230,
+    "earliest_possible_reservation_ordinal": 348,
     "requires_separate_policy_promotion": true
   },
   "identity_batch": {
@@ -105,5 +105,18 @@
     "PUBLIC_PROJECTION_TESTS_PASS",
     "OWNER_PROMOTION_RECORDED"
   ],
-  "claim_boundary": "This is a fail-closed design template, not an active policy, reservation, candidate, result, or return authorization. Null and empty fields must be filled and hash-bound before validation. It cannot be applied to a known result."
+  "claim_boundary": "This is a fail-closed design template, not an active policy, reservation, candidate, result, or return authorization. Null and empty fields must be filled and hash-bound before validation. It cannot be applied to a known result.",
+  "promotion": {
+    "receipt_path": "config/forward_full_evidence_reservation_v2_promotion.json",
+    "promoted_at": "2026-09-14",
+    "effective_on_or_after_reservation_ordinal": 348,
+    "gates_satisfied": [
+      "SATISFIABILITY_AUDIT_PASSES",
+      "TRIAL_ACCOUNTING_BATCH_AND_DIAGNOSTIC_CLASSIFICATION_PROMOTED",
+      "SERIALITY_GUARD_SUPPORTS_PREDECLARED_BATCH",
+      "PUBLIC_PROJECTION_TESTS_PASS",
+      "OWNER_PROMOTION_RECORDED"
+    ],
+    "return_authorization": "By reservation only: a filled reservation must pass alphaforge.validation.trial_reservation.validate_reservation and scripts/audit_forward_full_evidence_reservation.py before any return is computed."
+  }
 }

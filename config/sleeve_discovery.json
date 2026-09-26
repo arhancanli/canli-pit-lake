@@ -2,18 +2,12 @@
   "schema": "canli.sleeve-discovery.v2",
   "program": "ALPHAC breadth program",
   "objective": {
-    "source_of_truth": "config/sleeve_admission_contract.json#objective",
-    "honest_forward_sharpe_target": 1.5,
-    "portfolio_sharpe_target": [2.25, 3.0],
-    "portfolio_sharpe_target_unit": "IN-SAMPLE support band implied by the measured 1.5x to 3.0x backtest-to-forward haircut; honest_forward_sharpe_target is the headline target",
-    "portfolio_max_drawdown_target": 0.11,
+    "source_of_truth": "config/owner_goals.json#goals projected on config/sleeve_admission_contract.json by src/alphaforge/research/owner_goals.py; research_export.py derives every published target and carries the contract's superseded objective as dated history",
     "drawdown_target_kind": "expected maximum drawdown research objective evaluated out of sample and under stress, never a loss limit or promised result; the 95th percentile must be published separately",
     "target_kind": "honest forward research objective, never a promised result",
     "portfolio_requirement": "Improve the combined book through independent economic return sources, not leverage or selection of the prettiest backtest.",
-    "target_sleeve_count": 14,
-    "minimum_new_sleeves": 10,
     "candidate_atlas_minimum": 200,
-    "admission_rule": "A target never creates a sleeve. Fourteen is reached only if ten or more new identities independently clear every admission gate; otherwise the book remains smaller."
+    "admission_rule": "A target never creates a sleeve. The owner's minimum is reached only if enough new identities independently clear every admission gate; otherwise the book remains smaller."
   },
   "admission_gates": {
     "source_of_truth": "config/sleeve_admission_contract.json#thresholds; research_export.py derives every published numeric value",
@@ -36,7 +30,12 @@
   },
   "credential_policy": {
     "storage": "environment variables or managed secret store only",
-    "never": ["source code", "research artifacts", "chat transcripts", "client-side bundles"],
+    "never": [
+      "source code",
+      "research artifacts",
+      "chat transcripts",
+      "client-side bundles"
+    ],
     "request_timing": "Only after a candidate passes its key-free feasibility screen."
   },
   "feasibility_reviews": [
@@ -52,9 +51,27 @@
       "return_hypotheses_spent": 0,
       "frozen_token": "native issuer-supported USDC only",
       "frozen_mechanism": "executable secondary USDC/USD purchase followed by direct Circle redemption to linked-bank USD",
-      "excluded_identities": ["USDT substitution", "algorithmic stablecoins", "crypto-collateralized stablecoins", "wrapped or bridged USDC", "exchange-to-exchange convergence"],
-      "required_stress_windows": ["2020-03", "2022-05", "2022-11", "2023-03", "issuer conversion pauses", "venue outages"],
-      "blocking_reasons": ["production_entity_circle_mint_eligibility", "effective_dated_redemption_and_outage_lineage", "synchronized_historical_l2_books", "prospective_end_to_end_redemption_ledger"],
+      "excluded_identities": [
+        "USDT substitution",
+        "algorithmic stablecoins",
+        "crypto-collateralized stablecoins",
+        "wrapped or bridged USDC",
+        "exchange-to-exchange convergence"
+      ],
+      "required_stress_windows": [
+        "2020-03",
+        "2022-05",
+        "2022-11",
+        "2023-03",
+        "issuer conversion pauses",
+        "venue outages"
+      ],
+      "blocking_reasons": [
+        "production_entity_circle_mint_eligibility",
+        "effective_dated_redemption_and_outage_lineage",
+        "synchronized_historical_l2_books",
+        "prospective_end_to_end_redemption_ledger"
+      ],
       "credential_state": "INSTITUTIONAL_REDEMPTION_AND_L2_NOT_CONFIGURED",
       "claim_boundary": "No sign, threshold, return, Sharpe, drawdown, correlation, capacity, or admission claim exists; public candles cannot pass feasibility."
     },
@@ -162,7 +179,10 @@
       "result": "artifacts/feasibility/bond_etf_nav_dislocation/result.json",
       "result_public": "/glassbox/bond_etf_nav_dislocation_feasibility.json",
       "decision": "DATA_GATED",
-      "funds": ["HYG", "LQD"],
+      "funds": [
+        "HYG",
+        "LQD"
+      ],
       "expected_xnys_sessions_each": 2514,
       "issuer_dates_in_period_each": 249,
       "issuer_coverage_each": 0.09904534606205251,
@@ -197,8 +217,14 @@
       "hypothesis_budget": 2,
       "free_probe": "Official SEC 10-Q, 10-K and earnings-exhibit filing-time corpus feasibility with deterministic section extraction",
       "production_data": "Point-in-time filing text, earnings-call transcripts, speaker roles, revisions and delistings",
-      "provider_options": ["SEC EDGAR", "LSEG StreetEvents", "FactSet CallStreet"],
-      "execution": ["Alpaca"],
+      "provider_options": [
+        "SEC EDGAR",
+        "LSEG StreetEvents",
+        "FactSet CallStreet"
+      ],
+      "execution": [
+        "Alpaca"
+      ],
       "status": "return-killed",
       "feasibility": {
         "protocol": "docs/design/FEASIBILITY_EARNINGS_NARRATIVE_CHANGE.md",
@@ -245,8 +271,14 @@
       "hypothesis_budget": 2,
       "free_probe": "Schema and timestamp audit only; free history is not sufficient for a defensible backtest",
       "production_data": "As-of analyst estimates, contributor counts, announcement timestamps and delistings",
-      "provider_options": ["LSEG I/B/E/S", "FactSet Estimates", "Visible Alpha"],
-      "execution": ["Alpaca"],
+      "provider_options": [
+        "LSEG I/B/E/S",
+        "FactSet Estimates",
+        "Visible Alpha"
+      ],
+      "execution": [
+        "Alpaca"
+      ],
       "status": "data-gated",
       "kill": "Kill if revision timestamps cannot be reconstructed point-in-time or residual correlation to AlphaMax exceeds 0.35."
     },
@@ -258,8 +290,15 @@
       "hypothesis_budget": 3,
       "free_probe": "Accounting, surface-cleaning and tail-budget harness only",
       "production_data": "Historical SPX and constituent option chains, index membership, bid/ask, greeks and corporate actions",
-      "provider_options": ["OptionMetrics", "Cboe DataShop", "ORATS"],
-      "execution": ["Interactive Brokers", "Alpaca options only if multi-leg controls qualify"],
+      "provider_options": [
+        "OptionMetrics",
+        "Cboe DataShop",
+        "ORATS"
+      ],
+      "execution": [
+        "Interactive Brokers",
+        "Alpaca options only if multi-leg controls qualify"
+      ],
       "status": "data-gated",
       "literature_review": "docs/design/LITERATURE_OPTIONS_DISPERSION.md",
       "literature_review_public": "/research/literature-options-dispersion.md",
@@ -286,8 +325,15 @@
       "hypothesis_budget": 2,
       "free_probe": "SEC 8-K and merger-agreement event-schema feasibility",
       "production_data": "Point-in-time deal terms, revisions, breaks, votes, close dates and borrow costs",
-      "provider_options": ["SEC EDGAR", "LSEG Deals", "FactSet Mergerstat"],
-      "execution": ["Alpaca", "Interactive Brokers"],
+      "provider_options": [
+        "SEC EDGAR",
+        "LSEG Deals",
+        "FactSet Mergerstat"
+      ],
+      "execution": [
+        "Alpaca",
+        "Interactive Brokers"
+      ],
       "status": "identity-redesign-required",
       "feasibility": {
         "protocol": "docs/design/FEASIBILITY_MERGER_ARBITRAGE.md",
@@ -305,18 +351,27 @@
         "result_public": "/glassbox/merger_announcement_confirmatory_design.json",
         "technical_decision": "PASS_PROSPECTIVE_NO_RETURN_CONFIRMATORY_DESIGN",
         "governance_decision": "AUTHOR_APPROVAL_REQUIRED",
-        "exploration_period": {"start": "2016-01-01", "end": "2025-12-31"},
-        "confirmation_period": {"start": "2006-01-01", "end": "2015-12-31"},
+        "exploration_period": {
+          "start": "2016-01-01",
+          "end": "2025-12-31"
+        },
+        "confirmation_period": {
+          "start": "2006-01-01",
+          "end": "2015-12-31"
+        },
         "confirmation_target_rows": 400,
         "rows_per_stratum": 200,
-        "strata": ["DEFM14A", "SC 14D9"],
+        "strata": [
+          "DEFM14A",
+          "SC 14D9"
+        ],
         "technical_authorship_approved": false,
         "confirmation_corpus_opened": false,
         "return_data_opened": false,
         "return_hypotheses_spent": 0,
         "author_review_packet": "artifacts/governance/author_protocol_review_packets/merger-announcement-identity-v2/review_packet.json",
-        "author_review_packet_content_hash": "sha256:1b5e4a781dfd0fb9f188e541b38920cf6e93be07e9a5027cdae4172545e62dad",
-        "content_hash": "sha256:e2d294361c96994931849cef2e44faa464e3f2ab6a9ba1e05e9c4d6742f82b74"
+        "author_review_packet_content_hash": "sha256:8d0c46293333484d3e0d1b1f02d0ef93f976a2f9cc3ece671e3d37afcc9e86cf",
+        "content_hash": "sha256:ae10f38a55e86758ee2f949d9297603c59da901d82728918904f983366372795"
       },
       "tender_only_document_feasibility": {
         "protocol": "docs/design/FEASIBILITY_TENDER_OFFER_SPREAD.md",
@@ -339,8 +394,15 @@
       "hypothesis_budget": 2,
       "free_probe": "Rulebook and announcement timestamp audit",
       "production_data": "Point-in-time announcement archive, index weights, float, ADV and closing-auction data",
-      "provider_options": ["S&P Global", "FTSE Russell", "MSCI"],
-      "execution": ["Alpaca US subset", "Interactive Brokers global"],
+      "provider_options": [
+        "S&P Global",
+        "FTSE Russell",
+        "MSCI"
+      ],
+      "execution": [
+        "Alpaca US subset",
+        "Interactive Brokers global"
+      ],
       "status": "data-gated",
       "kill": "Kill if announcement history is survivorship-biased or auction slippage consumes the forecast edge."
     },
@@ -352,8 +414,18 @@
       "hypothesis_budget": 2,
       "free_probe": "Official EIA balancing-authority demand and NOAA forecast-vintage timestamp feasibility for a fixed set of liquid regions",
       "production_data": "Point-in-time weather forecasts, ISO load forecasts and revisions, nodal or hub power prices, fuel prices, listed contract rolls and executable bid/ask",
-      "provider_options": ["EIA", "NOAA", "PJM", "ERCOT", "CME DataMine", "ICE Data Services"],
-      "execution": ["Interactive Brokers where contracts are supported", "CME or ICE clearing broker"],
+      "provider_options": [
+        "EIA",
+        "NOAA",
+        "PJM",
+        "ERCOT",
+        "CME DataMine",
+        "ICE Data Services"
+      ],
+      "execution": [
+        "Interactive Brokers where contracts are supported",
+        "CME or ICE clearing broker"
+      ],
       "status": "data-gated",
       "literature_review": "docs/design/LITERATURE_ELECTRICITY_LOAD_WEATHER.md",
       "literature_review_public": "/research/literature-electricity-load-weather.md",
@@ -365,8 +437,16 @@
         "decision": "DATA_GATED",
         "source_collection_complete": false,
         "collection_error_type": "RuntimeError",
-        "locked_respondents": ["PJM", "ERCO", "MISO", "ISNE"],
-        "locked_series_types": ["D", "DF"],
+        "locked_respondents": [
+          "PJM",
+          "ERCO",
+          "MISO",
+          "ISNE"
+        ],
+        "locked_series_types": [
+          "D",
+          "DF"
+        ],
         "blocking_reasons": [
           "official_eia_collection_rate_limited_or_unavailable",
           "explicit_forecast_issue_or_vintage_timestamp",
@@ -386,8 +466,15 @@
       "hypothesis_budget": 2,
       "free_probe": "Broker snapshot schema and forward capture; no historical claim from current snapshots",
       "production_data": "Historical borrow fees, utilization, recalls and availability by security",
-      "provider_options": ["S&P Global Securities Finance", "DataLend", "Orbisa"],
-      "execution": ["Interactive Brokers", "Alpaca where borrow metadata is sufficient"],
+      "provider_options": [
+        "S&P Global Securities Finance",
+        "DataLend",
+        "Orbisa"
+      ],
+      "execution": [
+        "Interactive Brokers",
+        "Alpaca where borrow metadata is sufficient"
+      ],
       "status": "data-gated",
       "kill": "Kill if locate and recall costs erase the signal or historical availability cannot be established point-in-time."
     },
@@ -399,8 +486,14 @@
       "hypothesis_budget": 3,
       "free_probe": "ETF-level harness and issuer-mapping audit only",
       "production_data": "Point-in-time bond prices, reference data, TRACE liquidity and equity corporate actions",
-      "provider_options": ["FINRA TRACE", "LSEG", "Bloomberg"],
-      "execution": ["Interactive Brokers"],
+      "provider_options": [
+        "FINRA TRACE",
+        "LSEG",
+        "Bloomberg"
+      ],
+      "execution": [
+        "Interactive Brokers"
+      ],
       "status": "data-gated",
       "kill": "Kill if issuer mapping is hindsight-contaminated, liquidity makes fills implausible, or the result is merely quality or momentum."
     },
@@ -412,8 +505,14 @@
       "hypothesis_budget": 2,
       "free_probe": "Global SEC quarterly-index, immutable header and Item 4 document feasibility with contemporaneous subject-CIK mapping",
       "production_data": "Point-in-time Schedule 13D/13D-A state, reporting groups, Item 4 intent changes, ownership percentages, exits, delistings and borrow",
-      "provider_options": ["SEC EDGAR", "LSEG Ownership", "FactSet Ownership"],
-      "execution": ["Alpaca"],
+      "provider_options": [
+        "SEC EDGAR",
+        "LSEG Ownership",
+        "FactSet Ownership"
+      ],
+      "execution": [
+        "Alpaca"
+      ],
       "status": "data-gated",
       "metadata_feasibility_v1": {
         "protocol": "docs/design/FEASIBILITY_ACTIVE_OWNERSHIP_13D.md",
@@ -476,8 +575,15 @@
       "hypothesis_budget": 1,
       "free_probe": "Official Fiscal Data auction API lineage, publication-timing audit and a no-return event manifest before one publication-aware return identity",
       "production_data": "Auction announcements and results, reopening status, issue size, when-issued or futures prices, contract rolls, bid/ask and primary-dealer positioning",
-      "provider_options": ["US Treasury Fiscal Data", "Federal Reserve Bank of New York", "CME DataMine"],
-      "execution": ["Interactive Brokers", "Alpaca ETF proxy only for shadow validation"],
+      "provider_options": [
+        "US Treasury Fiscal Data",
+        "Federal Reserve Bank of New York",
+        "CME DataMine"
+      ],
+      "execution": [
+        "Interactive Brokers",
+        "Alpaca ETF proxy only for shadow validation"
+      ],
       "status": "identity-redesign-required",
       "literature_review": "docs/design/LITERATURE_FRONTIER_2026_08_16.md",
       "literature_review_public": "/research/literature-frontier-2026-08-16.md",
@@ -519,7 +625,10 @@
         "result_public": "/glassbox/treasury_tentative_schedule_audit.json",
         "decision": "CALENDAR_LINEAGE_REQUIRED",
         "return_hypotheses_spent": 0,
-        "target_years": [2013, 2025],
+        "target_years": [
+          2013,
+          2025
+        ],
         "expected_quarters": 52,
         "available_schedule_quarters": 23,
         "missing_schedule_quarters": 29,
@@ -572,7 +681,10 @@
         "exact_date_only_late_capture": 2,
         "exact_date_only_post_event_capture": 3,
         "no_captured_month_schedule": 1,
-        "formal_announcement_lead_sessions_range": [2, 4],
+        "formal_announcement_lead_sessions_range": [
+          2,
+          4
+        ],
         "archive_evidence_rows": 251,
         "archive_corpus_sha256": "53de6a6cee2d77da54b2564e904b38ad08c64cecd5ea70fddb2b84d166e9a3bc",
         "return_hypotheses_spent": 0,
@@ -610,8 +722,15 @@
       "hypothesis_budget": 1,
       "free_probe": "Official CFTC historical compressed-report schema, release-lag audit and fixed mapping from report markets to the existing liquid futures or ETF universe",
       "production_data": "Point-in-time COT disaggregated positions, release timestamps, futures settlements, rolls, limits, bid/ask and contract multipliers",
-      "provider_options": ["CFTC", "CME DataMine", "ICE Data Services"],
-      "execution": ["Interactive Brokers", "CME or ICE clearing broker"],
+      "provider_options": [
+        "CFTC",
+        "CME DataMine",
+        "ICE Data Services"
+      ],
+      "execution": [
+        "Interactive Brokers",
+        "CME or ICE clearing broker"
+      ],
       "status": "data-gated",
       "literature_review": "docs/design/LITERATURE_FRONTIER_2026_08_16.md",
       "literature_review_public": "/research/literature-frontier-2026-08-16.md",
@@ -630,7 +749,10 @@
         "tuesday_report_date_rate": 0.9890459287005379,
         "exact_release_timestamp_lineage_rate": 0.0,
         "stable_market_code_name_rate": 0.9938461538461538,
-        "blocking_reasons": ["exact_historical_release_lineage", "fixed_tradable_contract_mapping"],
+        "blocking_reasons": [
+          "exact_historical_release_lineage",
+          "fixed_tradable_contract_mapping"
+        ],
         "raw_sha256": "61ddb56a6eb7ce58cbac841ecc2b149eb65d516dd3337e8edf01f1c01012a607",
         "manifest_sha256": "8dcc786360279c0448c9600f4d7e7bf4f120a64fa3bbcd4b525ab6d44b7843a8"
       },
@@ -645,8 +767,15 @@
       "hypothesis_budget": 1,
       "free_probe": "Official Federal Reserve calendar lineage and intraday-bar coverage audit, with the post-2015 publication window designated as the primary falsification sample",
       "production_data": "Point-in-time FOMC schedule changes, intraday index futures or SPY quotes, spreads, holidays and announcement timestamps",
-      "provider_options": ["Federal Reserve", "Polygon", "CME DataMine"],
-      "execution": ["Interactive Brokers", "Alpaca SPY proxy for shadow validation"],
+      "provider_options": [
+        "Federal Reserve",
+        "Polygon",
+        "CME DataMine"
+      ],
+      "execution": [
+        "Interactive Brokers",
+        "Alpaca SPY proxy for shadow validation"
+      ],
       "status": "data-gated",
       "literature_review": "docs/design/LITERATURE_FRONTIER_2026_08_16.md",
       "literature_review_public": "/research/literature-frontier-2026-08-16.md",
@@ -664,7 +793,9 @@
         "release_time_coverage_rate": 1.0,
         "release_at_2pm_et_rate": 1.0,
         "point_in_time_schedule_revision_lineage_rate": 0.0,
-        "blocking_reasons": ["point_in_time_schedule_revision_lineage"],
+        "blocking_reasons": [
+          "point_in_time_schedule_revision_lineage"
+        ],
         "source_manifest_sha256": "a1a5196803cc7dea80a59f20120522b6057fabca0a3bdd13ce12f99aa011945c",
         "events_sha256": "049b20e54e32376ade4e2366a83dc5cb83e3ceca134779009da066bd2bdb77f5"
       },
@@ -735,8 +866,14 @@
       },
       "free_probe": "Official SEC Company Facts, Submissions and accession-bound Item 703 schema coverage with amendments replayed point-in-time and no prices",
       "production_data": "PIT XBRL facts, accession-bound Item 703 tables, shares and corporate actions, issuance contamination flags, delistings, borrow, spreads and market impact",
-      "provider_options": ["SEC EDGAR", "LSEG Fundamentals", "FactSet Fundamentals"],
-      "execution": ["Alpaca"],
+      "provider_options": [
+        "SEC EDGAR",
+        "LSEG Fundamentals",
+        "FactSet Fundamentals"
+      ],
+      "execution": [
+        "Alpaca"
+      ],
       "status": "manual-blind-label-gate",
       "literature_review": "docs/design/LITERATURE_REPURCHASE_ISSUANCE_FLOW.md",
       "literature_review_public": "/research/literature-repurchase-issuance-flow.md",
@@ -796,14 +933,46 @@
     }
   ],
   "retired_candidates": [
-    {"id": "futures_curve_carry", "public_result": "futcarry_xs and xasset_carry", "verdict": "KILLED"},
-    {"id": "options_variance_premium", "public_result": "equity_vrp and crypto_vrp", "verdict": "KILLED"},
-    {"id": "post_earnings_drift", "public_result": "equity_pead", "verdict": "KILLED"},
-    {"id": "crypto_basis_curve", "public_result": "crypto_dated_basis and funding_termstructure", "verdict": "KILLED"},
-    {"id": "rates_curve_relative_value", "public_result": "rates_curve_carry", "verdict": "KILLED"},
-    {"id": "short_horizon_reversal", "public_result": "PRE_REGISTRATION Sleeve E and reversal IC campaign", "verdict": "KILLED"},
-    {"id": "fx_value_carry", "public_result": "fx_carry_ratediff, fx_carry_trend_overlay and xasset_value", "verdict": "KILLED"},
-    {"id": "cross_asset_defensive", "public_result": "quality, BAB and tail_overlay campaigns", "verdict": "KILLED"},
+    {
+      "id": "futures_curve_carry",
+      "public_result": "futcarry_xs and xasset_carry",
+      "verdict": "KILLED"
+    },
+    {
+      "id": "options_variance_premium",
+      "public_result": "equity_vrp and crypto_vrp",
+      "verdict": "KILLED"
+    },
+    {
+      "id": "post_earnings_drift",
+      "public_result": "equity_pead",
+      "verdict": "KILLED"
+    },
+    {
+      "id": "crypto_basis_curve",
+      "public_result": "crypto_dated_basis and funding_termstructure",
+      "verdict": "KILLED"
+    },
+    {
+      "id": "rates_curve_relative_value",
+      "public_result": "rates_curve_carry",
+      "verdict": "KILLED"
+    },
+    {
+      "id": "short_horizon_reversal",
+      "public_result": "PRE_REGISTRATION Sleeve E and reversal IC campaign",
+      "verdict": "KILLED"
+    },
+    {
+      "id": "fx_value_carry",
+      "public_result": "fx_carry_ratediff, fx_carry_trend_overlay and xasset_value",
+      "verdict": "KILLED"
+    },
+    {
+      "id": "cross_asset_defensive",
+      "public_result": "quality, BAB and tail_overlay campaigns",
+      "verdict": "KILLED"
+    },
     {
       "id": "insider_purchase_clusters",
       "public_result": "artifacts/probe/insider_purchase_clusters/result.json",

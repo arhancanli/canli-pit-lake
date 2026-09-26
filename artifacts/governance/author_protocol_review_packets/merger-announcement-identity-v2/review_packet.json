@@ -74,12 +74,12 @@
     }
   ],
   "claim_boundary": "Automation populated source bindings, governed questions, and blank checks only. This packet proves no author answer, approval, identity, corpus authorization, return authorization, external review, or publication acceptance.",
-  "content_hash": "sha256:1b5e4a781dfd0fb9f188e541b38920cf6e93be07e9a5027cdae4172545e62dad",
+  "content_hash": "sha256:8d0c46293333484d3e0d1b1f02d0ef93f976a2f9cc3ece671e3d37afcc9e86cf",
   "evidence_binding": {
-    "content_hash": "sha256:e2d294361c96994931849cef2e44faa464e3f2ab6a9ba1e05e9c4d6742f82b74",
+    "content_hash": "sha256:ae10f38a55e86758ee2f949d9297603c59da901d82728918904f983366372795",
     "governance_decision": "AUTHOR_APPROVAL_REQUIRED",
     "path": "artifacts/feasibility/merger_arbitrage/announcement_confirmatory_design.json",
-    "sha256": "4a53e4ad16367f7e0f66613275296613948521bbe7249705a86e32dcdb3c1a62",
+    "sha256": "efa77051fd3dfdc5069a727377376daaa6063897520cf34b46fcd8e71b401f4a",
     "technical_decision": "PASS_PROSPECTIVE_NO_RETURN_CONFIRMATORY_DESIGN"
   },
   "external_review_claimed": false,

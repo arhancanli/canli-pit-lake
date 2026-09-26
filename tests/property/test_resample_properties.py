@@ -13,7 +13,7 @@ from __future__ import annotations
 from typing import TypedDict
 
 import pyarrow as pa
-from hypothesis import given
+from hypothesis import given, settings
 from hypothesis import strategies as st
 
 from alphaforge.core.time import Timeframe
@@ -102,6 +102,9 @@ def windows(p: Panel, size: int) -> list[range]:
     return [range(i, i + size) for i in range(0, len(p["ts"]), size)]
 
 
+# Timing is not a property of resampling: under the 16-worker nightly suite a first call took
+# 1,090 ms against Hypothesis's 200 ms default deadline and 2.6 ms when replayed (2026-09-24).
+@settings(deadline=None)
 @given(p=panels(bars_per_bucket=4, max_buckets=5))
 def test_high_is_max_and_low_is_min(p: Panel) -> None:
     out = h4_of(p)
@@ -112,6 +115,7 @@ def test_high_is_max_and_low_is_min(p: Panel) -> None:
         assert lows[bucket] == min(p["low"][i] for i in w)
 
 
+@settings(deadline=None)
 @given(p=panels(bars_per_bucket=4, max_buckets=5))
 def test_open_is_first_and_close_is_last(p: Panel) -> None:
     out = h4_of(p)
@@ -122,6 +126,7 @@ def test_open_is_first_and_close_is_last(p: Panel) -> None:
         assert closes[bucket] == p["close"][w[-1]]
 
 
+@settings(deadline=None)
 @given(p=panels(bars_per_bucket=4, max_buckets=5))
 def test_sums_are_exact(p: Panel) -> None:
     # Dyadic volumes (k/64) make every partial sum exactly representable: the float
@@ -136,6 +141,7 @@ def test_sums_are_exact(p: Panel) -> None:
         assert trades[bucket] == sum(p["n_trades"][i] for i in w)
 
 
+@settings(deadline=None)
 @given(p=panels(bars_per_bucket=4, max_buckets=5))
 def test_flags_are_bitwise_or(p: Panel) -> None:
     out = h4_of(p)
@@ -147,6 +153,7 @@ def test_flags_are_bitwise_or(p: Panel) -> None:
         assert flags[bucket] == expected
 
 
+@settings(deadline=None)
 @given(p=panels(bars_per_bucket=4, max_buckets=8))
 def test_count_identity_on_aligned_complete_spans(p: Panel) -> None:
     out = h4_of(p)
@@ -156,6 +163,7 @@ def test_count_identity_on_aligned_complete_spans(p: Panel) -> None:
     ]
 
 
+@settings(deadline=None)
 @given(p=panels(bars_per_bucket=24, max_buckets=2))
 def test_composition_d1_of_h4_equals_d1_of_h1(p: Panel) -> None:
     now = end_of(p)
@@ -166,6 +174,7 @@ def test_composition_d1_of_h4_equals_d1_of_h1(p: Panel) -> None:
         assert via_h4.column(name).to_pylist() == direct.column(name).to_pylist(), name
 
 
+@settings(deadline=None)
 @given(p=panels(bars_per_bucket=4, max_buckets=4))
 def test_nothing_closed_means_nothing_emitted(p: Panel) -> None:
     # At now = T0 not a single bucket is closed: every bucket is skipped, none written.
@@ -174,6 +183,7 @@ def test_nothing_closed_means_nothing_emitted(p: Panel) -> None:
     assert batch.buckets_unclosed == len(p["ts"]) // 4
 
 
+@settings(deadline=None)
 @given(p=panels(bars_per_bucket=4, max_buckets=4), drop=st.data())
 def test_dropping_one_bar_kills_exactly_its_bucket(p: Panel, drop: st.DataObject) -> None:
     idx = drop.draw(st.integers(min_value=0, max_value=len(p["ts"]) - 1), label="dropped bar")

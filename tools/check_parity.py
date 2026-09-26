@@ -30,7 +30,7 @@ MANIFEST = ROOT / "extraction_manifest.json"
 
 #: The exact ALPHAC commit this extraction was taken from. Bump it only together
 #: with a re-extraction, never to make a red check go green.
-ENGINE_COMMIT = "612d2af818441a3e67ceba17e1451434ed9e4f1c"
+ENGINE_COMMIT = "345b38d20436c4fcf2474eac5ff863e990074019"
 RAW = "https://raw.githubusercontent.com/arhancanli/alphac/{commit}/{path}"
 
 
